@@ -24,6 +24,42 @@ namespace ExplorerGame.Editor
         private const string AnimalPrefabFolder = PrefabFolder + "/Animals";
         private const string PropPrefabFolder = PrefabFolder + "/Props";
         private const string MaterialFolder = PrefabFolder + "/Materials";
+        private static readonly Color VillageGroundColor = new Color(0.57f, 0.61f, 0.38f);
+        private static readonly Color VillagePathColor = new Color(0.63f, 0.54f, 0.39f);
+        private static readonly Color VillageWallColor = new Color(0.8f, 0.71f, 0.56f);
+        private static readonly Color VillageWallAltColor = new Color(0.73f, 0.64f, 0.52f);
+        private static readonly Color VillageRoofColor = new Color(0.43f, 0.24f, 0.2f);
+        private static readonly Color WoodDarkColor = new Color(0.33f, 0.22f, 0.12f);
+        private static readonly Color WoodSignColor = new Color(0.68f, 0.58f, 0.33f);
+        private static readonly Color ForestGroundColor = new Color(0.26f, 0.37f, 0.23f);
+        private static readonly Color ForestTrailColor = new Color(0.43f, 0.33f, 0.23f);
+        private static readonly Color ForestCanopyColor = new Color(0.3f, 0.48f, 0.27f);
+        private static readonly Color ForestPortalColor = new Color(0.39f, 0.61f, 0.35f);
+        private static readonly Color StoneColor = new Color(0.49f, 0.49f, 0.48f);
+        private static readonly Color StoneDarkColor = new Color(0.43f, 0.43f, 0.42f);
+        private static readonly Color MountainGroundColor = new Color(0.46f, 0.44f, 0.39f);
+        private static readonly Color MountainPathColor = new Color(0.58f, 0.52f, 0.43f);
+        private static readonly Color MountainAccentColor = new Color(0.8f, 0.69f, 0.31f);
+        private static readonly Color PortalFloorColor = new Color(0.5f, 0.43f, 0.3f);
+        private static readonly Color PromptAccentColor = new Color(0.73f, 0.66f, 0.34f);
+        private static readonly Color CharacterMaleColor = new Color(0.31f, 0.53f, 0.79f);
+        private static readonly Color CharacterFemaleColor = new Color(0.83f, 0.43f, 0.32f);
+        private static readonly Color CharacterAccentColor = new Color(0.89f, 0.84f, 0.74f);
+        private static readonly Color NpcGuideColor = new Color(0.45f, 0.66f, 0.46f);
+        private static readonly Color NpcGuideAccentColor = new Color(0.9f, 0.84f, 0.69f);
+        private static readonly Color AnimalColor = new Color(0.58f, 0.45f, 0.31f);
+        private static readonly Color BootstrapSkyAmbient = new Color(0.44f, 0.49f, 0.58f);
+        private static readonly Color BootstrapEquatorAmbient = new Color(0.29f, 0.32f, 0.38f);
+        private static readonly Color BootstrapGroundAmbient = new Color(0.12f, 0.11f, 0.1f);
+        private static readonly Color CharacterSkyAmbient = new Color(0.54f, 0.58f, 0.64f);
+        private static readonly Color CharacterEquatorAmbient = new Color(0.34f, 0.32f, 0.3f);
+        private static readonly Color CharacterGroundAmbient = new Color(0.13f, 0.12f, 0.11f);
+        private static readonly Color WorldSkyAmbient = new Color(0.52f, 0.57f, 0.51f);
+        private static readonly Color WorldEquatorAmbient = new Color(0.31f, 0.33f, 0.28f);
+        private static readonly Color WorldGroundAmbient = new Color(0.11f, 0.1f, 0.08f);
+        private static readonly Color BootstrapFogColor = new Color(0.28f, 0.32f, 0.38f);
+        private static readonly Color CharacterFogColor = new Color(0.35f, 0.34f, 0.33f);
+        private static readonly Color WorldFogColor = new Color(0.48f, 0.47f, 0.39f);
 
         [MenuItem("Tools/Explorer Game/Generate Project Scaffolding")]
         public static void GenerateProjectScaffolding()
@@ -88,8 +124,8 @@ namespace ExplorerGame.Editor
         {
             var characterCatalog = LoadOrCreateAsset<CharacterCatalog>($"{GameConstants.ConfigFolder}/CharacterCatalog.asset");
             var worldCatalog = LoadOrCreateAsset<WorldCatalog>($"{GameConstants.ConfigFolder}/WorldCatalog.asset");
-            var maleCharacterPrefab = CreatePlaceholderCharacterPrefab("MaleExplorer", new Color(0.27f, 0.54f, 0.88f));
-            var femaleCharacterPrefab = CreatePlaceholderCharacterPrefab("FemaleExplorer", new Color(0.88f, 0.45f, 0.31f));
+            var maleCharacterPrefab = CreatePlaceholderCharacterPrefab("MaleExplorer", CharacterMaleColor);
+            var femaleCharacterPrefab = CreatePlaceholderCharacterPrefab("FemaleExplorer", CharacterFemaleColor);
 
             var maleCharacter = CreateCharacterAsset(CharacterOption.Male, "Male Explorer", maleCharacterPrefab);
             var femaleCharacter = CreateCharacterAsset(CharacterOption.Female, "Female Explorer", femaleCharacterPrefab);
@@ -148,6 +184,7 @@ namespace ExplorerGame.Editor
         {
             EnsureSceneWithSingleRoot(GameConstants.BootstrapScene, GameConstants.BootstrapScene, root =>
             {
+                ConfigureBootstrapAtmosphere(root.scene);
                 GetOrAddComponent<GameSession>(root);
                 GetOrAddComponent<BootstrapFlowController>(root);
                 EnsureOverlayCamera(root.scene, "BootstrapCamera", new Vector3(0f, 2f, -6f));
@@ -158,6 +195,7 @@ namespace ExplorerGame.Editor
         {
             EnsureSceneWithSingleRoot(GameConstants.CharacterSelectScene, GameConstants.CharacterSelectScene, root =>
             {
+                ConfigureCharacterSelectAtmosphere(root.scene);
                 GetOrAddComponent<CharacterSelectionView>(root);
                 EnsureOverlayCamera(root.scene, "CharacterSelectCamera", new Vector3(0f, 1.5f, -8f));
             });
@@ -170,6 +208,7 @@ namespace ExplorerGame.Editor
                 root.name = rootName;
                 if (sceneName == GameConstants.WorldPersistentScene)
                 {
+                    ConfigureWorldAtmosphere(root.gameObject.scene);
                     GetOrAddComponent<WorldRuntimeController>(root);
                     CreateCameraRig(root.transform);
                 }
@@ -199,7 +238,7 @@ namespace ExplorerGame.Editor
                         "ForestTrailPortal",
                         new Vector3(0f, 0f, 5.2f),
                         new Vector3(2.2f, 2.2f, 0.8f),
-                        new Color(0.24f, 0.52f, 0.29f),
+                        ForestPortalColor,
                         GameConstants.ForestZoneScene);
                 }
 
@@ -219,7 +258,7 @@ namespace ExplorerGame.Editor
                         "VillageReturnPortal",
                         new Vector3(0f, 0f, -5.2f),
                         new Vector3(2.2f, 2.2f, 0.8f),
-                        new Color(0.54f, 0.41f, 0.22f),
+                        WoodSignColor,
                         GameConstants.VillageZoneScene);
                 }
 
@@ -338,7 +377,11 @@ namespace ExplorerGame.Editor
             var camera = cameraRoot.AddComponent<Camera>();
             cameraRoot.transform.position = position;
             cameraRoot.transform.rotation = Quaternion.Euler(10f, 0f, 0f);
-            camera.clearFlags = CameraClearFlags.Skybox;
+            camera.clearFlags = CameraClearFlags.SolidColor;
+            camera.backgroundColor = scene.name == GameConstants.BootstrapScene
+                ? BootstrapFogColor
+                : CharacterFogColor;
+            camera.fieldOfView = scene.name == GameConstants.CharacterSelectScene ? 38f : 45f;
             camera.tag = "MainCamera";
             cameraRoot.AddComponent<AudioListener>();
         }
@@ -393,8 +436,8 @@ namespace ExplorerGame.Editor
             }
 
             visual.transform.SetParent(root.transform, false);
-            visual.transform.localPosition = new Vector3(0f, 1f, 0f);
-            visual.transform.localScale = new Vector3(1f, 2f, 1f);
+            visual.transform.localPosition = new Vector3(0f, 0.95f, 0f);
+            visual.transform.localScale = new Vector3(0.78f, 1.6f, 0.72f);
 
             var visualCollider = visual.GetComponent<Collider>();
             if (visualCollider != null)
@@ -408,6 +451,10 @@ namespace ExplorerGame.Editor
             {
                 renderer.sharedMaterial = material;
             }
+
+            CreatePrimitive(visual.transform, PrimitiveType.Sphere, "Head", new Vector3(0f, 0.88f, 0f), new Vector3(0.5f, 0.5f, 0.5f), CharacterAccentColor);
+            CreatePrimitive(visual.transform, PrimitiveType.Cube, "Shoulders", new Vector3(0f, 0.4f, 0f), new Vector3(0.72f, 0.18f, 0.3f), color);
+            CreatePrimitive(visual.transform, PrimitiveType.Cube, "Satchel", new Vector3(-0.3f, 0.12f, 0.16f), new Vector3(0.18f, 0.32f, 0.12f), WoodSignColor);
 
             if (existing == null)
             {
@@ -447,10 +494,121 @@ namespace ExplorerGame.Editor
             cameraRig.transform.localPosition = new Vector3(0f, 2.5f, -4.5f);
             var camera = GetOrAddComponent<Camera>(cameraRig);
             cameraRig.tag = "MainCamera";
-            camera.clearFlags = CameraClearFlags.Skybox;
+            camera.clearFlags = CameraClearFlags.SolidColor;
+            camera.backgroundColor = WorldFogColor;
+            camera.fieldOfView = 50f;
             CleanupExtraSceneAudioListeners(parent.gameObject.scene, cameraRig);
             GetOrAddComponent<AudioListener>(cameraRig);
             GetOrAddComponent<ThirdPersonCameraRig>(cameraRig);
+        }
+
+        private static void ConfigureBootstrapAtmosphere(Scene scene)
+        {
+            ConfigureSceneAtmosphere(
+                scene,
+                BootstrapSkyAmbient,
+                BootstrapEquatorAmbient,
+                BootstrapGroundAmbient,
+                BootstrapFogColor,
+                0.015f,
+                new Color(0.96f, 0.89f, 0.77f),
+                1.1f,
+                new Vector3(35f, -28f, 0f));
+        }
+
+        private static void ConfigureCharacterSelectAtmosphere(Scene scene)
+        {
+            ConfigureSceneAtmosphere(
+                scene,
+                CharacterSkyAmbient,
+                CharacterEquatorAmbient,
+                CharacterGroundAmbient,
+                CharacterFogColor,
+                0.018f,
+                new Color(0.98f, 0.9f, 0.82f),
+                1.2f,
+                new Vector3(28f, -24f, 0f));
+        }
+
+        private static void ConfigureWorldAtmosphere(Scene scene)
+        {
+            ConfigureSceneAtmosphere(
+                scene,
+                WorldSkyAmbient,
+                WorldEquatorAmbient,
+                WorldGroundAmbient,
+                WorldFogColor,
+                0.012f,
+                new Color(0.95f, 0.91f, 0.79f),
+                1.15f,
+                new Vector3(42f, -32f, 0f));
+        }
+
+        private static void ConfigureSceneAtmosphere(
+            Scene scene,
+            Color skyAmbient,
+            Color equatorAmbient,
+            Color groundAmbient,
+            Color fogColor,
+            float fogDensity,
+            Color lightColor,
+            float lightIntensity,
+            Vector3 lightEuler)
+        {
+            SceneManager.SetActiveScene(scene);
+            RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Trilight;
+            RenderSettings.ambientSkyColor = skyAmbient;
+            RenderSettings.ambientEquatorColor = equatorAmbient;
+            RenderSettings.ambientGroundColor = groundAmbient;
+            RenderSettings.ambientIntensity = 1f;
+            RenderSettings.fog = true;
+            RenderSettings.fogMode = FogMode.ExponentialSquared;
+            RenderSettings.fogColor = fogColor;
+            RenderSettings.fogDensity = fogDensity;
+            EnsureDirectionalLight(scene, "SceneKeyLight", lightColor, lightIntensity, lightEuler);
+        }
+
+        private static void EnsureDirectionalLight(
+            Scene scene,
+            string lightName,
+            Color color,
+            float intensity,
+            Vector3 eulerAngles)
+        {
+            Light keyLight = null;
+            foreach (var root in scene.GetRootGameObjects())
+            {
+                var lights = root.GetComponentsInChildren<Light>(true);
+                foreach (var light in lights)
+                {
+                    if (light.type != LightType.Directional)
+                    {
+                        continue;
+                    }
+
+                    if (keyLight == null)
+                    {
+                        keyLight = light;
+                        continue;
+                    }
+
+                    Object.DestroyImmediate(light.gameObject);
+                }
+            }
+
+            if (keyLight == null)
+            {
+                var lightRoot = new GameObject(lightName);
+                keyLight = lightRoot.AddComponent<Light>();
+                keyLight.type = LightType.Directional;
+            }
+
+            keyLight.name = lightName;
+            keyLight.color = color;
+            keyLight.intensity = intensity;
+            keyLight.shadows = LightShadows.Soft;
+            keyLight.transform.position = Vector3.zero;
+            keyLight.transform.rotation = Quaternion.Euler(eulerAngles);
         }
 
         private static void CleanupExtraSceneAudioListeners(Scene scene, GameObject cameraRig)
@@ -498,38 +656,41 @@ namespace ExplorerGame.Editor
 
         private static void DressVillageZone(Transform parent)
         {
-            CreateGround(parent, "VillageGround", new Vector3(0f, -0.05f, 0f), new Vector3(8f, 0.1f, 12f), new Color(0.42f, 0.64f, 0.35f));
-            CreateBlock(parent, "MainPath", new Vector3(0.8f, 0.02f, 2.4f), new Vector3(2.4f, 0.04f, 6.4f), new Color(0.58f, 0.49f, 0.38f));
-            CreateHouse(parent, "VillageHouseA", new Vector3(-4f, 0f, 2f), new Color(0.82f, 0.73f, 0.58f));
-            CreateHouse(parent, "VillageHouseB", new Vector3(4f, 0f, -1.5f), new Color(0.75f, 0.66f, 0.54f));
-            CreateBlock(parent, "VillageSign", new Vector3(1.5f, 0.8f, 1.2f), new Vector3(0.3f, 0.8f, 0.08f), new Color(0.41f, 0.28f, 0.15f));
-            CreateBlock(parent, "ForestTrailMarker", new Vector3(0f, 0.45f, 4.25f), new Vector3(0.25f, 0.9f, 0.25f), new Color(0.35f, 0.24f, 0.11f));
+            CreateGround(parent, "VillageGround", new Vector3(0f, -0.05f, 0f), new Vector3(8f, 0.1f, 12f), VillageGroundColor);
+            CreateBlock(parent, "MainPath", new Vector3(0.8f, 0.02f, 2.4f), new Vector3(2.4f, 0.04f, 6.4f), VillagePathColor);
+            CreateHouse(parent, "VillageHouseA", new Vector3(-4f, 0f, 2f), VillageWallColor);
+            CreateHouse(parent, "VillageHouseB", new Vector3(4f, 0f, -1.5f), VillageWallAltColor);
+            CreateBlock(parent, "VillageSign", new Vector3(1.5f, 1.05f, 1.2f), new Vector3(0.34f, 1.1f, 0.1f), WoodDarkColor);
+            CreateBlock(parent, "ForestTrailMarker", new Vector3(0f, 0.9f, 4.25f), new Vector3(0.32f, 1.8f, 0.32f), WoodDarkColor);
+            CreateBlock(parent, "ForestTrailMarkerCap", new Vector3(0f, 1.95f, 4.25f), new Vector3(0.9f, 0.18f, 0.9f), PromptAccentColor);
         }
 
         private static void DressForestZone(Transform parent)
         {
-            CreateGround(parent, "ForestGround", new Vector3(0f, -0.05f, 0f), new Vector3(6f, 0.1f, 12f), new Color(0.22f, 0.46f, 0.24f));
-            CreateBlock(parent, "ForestTrail", new Vector3(0f, 0.02f, -2.9f), new Vector3(1.6f, 0.04f, 4.2f), new Color(0.4f, 0.31f, 0.2f));
+            CreateGround(parent, "ForestGround", new Vector3(0f, -0.05f, 0f), new Vector3(6f, 0.1f, 12f), ForestGroundColor);
+            CreateBlock(parent, "ForestTrail", new Vector3(0f, 0.02f, -2.9f), new Vector3(1.6f, 0.04f, 4.2f), ForestTrailColor);
             CreateTree(parent, "ForestTreeA", new Vector3(-4f, 0f, 3f));
             CreateTree(parent, "ForestTreeB", new Vector3(3f, 0f, -2f));
             CreateTree(parent, "ForestTreeC", new Vector3(5f, 0f, 4f));
             CreateTree(parent, "ForestTreeD", new Vector3(-5.2f, 0f, -1.8f));
             CreateTree(parent, "ForestTreeE", new Vector3(4.2f, 0f, 6.2f));
-            CreateBlock(parent, "ForestRockA", new Vector3(-1.5f, 0.35f, -3f), new Vector3(0.8f, 0.7f, 0.7f), new Color(0.45f, 0.47f, 0.48f));
-            CreateBlock(parent, "ForestRockB", new Vector3(2.5f, 0.25f, 1.5f), new Vector3(0.6f, 0.5f, 0.9f), new Color(0.43f, 0.45f, 0.46f));
-            CreateBlock(parent, "ForestLookoutMarker", new Vector3(0f, 1.2f, 4.6f), new Vector3(0.6f, 2.4f, 0.6f), new Color(0.66f, 0.72f, 0.34f));
-            CreateBlock(parent, "VillageMarker", new Vector3(0f, 0.45f, -4.1f), new Vector3(0.25f, 0.9f, 0.25f), new Color(0.35f, 0.24f, 0.11f));
+            CreateBlock(parent, "ForestRockA", new Vector3(-1.5f, 0.35f, -3f), new Vector3(0.8f, 0.7f, 0.7f), StoneColor);
+            CreateBlock(parent, "ForestRockB", new Vector3(2.5f, 0.25f, 1.5f), new Vector3(0.6f, 0.5f, 0.9f), StoneDarkColor);
+            CreateBlock(parent, "ForestLookoutMarker", new Vector3(0f, 1.45f, 4.6f), new Vector3(0.72f, 2.9f, 0.72f), PromptAccentColor);
+            CreateBlock(parent, "ForestLookoutMarkerTop", new Vector3(0f, 3.1f, 4.6f), new Vector3(1.1f, 0.22f, 1.1f), WoodSignColor);
+            CreateBlock(parent, "VillageMarker", new Vector3(0f, 0.75f, -4.1f), new Vector3(0.3f, 1.5f, 0.3f), WoodDarkColor);
         }
 
         private static void DressMountainZone(Transform parent)
         {
-            CreateGround(parent, "MountainGround", new Vector3(0f, -0.05f, 0f), new Vector3(5f, 0.1f, 8f), new Color(0.38f, 0.38f, 0.36f));
-            CreateBlock(parent, "CliffA", new Vector3(-4f, 1.2f, 2f), new Vector3(1.6f, 2.4f, 2f), new Color(0.47f, 0.47f, 0.46f));
-            CreateBlock(parent, "CliffB", new Vector3(3.5f, 1.6f, -1.5f), new Vector3(1.4f, 3.2f, 1.8f), new Color(0.44f, 0.44f, 0.43f));
-            CreateBlock(parent, "MountainPath", new Vector3(0f, 0.05f, 1.8f), new Vector3(1.1f, 0.08f, 4.8f), new Color(0.54f, 0.5f, 0.43f));
-            CreateBlock(parent, "LookoutStone", new Vector3(1.8f, 0.3f, -2.8f), new Vector3(0.9f, 0.6f, 0.9f), new Color(0.5f, 0.5f, 0.49f));
-            CreateBlock(parent, "MountainBeacon", new Vector3(0f, 1.1f, 3.9f), new Vector3(0.5f, 2.2f, 0.5f), new Color(0.77f, 0.66f, 0.28f));
-            CreateBlock(parent, "LookoutPath", new Vector3(1.2f, 0.05f, -1.4f), new Vector3(0.7f, 0.08f, 2.4f), new Color(0.56f, 0.52f, 0.44f));
+            CreateGround(parent, "MountainGround", new Vector3(0f, -0.05f, 0f), new Vector3(5f, 0.1f, 8f), MountainGroundColor);
+            CreateBlock(parent, "CliffA", new Vector3(-4f, 1.2f, 2f), new Vector3(1.6f, 2.4f, 2f), StoneColor);
+            CreateBlock(parent, "CliffB", new Vector3(3.5f, 1.6f, -1.5f), new Vector3(1.4f, 3.2f, 1.8f), StoneDarkColor);
+            CreateBlock(parent, "MountainPath", new Vector3(0f, 0.05f, 1.8f), new Vector3(1.1f, 0.08f, 4.8f), MountainPathColor);
+            CreateBlock(parent, "LookoutStone", new Vector3(1.8f, 0.3f, -2.8f), new Vector3(0.9f, 0.6f, 0.9f), StoneColor);
+            CreateBlock(parent, "MountainBeacon", new Vector3(0f, 1.35f, 3.9f), new Vector3(0.65f, 2.7f, 0.65f), MountainAccentColor);
+            CreateBlock(parent, "MountainBeaconTop", new Vector3(0f, 2.95f, 3.9f), new Vector3(1.1f, 0.22f, 1.1f), WoodSignColor);
+            CreateBlock(parent, "LookoutPath", new Vector3(1.2f, 0.05f, -1.4f), new Vector3(0.7f, 0.08f, 2.4f), MountainPathColor);
         }
 
         private static void CreatePlaceholderNpc(Transform parent, Vector3 localPosition, string promptText, string dialogueText)
@@ -640,8 +801,8 @@ namespace ExplorerGame.Editor
 
             var collider = GetOrAddComponent<BoxCollider>(root);
             collider.isTrigger = false;
-            collider.center = new Vector3(0f, 1f, 0f);
-            collider.size = new Vector3(0.7f, 2f, 0.3f);
+            collider.center = new Vector3(0f, 1.15f, 0f);
+            collider.size = new Vector3(0.95f, 2.4f, 0.35f);
 
             var inspectable = GetOrAddComponent<InspectableObject>(root);
             var serializedInspectable = new SerializedObject(inspectable);
@@ -649,8 +810,9 @@ namespace ExplorerGame.Editor
             serializedInspectable.FindProperty("descriptionText").stringValue = descriptionText;
             serializedInspectable.ApplyModifiedPropertiesWithoutUndo();
 
-            CreatePortalPillar(root.transform, "Post", new Vector3(0f, 0.8f, 0f), new Vector3(0.15f, 1.6f, 0.15f), new Color(0.35f, 0.24f, 0.11f));
-            CreatePortalPillar(root.transform, "Board", new Vector3(0f, 1.4f, 0f), new Vector3(0.8f, 0.45f, 0.12f), new Color(0.62f, 0.52f, 0.3f));
+            CreatePortalPillar(root.transform, "Post", new Vector3(0f, 0.95f, 0f), new Vector3(0.18f, 1.9f, 0.18f), WoodDarkColor);
+            CreatePortalPillar(root.transform, "Board", new Vector3(0f, 1.65f, 0f), new Vector3(1.05f, 0.55f, 0.14f), WoodSignColor);
+            CreatePortalPillar(root.transform, "Cap", new Vector3(0f, 2.15f, 0f), new Vector3(1.2f, 0.12f, 0.22f), PromptAccentColor);
         }
 
         private static void CreateZonePortalAnchor(
@@ -679,13 +841,14 @@ namespace ExplorerGame.Editor
 
             var trigger = GetOrAddComponent<BoxCollider>(root);
             trigger.isTrigger = true;
-            trigger.center = new Vector3(0f, 1.2f, 0f);
-            trigger.size = new Vector3(1.6f, 2.4f, 1f);
+            trigger.center = new Vector3(0f, 1.35f, 0f);
+            trigger.size = new Vector3(1.9f, 2.8f, 1.2f);
 
-            CreatePortalPillar(root.transform, "LeftPillar", new Vector3(-0.75f, 1.1f, 0f), new Vector3(0.35f, 2.2f, 0.35f), color);
-            CreatePortalPillar(root.transform, "RightPillar", new Vector3(0.75f, 1.1f, 0f), new Vector3(0.35f, 2.2f, 0.35f), color);
-            CreatePortalPillar(root.transform, "TopBeam", new Vector3(0f, 2.1f, 0f), new Vector3(1.9f, 0.28f, 0.35f), color);
-            CreateBlock(root.transform, "PortalFloor", new Vector3(0f, 0.02f, 0f), new Vector3(archScale.x, 0.04f, archScale.z), new Color(0.46f, 0.4f, 0.29f));
+            CreatePortalPillar(root.transform, "LeftPillar", new Vector3(-0.85f, 1.25f, 0f), new Vector3(0.42f, 2.5f, 0.42f), color);
+            CreatePortalPillar(root.transform, "RightPillar", new Vector3(0.85f, 1.25f, 0f), new Vector3(0.42f, 2.5f, 0.42f), color);
+            CreatePortalPillar(root.transform, "TopBeam", new Vector3(0f, 2.45f, 0f), new Vector3(2.2f, 0.34f, 0.42f), color);
+            CreatePortalPillar(root.transform, "Crest", new Vector3(0f, 2.95f, 0f), new Vector3(0.6f, 0.55f, 0.6f), PromptAccentColor);
+            CreateBlock(root.transform, "PortalFloor", new Vector3(0f, 0.02f, 0f), new Vector3(archScale.x, 0.04f, archScale.z), PortalFloorColor);
         }
 
         private static void CreatePortalPillar(Transform parent, string name, Vector3 localPosition, Vector3 localScale, Color color)
@@ -725,8 +888,8 @@ namespace ExplorerGame.Editor
             var visual = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             visual.name = "Visual";
             visual.transform.SetParent(root.transform, false);
-            visual.transform.localPosition = new Vector3(0f, 1f, 0f);
-            visual.transform.localScale = new Vector3(1f, 2f, 1f);
+            visual.transform.localPosition = new Vector3(0f, 0.98f, 0f);
+            visual.transform.localScale = new Vector3(0.82f, 1.7f, 0.78f);
 
             var visualCollider = visual.GetComponent<Collider>();
             if (visualCollider != null)
@@ -734,12 +897,16 @@ namespace ExplorerGame.Editor
                 Object.DestroyImmediate(visualCollider);
             }
 
-            var material = CreateMaterialAsset("GuideNpc", new Color(0.35f, 0.75f, 0.48f));
+            var material = CreateMaterialAsset("GuideNpc", NpcGuideColor);
             var renderer = visual.GetComponent<Renderer>();
             if (renderer != null)
             {
                 renderer.sharedMaterial = material;
             }
+
+            CreatePrimitive(visual.transform, PrimitiveType.Sphere, "Head", new Vector3(0f, 0.9f, 0f), new Vector3(0.48f, 0.48f, 0.48f), NpcGuideAccentColor);
+            CreatePrimitive(visual.transform, PrimitiveType.Cube, "Arms", new Vector3(0f, 0.34f, 0f), new Vector3(0.84f, 0.16f, 0.22f), NpcGuideColor);
+            CreatePrimitive(visual.transform, PrimitiveType.Cylinder, "Staff", new Vector3(0.34f, 0.12f, 0f), new Vector3(0.08f, 0.7f, 0.08f), WoodDarkColor);
 
             var prefab = PrefabUtility.SaveAsPrefabAsset(root, path);
             Object.DestroyImmediate(root);
@@ -779,7 +946,7 @@ namespace ExplorerGame.Editor
             var renderer = visual.GetComponent<Renderer>();
             if (renderer != null)
             {
-                renderer.sharedMaterial = CreateMaterialAsset("ForestAnimal", new Color(0.62f, 0.48f, 0.34f));
+                renderer.sharedMaterial = CreateMaterialAsset("ForestAnimal", AnimalColor);
             }
 
             var prefab = PrefabUtility.SaveAsPrefabAsset(root, path);
@@ -815,7 +982,7 @@ namespace ExplorerGame.Editor
             var renderer = visual.GetComponent<Renderer>();
             if (renderer != null)
             {
-                renderer.sharedMaterial = CreateMaterialAsset("InspectableMarker", new Color(0.72f, 0.63f, 0.3f));
+                renderer.sharedMaterial = CreateMaterialAsset("InspectableMarker", PromptAccentColor);
             }
 
             var prefab = PrefabUtility.SaveAsPrefabAsset(root, path);
@@ -829,6 +996,12 @@ namespace ExplorerGame.Editor
             var existing = AssetDatabase.LoadAssetAtPath<Material>(path);
             if (existing != null)
             {
+                if (existing.color != color)
+                {
+                    existing.color = color;
+                    EditorUtility.SetDirty(existing);
+                }
+
                 return existing;
             }
 
@@ -856,7 +1029,7 @@ namespace ExplorerGame.Editor
             houseRoot.transform.localPosition = localPosition;
 
             CreatePrimitive(houseRoot.transform, PrimitiveType.Cube, "Body", new Vector3(0f, 0.75f, 0f), new Vector3(1.6f, 1.5f, 1.4f), color);
-            CreatePrimitive(houseRoot.transform, PrimitiveType.Cube, "Roof", new Vector3(0f, 1.55f, 0f), new Vector3(1.8f, 0.3f, 1.6f), new Color(0.45f, 0.2f, 0.16f));
+            CreatePrimitive(houseRoot.transform, PrimitiveType.Cube, "Roof", new Vector3(0f, 1.55f, 0f), new Vector3(1.8f, 0.3f, 1.6f), VillageRoofColor);
         }
 
         private static void CreateTree(Transform parent, string name, Vector3 localPosition)
@@ -865,8 +1038,8 @@ namespace ExplorerGame.Editor
             treeRoot.transform.SetParent(parent, false);
             treeRoot.transform.localPosition = localPosition;
 
-            CreatePrimitive(treeRoot.transform, PrimitiveType.Cylinder, "Trunk", new Vector3(0f, 1f, 0f), new Vector3(0.25f, 1f, 0.25f), new Color(0.38f, 0.24f, 0.1f));
-            CreatePrimitive(treeRoot.transform, PrimitiveType.Sphere, "Canopy", new Vector3(0f, 2.3f, 0f), new Vector3(1.4f, 1.2f, 1.4f), new Color(0.21f, 0.52f, 0.24f));
+            CreatePrimitive(treeRoot.transform, PrimitiveType.Cylinder, "Trunk", new Vector3(0f, 1f, 0f), new Vector3(0.25f, 1f, 0.25f), WoodDarkColor);
+            CreatePrimitive(treeRoot.transform, PrimitiveType.Sphere, "Canopy", new Vector3(0f, 2.3f, 0f), new Vector3(1.4f, 1.2f, 1.4f), ForestCanopyColor);
         }
 
         private static void CreateBlock(Transform parent, string name, Vector3 localPosition, Vector3 localScale, Color color)
