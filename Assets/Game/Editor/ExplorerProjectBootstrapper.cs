@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using ExplorerGame.Animals;
 using ExplorerGame.Core;
@@ -46,6 +47,7 @@ namespace ExplorerGame.Editor
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             ValidateConfigAssets();
+            ValidateGeneratedScenes();
         }
 
         [MenuItem("Tools/Explorer Game/Validate Config Assets")]
@@ -67,6 +69,18 @@ namespace ExplorerGame.Editor
             characterCatalog.Validate();
             worldCatalog.Validate();
             Debug.Log("Explorer Game config validation completed successfully.");
+        }
+
+        [MenuItem("Tools/Explorer Game/Validate Generated Scenes")]
+        public static void ValidateGeneratedScenes()
+        {
+            ValidateScene(GameConstants.BootstrapScene, typeof(GameSession), typeof(BootstrapFlowController));
+            ValidateScene(GameConstants.CharacterSelectScene, typeof(CharacterSelectionView));
+            ValidateScene(GameConstants.WorldPersistentScene, typeof(WorldRuntimeController), typeof(ThirdPersonCameraRig));
+            ValidateScene(GameConstants.VillageZoneScene, typeof(DialogueNpc));
+            ValidateScene(GameConstants.ForestZoneScene, typeof(AnimalRoamingAgent), typeof(InspectableObject));
+            ValidateScene(GameConstants.MountainZoneScene, typeof(InspectableObject));
+            Debug.Log("Explorer Game scene validation completed successfully.");
         }
 
         private static void CreateCatalogAssets()
@@ -211,6 +225,38 @@ namespace ExplorerGame.Editor
         private static EditorBuildSettingsScene BuildScene(string sceneName)
         {
             return new EditorBuildSettingsScene($"{SceneFolder}/{sceneName}.unity", true);
+        }
+
+        private static void ValidateScene(string sceneName, params Type[] requiredComponents)
+        {
+            var path = $"{SceneFolder}/{sceneName}.unity";
+            if (!File.Exists(path))
+            {
+                throw new FileNotFoundException($"Missing scene at {path}. Run Tools/Explorer Game/Generate Project Scaffolding.");
+            }
+
+            var scene = EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
+            foreach (var componentType in requiredComponents)
+            {
+                if (!SceneContainsComponent(scene, componentType))
+                {
+                    throw new InvalidOperationException(
+                        $"Scene '{sceneName}' is missing required component '{componentType.Name}'.");
+                }
+            }
+        }
+
+        private static bool SceneContainsComponent(Scene scene, Type componentType)
+        {
+            foreach (var root in scene.GetRootGameObjects())
+            {
+                if (root.GetComponentInChildren(componentType, true) != null)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private static GameObject CreatePlaceholderCharacterPrefab(string prefabName, Color color)

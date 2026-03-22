@@ -7,6 +7,7 @@ This Unity `6000.4.0f1` project uses URP. Runtime code lives in `Assets/Game`, s
 Use the Unity Editor for day-to-day work:
 - `Tools/Explorer Game/Generate Project Scaffolding` creates the starter scenes, config assets, and build settings.
 - `Tools/Explorer Game/Validate Config Assets` checks the generated character and world catalogs.
+- `Tools/Explorer Game/Validate Generated Scenes` checks the generated bootstrap, world, and interaction scene wiring.
 - Unity Test Runner runs `EditMode` and `PlayMode` tests from `Assets/Game/Tests`.
 
 ## Coding Style

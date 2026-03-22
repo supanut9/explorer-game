@@ -195,7 +195,7 @@
   - Sprint detail: `docs/planning/sprint-02.md#eg-22-ambient-placement-pass`
 
 ## Epic 13: First Playable Verification
-- Status: ready
+- Status: in progress
 - Goal: verify that the first playable loop works in-editor and in CI-supported paths
 - Story 13.1: scene wiring and traversal verification
   - Tracking ID: `EG-23`

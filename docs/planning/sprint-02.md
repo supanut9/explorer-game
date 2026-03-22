@@ -180,7 +180,7 @@
 
 ### EG-23 Scene Wiring Verification
 - Story Order: `13.1`
-- Status: ready
+- Status: in progress
 - Owner: `Game.Editor`
 - Module: `Assets/Scenes`, `docs/planning`
 - Files: `Assets/Scenes/Bootstrap.unity`, `Assets/Scenes/CharacterSelect.unity`, `Assets/Scenes/WorldPersistent.unity`, `docs/planning/sprint-02.md`
@@ -200,3 +200,4 @@
   - `EG-22`
 - Notes:
   - this is the bridge between code-complete and actually playable
+  - validation tooling and checklist are in place, but the manual Unity Editor verification pass still needs to be run
