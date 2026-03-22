@@ -15,6 +15,9 @@
 ## Stretch Items
 - Additional placeholder content variants
 - Extra world-zone polish
+- Animal roaming placeholder behavior
+- Selected character HUD label
+- Repo Codex workflow assets
 
 ## Dependencies
 - `docs/game-spec.md`
@@ -129,7 +132,7 @@
 
 ### EG-5 Movement Camera
 - Story Order: `3.2`
-- Status: ready
+- Status: blocked
 - Owner: `Game.Player`
 - Module: `Assets/Game/Player`
 - Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`
@@ -147,6 +150,7 @@
   - `EG-2`
 - Notes:
   - keep movement simple and PC-first
+  - blocked until the movement source files are added to the repo
 
 ### EG-6 Zone Catalog
 - Story Order: `4.1`
@@ -170,7 +174,7 @@
 
 ### EG-7 World Spawn
 - Story Order: `4.2`
-- Status: ready
+- Status: blocked
 - Owner: `Game.World`
 - Module: `Assets/Game/World`
 - Files: `Assets/Game/World/WorldRuntimeController.cs`, `Assets/Game/World/ZonePortal.cs`
@@ -187,10 +191,11 @@
   - `EG-6`
 - Notes:
   - depends on stable scene-name contracts
+  - blocked until `ZonePortal.cs` is added to the repo
 
 ### EG-8 Interaction Probe
 - Story Order: `5.1`
-- Status: ready
+- Status: blocked
 - Owner: `Game.Interaction`
 - Module: `Assets/Game/Interaction`
 - Files: `Assets/Game/Interaction/InteractionProbe.cs`, `Assets/Game/UI/InteractionPromptLabel.cs`
@@ -208,10 +213,11 @@
   - `EG-2`
 - Notes:
   - keep interactions light and non-hostile
+  - blocked until interaction runtime files are added to the repo
 
 ### EG-9 NPC Inspectable
 - Story Order: `5.2`
-- Status: ready
+- Status: blocked
 - Owner: `Game.Interaction`
 - Module: `Assets/Game/Interaction`
 - Files: `Assets/Game/Interaction/DialogueNpc.cs`, `Assets/Game/Interaction/InspectableObject.cs`
@@ -228,6 +234,7 @@
   - `docs/content-decisions.md`
 - Notes:
   - no quest or inventory systems
+  - blocked until interaction runtime files are added to the repo
 
 ### EG-10 Editor Scaffold
 - Story Order: `6.1`
@@ -252,7 +259,7 @@
 
 ### EG-11 Session Tests
 - Story Order: `7.1`
-- Status: ready
+- Status: done
 - Owner: `Game.Tests.EditMode`
 - Module: `Assets/Game/Tests/EditMode`
 - Files: `Assets/Game/Tests/EditMode/GameSessionTests.cs`
@@ -271,7 +278,7 @@
 
 ### EG-12 Interaction Tests
 - Story Order: `7.2`
-- Status: ready
+- Status: blocked
 - Owner: `Game.Tests.PlayMode`
 - Module: `Assets/Game/Tests/PlayMode`
 - Files: `Assets/Game/Tests/PlayMode/InteractionProbeTests.cs`
@@ -287,3 +294,61 @@
   - `EG-8`
 - Notes:
   - keep the test setup minimal
+  - blocked until play mode interaction test files are added to the repo
+
+### EG-13 Animal Roaming
+- Story Order: `8.1`
+- Status: ready
+- Owner: `Game.Animals`
+- Module: `Assets/Game/Animals`
+- Files: `Assets/Game/Animals/AnimalRoamingAgent.cs`, `Assets/Game/Animals/Game.Animals.asmdef`
+- Goal: provide simple non-hostile roaming or idling behavior for animals.
+- Acceptance:
+  - animals roam or idle naturally
+  - the behavior stays non-hostile
+- Subtasks:
+  - configure the roaming agent
+  - keep movement localized around an origin area
+  - avoid adding combat or quest systems
+- Dependencies:
+  - `docs/game-spec.md`
+- Notes:
+  - currently present in the workspace but not yet tracked
+
+### EG-14 Selected Character Label
+- Story Order: `8.2`
+- Status: ready
+- Owner: `Game.UI`
+- Module: `Assets/Game/UI`
+- Files: `Assets/Game/UI/SelectedCharacterLabel.cs`
+- Goal: reflect the active selected character in a simple on-screen label.
+- Acceptance:
+  - the current selected character is shown in a lightweight UI label
+  - the label reads from session state without adding a larger UI system
+- Subtasks:
+  - bind a text label to the selected character
+  - keep the display lightweight
+- Dependencies:
+  - `EG-2`
+- Notes:
+  - currently present in the workspace but not yet tracked
+
+### EG-15 Codex Workflow Assets
+- Story Order: `8.3`
+- Status: done
+- Owner: `Docs`
+- Module: `.codex`
+- Files: `.codex/instructions.md`, `.codex/agents/*.md`, `.codex/skills/*.md`
+- Goal: keep repo-owned Codex instructions, role prompts, and task skills versioned with the project docs.
+- Acceptance:
+  - the repo-owned `.codex` instructions are committed
+  - agent role prompts are committed for project reuse
+  - skill docs are committed for sprint and task workflows
+- Subtasks:
+  - track repo-owned `.codex` instruction files
+  - track role prompts under `.codex/agents`
+  - track skill docs under `.codex/skills`
+- Dependencies:
+  - `EG-1`
+- Notes:
+  - commit only project-owned Codex assets, not personal machine config

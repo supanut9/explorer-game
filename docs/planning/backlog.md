@@ -1,7 +1,7 @@
 # Backlog
 
 ## Sprint 01: MVP Foundation
-- Status: planned
+- Status: in progress
 - Goal: make the repo ready for a first playable exploration loop with clear AI ownership.
 
 ## Parallel Lanes
@@ -39,7 +39,7 @@
   - Sprint detail: `docs/planning/sprint-01.md#eg-3-catalog-validation`
 
 ## Epic 3: Player Flow
-- Status: ready
+- Status: in progress
 - Goal: character select, movement, and camera
 - Story 3.1: character select flow
   - Tracking ID: `EG-4`
@@ -97,7 +97,7 @@
   - Sprint detail: `docs/planning/sprint-01.md#eg-10-editor-scaffold`
 
 ## Epic 7: Tests
-- Status: ready
+- Status: in progress
 - Goal: edit mode and play mode coverage
 - Story 7.1: session and selection tests
   - Tracking ID: `EG-11`
@@ -111,3 +111,25 @@
   - Files: `Assets/Game/Tests/PlayMode/InteractionProbeTests.cs`
   - Acceptance: nearest-target interaction is covered by play mode tests.
   - Sprint detail: `docs/planning/sprint-01.md#eg-12-interaction-tests`
+
+## Epic 8: Stretch Backlog
+- Status: ready
+- Goal: track optional sprint-adjacent work that already exists in the workspace
+- Story 8.1: animal roaming placeholder behavior
+  - Tracking ID: `EG-13`
+  - Owner: `Game.Animals`
+  - Files: `Assets/Game/Animals/AnimalRoamingAgent.cs`, `Assets/Game/Animals/Game.Animals.asmdef`
+  - Acceptance: animals roam or idle naturally without adding hostile behavior.
+  - Sprint detail: `docs/planning/sprint-01.md#eg-13-animal-roaming`
+- Story 8.2: selected character HUD label
+  - Tracking ID: `EG-14`
+  - Owner: `Game.UI`
+  - Files: `Assets/Game/UI/SelectedCharacterLabel.cs`
+  - Acceptance: the current selected character is reflected in a simple on-screen label.
+  - Sprint detail: `docs/planning/sprint-01.md#eg-14-selected-character-label`
+- Story 8.3: repo codex workflow assets
+  - Tracking ID: `EG-15`
+  - Owner: `Docs`
+  - Files: `.codex/instructions.md`, `.codex/agents/*.md`, `.codex/skills/*.md`
+  - Acceptance: repo-owned Codex instructions, agent roles, and task skills are tracked with the project docs.
+  - Sprint detail: `docs/planning/sprint-01.md#eg-15-codex-workflow-assets`
