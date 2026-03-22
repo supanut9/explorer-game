@@ -2,8 +2,12 @@
   "name": "Game.Tests.PlayMode",
   "rootNamespace": "ExplorerGame.Tests",
   "references": [
+    "Game.Core",
     "Game.Interaction",
+    "Game.Player",
     "Game.UI",
+    "Game.World",
+    "Unity.InputSystem",
     "UnityEngine.TestRunner"
   ],
   "includePlatforms": [],

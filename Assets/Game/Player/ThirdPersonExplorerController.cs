@@ -14,12 +14,15 @@ namespace ExplorerGame.Player
         [SerializeField] private float sprintSpeed = 5.5f;
         [SerializeField] private float rotationSpeed = 540f;
         [SerializeField] private float gravity = -20f;
+        [SerializeField] private float jumpHeight = 1.2f;
         [SerializeField] private InputActionProperty moveAction;
         [SerializeField] private InputActionProperty sprintAction;
+        [SerializeField] private InputActionProperty jumpAction;
 
         private CharacterController characterController;
         private InputAction runtimeMoveAction;
         private InputAction runtimeSprintAction;
+        private InputAction runtimeJumpAction;
         private Vector3 velocity;
 
         private void Awake()
@@ -31,14 +34,17 @@ namespace ExplorerGame.Player
         {
             runtimeMoveAction = PrepareMoveAction(moveAction);
             runtimeSprintAction = PrepareSprintAction(sprintAction);
+            runtimeJumpAction = PrepareJumpAction(jumpAction);
             runtimeMoveAction.Enable();
             runtimeSprintAction.Enable();
+            runtimeJumpAction.Enable();
         }
 
         private void OnDisable()
         {
             runtimeMoveAction.Disable();
             runtimeSprintAction.Disable();
+            runtimeJumpAction.Disable();
         }
 
         private void Update()
@@ -61,6 +67,11 @@ namespace ExplorerGame.Player
             if (characterController.isGrounded && velocity.y < 0f)
             {
                 velocity.y = -2f;
+            }
+
+            if (characterController.isGrounded && ReadJumpPressed())
+            {
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             }
 
             velocity.y += gravity * Time.deltaTime;
@@ -102,11 +113,22 @@ namespace ExplorerGame.Player
             return action;
         }
 
+        private static InputAction PrepareJumpAction(InputActionProperty property)
+        {
+            if (HasUsableAction(property))
+            {
+                return property.action;
+            }
+
+            var action = new InputAction("Jump", InputActionType.Button);
+            action.AddBinding("<Keyboard>/space");
+            return action;
+        }
+
         private static bool HasUsableAction(InputActionProperty property)
         {
-            var reference = property.reference;
             var action = property.action;
-            return reference != null && action != null && action.bindings.Count > 0;
+            return action != null && action.bindings.Count > 0;
         }
 
         private static Vector2 ApplyDeadzone(Vector2 input, float deadzone)
@@ -163,6 +185,17 @@ namespace ExplorerGame.Player
 
             var keyboard = Keyboard.current;
             return keyboard != null && keyboard.leftShiftKey.isPressed;
+        }
+
+        private bool ReadJumpPressed()
+        {
+            if (HasUsableAction(jumpAction))
+            {
+                return runtimeJumpAction.WasPressedThisFrame();
+            }
+
+            var keyboard = Keyboard.current;
+            return keyboard != null && keyboard.spaceKey.wasPressedThisFrame;
         }
     }
 }

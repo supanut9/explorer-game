@@ -7,6 +7,7 @@ namespace ExplorerGame.Player
     {
         private const float LookDeadzone = 0.01f;
         private const float KeyboardLookSpeed = 120f;
+        private const float FallbackMouseSensitivity = 0.2f;
 
         [SerializeField] private Transform target;
         [SerializeField] private Vector3 followOffset = new(0f, 1.8f, 0f);
@@ -21,16 +22,19 @@ namespace ExplorerGame.Player
         private Vector3 followVelocity;
         private float yaw;
         private float pitch = 12f;
+        private bool lockedCursorForFallback;
 
         private void OnEnable()
         {
             runtimeLookAction = PrepareLookAction(lookAction);
             runtimeLookAction.Enable();
+            TryLockCursorForFallback();
         }
 
         private void OnDisable()
         {
             runtimeLookAction.Disable();
+            ReleaseFallbackCursor();
         }
 
         private void LateUpdate()
@@ -65,8 +69,9 @@ namespace ExplorerGame.Player
         private Vector3 UpdateDesiredPosition()
         {
             var lookInput = ReadLookInput();
-            yaw += lookInput.x * lookSensitivity;
-            pitch = Mathf.Clamp(pitch - lookInput.y * lookSensitivity, minPitch, maxPitch);
+            var sensitivity = HasUsableAction(lookAction) ? lookSensitivity : 1f;
+            yaw += lookInput.x * sensitivity;
+            pitch = Mathf.Clamp(pitch - lookInput.y * sensitivity, minPitch, maxPitch);
 
             var pivot = target.position + followOffset;
             var rotation = Quaternion.Euler(pitch, yaw, 0f);
@@ -89,9 +94,8 @@ namespace ExplorerGame.Player
 
         private static bool HasUsableAction(InputActionProperty property)
         {
-            var reference = property.reference;
             var action = property.action;
-            return reference != null && action != null && action.bindings.Count > 0;
+            return action != null && action.bindings.Count > 0;
         }
 
         private static Vector2 ApplyDeadzone(Vector2 input, float deadzone)
@@ -106,8 +110,11 @@ namespace ExplorerGame.Player
                 return ApplyDeadzone(runtimeLookAction.ReadValue<Vector2>(), LookDeadzone);
             }
 
+            TryLockCursorForFallback();
             var mouse = Mouse.current;
-            var mouseInput = mouse != null ? ApplyDeadzone(mouse.delta.ReadValue(), LookDeadzone) : Vector2.zero;
+            var mouseInput = mouse != null
+                ? ApplyDeadzone(mouse.delta.ReadValue() * FallbackMouseSensitivity, LookDeadzone)
+                : Vector2.zero;
             if (mouseInput != Vector2.zero)
             {
                 return mouseInput;
@@ -163,6 +170,30 @@ namespace ExplorerGame.Player
             }
 
             return new Vector2(x, y);
+        }
+
+        private void TryLockCursorForFallback()
+        {
+            if (HasUsableAction(lookAction) || !Application.isPlaying || lockedCursorForFallback)
+            {
+                return;
+            }
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            lockedCursorForFallback = true;
+        }
+
+        private void ReleaseFallbackCursor()
+        {
+            if (!lockedCursorForFallback)
+            {
+                return;
+            }
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            lockedCursorForFallback = false;
         }
     }
 }

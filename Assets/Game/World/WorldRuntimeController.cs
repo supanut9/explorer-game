@@ -1,6 +1,7 @@
 using ExplorerGame.Core;
 using ExplorerGame.Interaction;
 using ExplorerGame.Player;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -45,6 +46,7 @@ namespace ExplorerGame.World
                 }
             }
 
+            NormalizeWorldCameras();
             SpawnPlayer(session.SelectedCharacter, zone);
         }
 
@@ -94,6 +96,61 @@ namespace ExplorerGame.World
             }
 
             spawnedPlayer = null;
+        }
+
+        private void NormalizeWorldCameras()
+        {
+            var cameraRigs = FindObjectsByType<ThirdPersonCameraRig>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            ThirdPersonCameraRig cameraRig = null;
+            foreach (var candidate in cameraRigs)
+            {
+                if (candidate == null)
+                {
+                    continue;
+                }
+
+                if (cameraRig == null)
+                {
+                    cameraRig = candidate;
+                    continue;
+                }
+
+                Destroy(candidate.gameObject);
+            }
+
+            if (cameraRig == null)
+            {
+                return;
+            }
+
+            var rigCamera = cameraRig.GetComponent<Camera>();
+            if (rigCamera != null)
+            {
+                rigCamera.enabled = true;
+                rigCamera.tag = "MainCamera";
+            }
+
+            var rigListener = cameraRig.GetComponent<AudioListener>();
+            if (rigListener != null)
+            {
+                rigListener.enabled = true;
+            }
+
+            var cameras = FindObjectsByType<Camera>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            foreach (var camera in cameras)
+            {
+                if (camera == null || camera == rigCamera)
+                {
+                    continue;
+                }
+
+                camera.enabled = false;
+                var listener = camera.GetComponent<AudioListener>();
+                if (listener != null)
+                {
+                    listener.enabled = false;
+                }
+            }
         }
 
         private async Awaitable UnloadInactiveZonesAsync(string activeZoneScene)

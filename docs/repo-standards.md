@@ -20,6 +20,11 @@
 - World scenes should load predictably from scene-name contracts.
 - Use catalogs and editor tooling to reduce manual scene wiring.
 
+## Input Configuration
+- `InputActionProperty` fields may be configured either with an `InputActionReference` or with a valid inline action on the component.
+- Empty serialized `InputActionProperty` values should be treated as missing input and should fall back to the repo's desktop baseline controls.
+- Generated placeholder content should remain playable on keyboard and mouse even when no action asset is wired in the Inspector.
+
 ## Content Rules
 - Placeholder-first is the default.
 - Replace art by swapping prefabs or catalog entries, not by rewriting systems.
