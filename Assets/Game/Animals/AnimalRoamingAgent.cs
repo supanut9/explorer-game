@@ -27,7 +27,13 @@ namespace ExplorerGame.Animals
                 return;
             }
 
-            if (agent.pathPending || agent.remainingDistance > 0.5f)
+            if (agent == null || !agent.isActiveAndEnabled || !agent.isOnNavMesh)
+            {
+                ScheduleNextMove();
+                return;
+            }
+
+            if (agent.pathPending || (agent.hasPath && agent.remainingDistance > 0.5f))
             {
                 return;
             }

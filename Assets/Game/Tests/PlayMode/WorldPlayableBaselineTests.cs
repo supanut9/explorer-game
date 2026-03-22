@@ -2,6 +2,7 @@ using System.Collections;
 using ExplorerGame.Core;
 using ExplorerGame.Interaction;
 using ExplorerGame.Player;
+using ExplorerGame.World;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -65,8 +66,47 @@ namespace ExplorerGame.Tests.PlayMode
 
             Assert.AreSame(npc, probe.CurrentTarget, "Expected the nearest interaction target to resolve to the village NPC.");
 
-            LogAssert.Expect(LogType.Log, "Hello, explorer.");
+            LogAssert.Expect(LogType.Log, "The forest trail is straight ahead. Follow the marked path past the sign and step through the green arch.");
             Assert.IsTrue(probe.TriggerCurrentTarget(), "Expected the probe to trigger the current NPC target.");
+        }
+
+        [UnityTest]
+        public IEnumerator WorldTraversal_ReachesForest_AndAllowsDestinationInteraction()
+        {
+            yield return WaitForFrames(5);
+
+            var player = Object.FindAnyObjectByType<ThirdPersonExplorerController>();
+            Assert.IsNotNull(player, "Expected a spawned player controller before traversal.");
+
+            var probe = player.GetComponent<InteractionProbe>();
+            Assert.IsNotNull(probe, "Expected the spawned player to have an interaction probe.");
+
+            var villagePortal = FindPortalInScene(GameConstants.VillageZoneScene);
+            Assert.IsNotNull(villagePortal, "Expected a traversal portal in the village scene.");
+
+            villagePortal.TravelAsync();
+            yield return WaitForFrames(10);
+
+            Assert.AreEqual(GameConstants.ForestZoneScene, GameSession.Instance.ActiveZoneScene, "Expected the active zone to switch to the forest after portal travel.");
+            Assert.IsTrue(SceneManager.GetSceneByName(GameConstants.ForestZoneScene).isLoaded, "Expected the forest scene to be loaded after traversal.");
+            Assert.IsFalse(SceneManager.GetSceneByName(GameConstants.VillageZoneScene).isLoaded, "Expected the village scene to unload after traversal.");
+
+            player = Object.FindAnyObjectByType<ThirdPersonExplorerController>();
+            Assert.IsNotNull(player, "Expected a spawned player controller after traversal.");
+
+            probe = player.GetComponent<InteractionProbe>();
+            Assert.IsNotNull(probe, "Expected the respawned player to keep an interaction probe after traversal.");
+
+            var forestMarker = Object.FindAnyObjectByType<InspectableObject>();
+            Assert.IsNotNull(forestMarker, "Expected a reachable inspectable in the forest scene.");
+
+            player.transform.position = forestMarker.transform.position + new Vector3(0.25f, 0f, 0f);
+            yield return WaitForFrames(2);
+
+            Assert.AreSame(forestMarker, probe.CurrentTarget, "Expected the forest inspectable to become the active target after traversal.");
+
+            LogAssert.Expect(LogType.Log, "The air is cooler here. Animal tracks cut between the trees and the trail bends back toward the village arch.");
+            Assert.IsTrue(probe.TriggerCurrentTarget(), "Expected the probe to trigger the forest inspectable target.");
         }
 
         [UnityTearDown]
@@ -98,6 +138,20 @@ namespace ExplorerGame.Tests.PlayMode
             {
                 yield return null;
             }
+        }
+
+        private static ZonePortal FindPortalInScene(string sceneName)
+        {
+            var portals = Object.FindObjectsByType<ZonePortal>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+            foreach (var portal in portals)
+            {
+                if (portal != null && portal.gameObject.scene.name == sceneName)
+                {
+                    return portal;
+                }
+            }
+
+            return null;
         }
     }
 }

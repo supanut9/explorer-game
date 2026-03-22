@@ -78,8 +78,8 @@ namespace ExplorerGame.Editor
             ValidateScene(GameConstants.BootstrapScene, typeof(GameSession), typeof(BootstrapFlowController), typeof(Camera));
             ValidateScene(GameConstants.CharacterSelectScene, typeof(CharacterSelectionView), typeof(Camera));
             ValidateScene(GameConstants.WorldPersistentScene, typeof(WorldRuntimeController), typeof(ThirdPersonCameraRig));
-            ValidateScene(GameConstants.VillageZoneScene, typeof(DialogueNpc));
-            ValidateScene(GameConstants.ForestZoneScene, typeof(AnimalRoamingAgent), typeof(InspectableObject));
+            ValidateScene(GameConstants.VillageZoneScene, typeof(DialogueNpc), typeof(ZonePortal));
+            ValidateScene(GameConstants.ForestZoneScene, typeof(AnimalRoamingAgent), typeof(InspectableObject), typeof(ZonePortal));
             ValidateScene(GameConstants.MountainZoneScene, typeof(InspectableObject));
             Debug.Log("Explorer Game scene validation completed successfully.");
         }
@@ -177,7 +177,30 @@ namespace ExplorerGame.Editor
                 if (sceneName == GameConstants.VillageZoneScene)
                 {
                     DressVillageZone(root.transform);
-                    CreatePlaceholderNpc(root.transform, new Vector3(1.8f, 0f, 0.8f));
+                    CreatePlaceholderNpc(
+                        root.transform,
+                        new Vector3(1.4f, 0f, 1.2f),
+                        "Ask for directions",
+                        "The forest trail is straight ahead. Follow the marked path past the sign and step through the green arch.");
+                    CreateGuideSignpost(
+                        root.transform,
+                        "ForestTrailSign",
+                        new Vector3(0.6f, 0f, 4f),
+                        "Read forest sign",
+                        "Forest trail ahead. Pass through the green arch to continue.");
+                    CreateGuideSignpost(
+                        root.transform,
+                        "MountainTrailSign",
+                        new Vector3(2.8f, 0f, -0.2f),
+                        "Read mountain sign",
+                        "Mountain route remains closed in this slice. Start with the forest trail.");
+                    CreateZonePortalAnchor(
+                        root.transform,
+                        "ForestTrailPortal",
+                        new Vector3(0f, 0f, 5.2f),
+                        new Vector3(2.2f, 2.2f, 0.8f),
+                        new Color(0.24f, 0.52f, 0.29f),
+                        GameConstants.ForestZoneScene);
                 }
 
                 if (sceneName == GameConstants.ForestZoneScene)
@@ -185,13 +208,30 @@ namespace ExplorerGame.Editor
                     DressForestZone(root.transform);
                     CreatePlaceholderAnimal(root.transform, new Vector3(-2.5f, 0f, 1.5f));
                     CreatePlaceholderAnimal(root.transform, new Vector3(2.2f, 0f, -1.2f));
-                    CreateInspectable(root.transform, "ForestMarker", new Vector3(1.2f, 0f, 3f));
+                    CreateInspectable(
+                        root.transform,
+                        "ForestMarker",
+                        new Vector3(1.2f, 0f, 3f),
+                        "Inspect forest marker",
+                        "The air is cooler here. Animal tracks cut between the trees and the trail bends back toward the village arch.");
+                    CreateZonePortalAnchor(
+                        root.transform,
+                        "VillageReturnPortal",
+                        new Vector3(0f, 0f, -5.2f),
+                        new Vector3(2.2f, 2.2f, 0.8f),
+                        new Color(0.54f, 0.41f, 0.22f),
+                        GameConstants.VillageZoneScene);
                 }
 
                 if (sceneName == GameConstants.MountainZoneScene)
                 {
                     DressMountainZone(root.transform);
-                    CreateInspectable(root.transform, "MountainMarker", new Vector3(-1.8f, 0f, -2.4f));
+                    CreateInspectable(
+                        root.transform,
+                        "MountainMarker",
+                        new Vector3(-1.8f, 0f, -2.4f),
+                        "Inspect lookout marker",
+                        "The higher path opens onto a quiet lookout. The mountain route is still rough, but the ridge is visible from here.");
                 }
             });
         }
@@ -458,33 +498,41 @@ namespace ExplorerGame.Editor
 
         private static void DressVillageZone(Transform parent)
         {
-            CreateGround(parent, "VillageGround", new Vector3(0f, -0.05f, 0f), new Vector3(8f, 0.1f, 6f), new Color(0.42f, 0.64f, 0.35f));
-            CreateBlock(parent, "MainPath", new Vector3(1.6f, 0.02f, 0.8f), new Vector3(1.6f, 0.04f, 1.2f), new Color(0.58f, 0.49f, 0.38f));
+            CreateGround(parent, "VillageGround", new Vector3(0f, -0.05f, 0f), new Vector3(8f, 0.1f, 12f), new Color(0.42f, 0.64f, 0.35f));
+            CreateBlock(parent, "MainPath", new Vector3(0.8f, 0.02f, 2.4f), new Vector3(2.4f, 0.04f, 6.4f), new Color(0.58f, 0.49f, 0.38f));
             CreateHouse(parent, "VillageHouseA", new Vector3(-4f, 0f, 2f), new Color(0.82f, 0.73f, 0.58f));
             CreateHouse(parent, "VillageHouseB", new Vector3(4f, 0f, -1.5f), new Color(0.75f, 0.66f, 0.54f));
             CreateBlock(parent, "VillageSign", new Vector3(1.5f, 0.8f, 1.2f), new Vector3(0.3f, 0.8f, 0.08f), new Color(0.41f, 0.28f, 0.15f));
+            CreateBlock(parent, "ForestTrailMarker", new Vector3(0f, 0.45f, 4.25f), new Vector3(0.25f, 0.9f, 0.25f), new Color(0.35f, 0.24f, 0.11f));
         }
 
         private static void DressForestZone(Transform parent)
         {
-            CreateGround(parent, "ForestGround", new Vector3(0f, -0.05f, 0f), new Vector3(3f, 0.1f, 3f), new Color(0.22f, 0.46f, 0.24f));
+            CreateGround(parent, "ForestGround", new Vector3(0f, -0.05f, 0f), new Vector3(6f, 0.1f, 12f), new Color(0.22f, 0.46f, 0.24f));
+            CreateBlock(parent, "ForestTrail", new Vector3(0f, 0.02f, -2.9f), new Vector3(1.6f, 0.04f, 4.2f), new Color(0.4f, 0.31f, 0.2f));
             CreateTree(parent, "ForestTreeA", new Vector3(-4f, 0f, 3f));
             CreateTree(parent, "ForestTreeB", new Vector3(3f, 0f, -2f));
             CreateTree(parent, "ForestTreeC", new Vector3(5f, 0f, 4f));
+            CreateTree(parent, "ForestTreeD", new Vector3(-5.2f, 0f, -1.8f));
+            CreateTree(parent, "ForestTreeE", new Vector3(4.2f, 0f, 6.2f));
             CreateBlock(parent, "ForestRockA", new Vector3(-1.5f, 0.35f, -3f), new Vector3(0.8f, 0.7f, 0.7f), new Color(0.45f, 0.47f, 0.48f));
             CreateBlock(parent, "ForestRockB", new Vector3(2.5f, 0.25f, 1.5f), new Vector3(0.6f, 0.5f, 0.9f), new Color(0.43f, 0.45f, 0.46f));
+            CreateBlock(parent, "ForestLookoutMarker", new Vector3(0f, 1.2f, 4.6f), new Vector3(0.6f, 2.4f, 0.6f), new Color(0.66f, 0.72f, 0.34f));
+            CreateBlock(parent, "VillageMarker", new Vector3(0f, 0.45f, -4.1f), new Vector3(0.25f, 0.9f, 0.25f), new Color(0.35f, 0.24f, 0.11f));
         }
 
         private static void DressMountainZone(Transform parent)
         {
-            CreateGround(parent, "MountainGround", new Vector3(0f, -0.05f, 0f), new Vector3(3f, 0.1f, 3f), new Color(0.38f, 0.38f, 0.36f));
+            CreateGround(parent, "MountainGround", new Vector3(0f, -0.05f, 0f), new Vector3(5f, 0.1f, 8f), new Color(0.38f, 0.38f, 0.36f));
             CreateBlock(parent, "CliffA", new Vector3(-4f, 1.2f, 2f), new Vector3(1.6f, 2.4f, 2f), new Color(0.47f, 0.47f, 0.46f));
             CreateBlock(parent, "CliffB", new Vector3(3.5f, 1.6f, -1.5f), new Vector3(1.4f, 3.2f, 1.8f), new Color(0.44f, 0.44f, 0.43f));
-            CreateBlock(parent, "MountainPath", new Vector3(0f, 0.05f, 1.5f), new Vector3(0.6f, 0.08f, 2.1f), new Color(0.54f, 0.5f, 0.43f));
+            CreateBlock(parent, "MountainPath", new Vector3(0f, 0.05f, 1.8f), new Vector3(1.1f, 0.08f, 4.8f), new Color(0.54f, 0.5f, 0.43f));
             CreateBlock(parent, "LookoutStone", new Vector3(1.8f, 0.3f, -2.8f), new Vector3(0.9f, 0.6f, 0.9f), new Color(0.5f, 0.5f, 0.49f));
+            CreateBlock(parent, "MountainBeacon", new Vector3(0f, 1.1f, 3.9f), new Vector3(0.5f, 2.2f, 0.5f), new Color(0.77f, 0.66f, 0.28f));
+            CreateBlock(parent, "LookoutPath", new Vector3(1.2f, 0.05f, -1.4f), new Vector3(0.7f, 0.08f, 2.4f), new Color(0.56f, 0.52f, 0.44f));
         }
 
-        private static void CreatePlaceholderNpc(Transform parent, Vector3 localPosition)
+        private static void CreatePlaceholderNpc(Transform parent, Vector3 localPosition, string promptText, string dialogueText)
         {
             var npcPrefab = CreatePlaceholderNpcPrefab();
             if (npcPrefab == null)
@@ -506,6 +554,12 @@ namespace ExplorerGame.Editor
             instance.name = "GuideNpc";
             instance.transform.SetParent(parent, false);
             instance.transform.localPosition = localPosition;
+
+            var npc = GetOrAddComponent<DialogueNpc>(instance);
+            var serializedNpc = new SerializedObject(npc);
+            serializedNpc.FindProperty("promptText").stringValue = promptText;
+            serializedNpc.FindProperty("dialogueText").stringValue = dialogueText;
+            serializedNpc.ApplyModifiedPropertiesWithoutUndo();
         }
 
         private static void CreatePlaceholderAnimal(Transform parent, Vector3 localPosition)
@@ -532,7 +586,12 @@ namespace ExplorerGame.Editor
             instance.transform.localPosition = localPosition;
         }
 
-        private static void CreateInspectable(Transform parent, string instanceName, Vector3 localPosition)
+        private static void CreateInspectable(
+            Transform parent,
+            string instanceName,
+            Vector3 localPosition,
+            string promptText,
+            string descriptionText)
         {
             var inspectablePrefab = CreateInspectablePrefab();
             if (inspectablePrefab == null)
@@ -554,6 +613,100 @@ namespace ExplorerGame.Editor
             instance.name = instanceName;
             instance.transform.SetParent(parent, false);
             instance.transform.localPosition = localPosition;
+
+            var inspectable = GetOrAddComponent<InspectableObject>(instance);
+            var serializedInspectable = new SerializedObject(inspectable);
+            serializedInspectable.FindProperty("promptText").stringValue = promptText;
+            serializedInspectable.FindProperty("descriptionText").stringValue = descriptionText;
+            serializedInspectable.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        private static void CreateGuideSignpost(
+            Transform parent,
+            string instanceName,
+            Vector3 localPosition,
+            string promptText,
+            string descriptionText)
+        {
+            var root = parent.Find(instanceName)?.gameObject;
+            if (root == null)
+            {
+                root = new GameObject(instanceName);
+            }
+
+            root.transform.SetParent(parent, false);
+            root.transform.localPosition = localPosition;
+            root.transform.localRotation = Quaternion.identity;
+
+            var collider = GetOrAddComponent<BoxCollider>(root);
+            collider.isTrigger = false;
+            collider.center = new Vector3(0f, 1f, 0f);
+            collider.size = new Vector3(0.7f, 2f, 0.3f);
+
+            var inspectable = GetOrAddComponent<InspectableObject>(root);
+            var serializedInspectable = new SerializedObject(inspectable);
+            serializedInspectable.FindProperty("promptText").stringValue = promptText;
+            serializedInspectable.FindProperty("descriptionText").stringValue = descriptionText;
+            serializedInspectable.ApplyModifiedPropertiesWithoutUndo();
+
+            CreatePortalPillar(root.transform, "Post", new Vector3(0f, 0.8f, 0f), new Vector3(0.15f, 1.6f, 0.15f), new Color(0.35f, 0.24f, 0.11f));
+            CreatePortalPillar(root.transform, "Board", new Vector3(0f, 1.4f, 0f), new Vector3(0.8f, 0.45f, 0.12f), new Color(0.62f, 0.52f, 0.3f));
+        }
+
+        private static void CreateZonePortalAnchor(
+            Transform parent,
+            string instanceName,
+            Vector3 localPosition,
+            Vector3 archScale,
+            Color color,
+            string targetScene)
+        {
+            var root = parent.Find(instanceName)?.gameObject;
+            if (root == null)
+            {
+                root = new GameObject(instanceName);
+            }
+
+            root.transform.SetParent(parent, false);
+            root.transform.localPosition = localPosition;
+            root.transform.localRotation = Quaternion.identity;
+
+            var portal = GetOrAddComponent<ZonePortal>(root);
+            var serializedPortal = new SerializedObject(portal);
+            serializedPortal.FindProperty("targetZoneScene").stringValue = targetScene;
+            serializedPortal.FindProperty("requireTriggerEnter").boolValue = true;
+            serializedPortal.ApplyModifiedPropertiesWithoutUndo();
+
+            var trigger = GetOrAddComponent<BoxCollider>(root);
+            trigger.isTrigger = true;
+            trigger.center = new Vector3(0f, 1.2f, 0f);
+            trigger.size = new Vector3(1.6f, 2.4f, 1f);
+
+            CreatePortalPillar(root.transform, "LeftPillar", new Vector3(-0.75f, 1.1f, 0f), new Vector3(0.35f, 2.2f, 0.35f), color);
+            CreatePortalPillar(root.transform, "RightPillar", new Vector3(0.75f, 1.1f, 0f), new Vector3(0.35f, 2.2f, 0.35f), color);
+            CreatePortalPillar(root.transform, "TopBeam", new Vector3(0f, 2.1f, 0f), new Vector3(1.9f, 0.28f, 0.35f), color);
+            CreateBlock(root.transform, "PortalFloor", new Vector3(0f, 0.02f, 0f), new Vector3(archScale.x, 0.04f, archScale.z), new Color(0.46f, 0.4f, 0.29f));
+        }
+
+        private static void CreatePortalPillar(Transform parent, string name, Vector3 localPosition, Vector3 localScale, Color color)
+        {
+            var pillar = parent.Find(name)?.gameObject;
+            if (pillar == null)
+            {
+                pillar = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                pillar.name = name;
+            }
+
+            pillar.transform.SetParent(parent, false);
+            pillar.transform.localPosition = localPosition;
+            pillar.transform.localRotation = Quaternion.identity;
+            pillar.transform.localScale = localScale;
+
+            var renderer = pillar.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.sharedMaterial = CreateMaterialAsset($"{parent.name}_{name}", color);
+            }
         }
 
         private static GameObject CreatePlaceholderNpcPrefab()
