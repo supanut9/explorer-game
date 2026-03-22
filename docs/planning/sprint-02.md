@@ -216,3 +216,25 @@
   - confirm at least one forest animal is present and roaming
   - confirm at least one inspectable in forest or mountain shows the placeholder interaction path
   - capture any failure as a new `EG-*` backlog item before changing runtime scope
+
+### EG-24 Input System Assembly Baseline
+- Story Order: `13.2`
+- Status: done
+- Owner: `Game.Player`, `Game.Interaction`
+- Module: `Assets/Game/Player`, `Assets/Game/Interaction`
+- Files: `Assets/Game/Player/Game.Player.asmdef`, `Assets/Game/Interaction/Game.Interaction.asmdef`
+- Goal: restore compile-time assembly references for modules that use the Unity Input System.
+- Acceptance:
+  - assemblies using `UnityEngine.InputSystem` reference `Unity.InputSystem` in their asmdefs
+  - Unity compilation no longer fails with missing `InputAction` or `InputActionProperty` types because of asmdef omissions
+- Subtasks:
+  - inspect the compile errors from the Unity console or `Editor.log`
+  - add missing package references to the affected asmdefs
+  - let Unity reimport and recompile with the corrected assembly graph
+- Dependencies:
+  - `EG-5`
+  - `EG-8`
+  - `EG-23`
+- Notes:
+  - this blocker was discovered during Sprint 02 verification
+  - the Input System package was already installed; only the asmdef references were missing

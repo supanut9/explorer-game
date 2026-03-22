@@ -203,3 +203,9 @@
   - Files: `Assets/Scenes/Bootstrap.unity`, `Assets/Scenes/CharacterSelect.unity`, `Assets/Scenes/WorldPersistent.unity`, `docs/planning/sprint-02.md`
   - Acceptance: Sprint 02 defines and captures a repeatable verification pass from bootstrap through character select into the world traversal loop.
   - Sprint detail: `docs/planning/sprint-02.md#eg-23-scene-wiring-verification`
+- Story 13.2: input system assembly-definition baseline
+  - Tracking ID: `EG-24`
+  - Owner: `Game.Player`, `Game.Interaction`
+  - Files: `Assets/Game/Player/Game.Player.asmdef`, `Assets/Game/Interaction/Game.Interaction.asmdef`
+  - Acceptance: assemblies that use `UnityEngine.InputSystem` compile cleanly because their asmdefs reference `Unity.InputSystem`.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-24-input-system-assembly-baseline`

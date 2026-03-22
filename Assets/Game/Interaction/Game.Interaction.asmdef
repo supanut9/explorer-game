@@ -2,7 +2,8 @@
   "name": "Game.Interaction",
   "rootNamespace": "ExplorerGame",
   "references": [
-    "Game.UI"
+    "Game.UI",
+    "Unity.InputSystem"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],

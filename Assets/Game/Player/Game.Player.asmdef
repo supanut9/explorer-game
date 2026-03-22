@@ -2,7 +2,8 @@
   "name": "Game.Player",
   "rootNamespace": "ExplorerGame",
   "references": [
-    "Game.Core"
+    "Game.Core",
+    "Unity.InputSystem"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
