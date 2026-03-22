@@ -12,6 +12,10 @@
 - Status: done
 - Goal: stabilize the first playable after Sprint 02 by repairing generated-scene camera state, tightening input contracts, and adding regression coverage for the verified runtime loop.
 
+## Sprint 04: Connected Exploration Slice
+- Status: in progress
+- Goal: turn the stable first playable into a readable multi-zone exploration slice with visible traversal, guidance, and verification.
+
 ## Parallel Lanes
 - Content: placeholder prefabs, ambient population, and zone dressing.
 - World: verify scene wiring and traversal flow in the editor.
@@ -337,3 +341,47 @@
   - Files: `Assets/Resources/Prefabs/Characters/*.prefab`, `Assets/Game/Tests/PlayMode/*.meta`, `ProjectSettings/SceneTemplateSettings.json`
   - Acceptance: serialized prefab and test assets are brought into line with the Sprint 03 runtime baseline, and editor-only scene-template noise is excluded from the sprint branch.
   - Sprint detail: `docs/planning/sprint-03.md#eg-44-sprint-03-asset-sync-and-noise-cleanup`
+
+## Epic 15: Connected Exploration
+- Status: in progress
+- Goal: make the world traversal loop readable and worthwhile beyond the initial spawn area
+- Story 15.1: zone traversal exposure
+  - Tracking ID: `EG-45`
+  - Owner: `Game.World`, `Game.Editor`
+  - Files: `Assets/Game/World/ZonePortal.cs`, `Assets/Game/World/WorldRuntimeController.cs`, `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
+  - Acceptance: the player can intentionally travel from `VillageZone` into at least one secondary zone and return through visible, reachable traversal anchors without breaking spawn stability.
+  - Sprint detail: `docs/planning/sprint-04.md#eg-45-zone-traversal-exposure`
+- Story 15.2: guide npc and signposting pass
+  - Tracking ID: `EG-46`
+  - Owner: `Content`, `Game.Interaction`
+  - Files: `Assets/Scenes/VillageZone.unity`, `Assets/Game/Interaction/DialogueNpc.cs`
+  - Acceptance: the starting village clearly points the player toward the forest and mountain routes using a guide NPC and simple world signage, without introducing a quest system.
+  - Sprint detail: `docs/planning/sprint-04.md#eg-46-guide-npc-and-signposting-pass`
+- Story 15.3: zone-specific interaction copy
+  - Tracking ID: `EG-47`
+  - Owner: `Game.Interaction`, `Content`
+  - Files: `Assets/Game/Interaction/DialogueNpc.cs`, `Assets/Game/Interaction/InspectableObject.cs`, `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
+  - Acceptance: placed NPCs and inspectables present distinct placeholder text by zone so exploration surfaces different content instead of repeated generic prompts.
+  - Sprint detail: `docs/planning/sprint-04.md#eg-47-zone-specific-interaction-copy`
+- Story 15.4: landmark and traversal dressing pass
+  - Tracking ID: `EG-48`
+  - Owner: `Content`
+  - Files: `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
+  - Acceptance: each zone has readable landmarks, paths, and traversal framing that help the player find transitions, NPCs, and inspectables without extra UI systems.
+  - Sprint detail: `docs/planning/sprint-04.md#eg-48-landmark-and-traversal-dressing-pass`
+- Story 15.5: multi-zone verification coverage
+  - Tracking ID: `EG-49`
+  - Owner: `Game.Tests.PlayMode`, `Game.Editor`
+  - Files: `Assets/Game/Tests/PlayMode/*`, `docs/planning/sprint-04.md`
+  - Acceptance: Sprint 04 captures a repeatable verification path for entering a secondary zone, returning, and confirming that prompts and traversal still work after scene transitions.
+  - Sprint detail: `docs/planning/sprint-04.md#eg-49-multi-zone-verification-coverage`
+
+## Epic 16: Validation Expansion
+- Status: planned
+- Goal: turn the Unity validation plan into real automated coverage after the connected exploration slice is stable
+- Story 16.1: unity validation workflow implementation
+  - Tracking ID: `EG-50`
+  - Owner: `CI`
+  - Files: `.github/workflows/unity-validation.yml`, `docs/planning/sprint-04.md`
+  - Acceptance: the repo runs at least one automated Unity-aware validation path in GitHub Actions with the environment and scope documented in the sprint plan.
+  - Sprint detail: `docs/planning/sprint-04.md#eg-50-unity-validation-workflow-implementation`

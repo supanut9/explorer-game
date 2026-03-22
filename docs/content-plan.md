@@ -35,4 +35,5 @@ Use this file for concrete content lists once a content pass is active.
 - `docs/planning/backlog.md`
 
 ## Status
-- planned for Sprint 02
+- baseline established in Sprint 02
+- readability and connected-exploration follow-up planned for Sprint 04

@@ -7,6 +7,7 @@ Use this folder for live task state, not for AI instructions.
 - `sprint-01.md` - first sprint plan with sprint overview and Sprint 01 task details
 - `sprint-02.md` - second sprint plan with repo stabilization and CI follow-up work
 - `sprint-03.md` - third sprint plan with post-playable stability, control contract, and regression coverage work
+- `sprint-04.md` - fourth sprint plan with connected exploration, signposting, and multi-zone verification work
 - `sprint-template.md` - reusable sprint planning format
 - `task-template.md` - reusable task or subtask format
 
