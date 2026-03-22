@@ -177,7 +177,7 @@
 
 ### EG-59 Presentation Review Checklist
 - Story Order: `19.1`
-- Status: planned
+- Status: in progress
 - Owner: `Docs`, `Game.Editor`
 - Module: `docs/planning`
 - Files: `docs/planning/sprint-05.md`
@@ -198,3 +198,32 @@
   - `EG-57`
 - Notes:
   - this is how the sprint should be closed, not how it starts
+
+## Presentation Review Checklist
+
+### Mandatory Route
+- Open `Bootstrap` and confirm the entry camera no longer feels like raw default Unity framing.
+- Move through `CharacterSelect` and confirm the selection panel reads clearly at first glance.
+- Enter the world and walk the village -> forest route.
+- Stop at the village signs, forest portal, forest lookout marker, and mountain beacon.
+- Approach one NPC and one inspectable to verify prompt readability against the updated backgrounds.
+
+### Mandatory Checks
+- Palette:
+  - village, forest, and mountain each read as distinct biomes
+  - materials feel related instead of randomly assigned
+  - traversal anchors still stand out from the environment
+- Atmosphere:
+  - lighting, fog, and ambient color improve mood without hiding the route
+  - bootstrap, character select, and world scenes feel visually related
+- Silhouette:
+  - village signs, forest portal, and mountain beacon read from gameplay distance
+  - placeholder avatars and the guide NPC are less raw than capsule-only shapes
+- UI:
+  - character-select copy and hierarchy are readable without explanation
+  - interaction prompts remain legible over ground, props, and horizon lines
+
+### Nice To Have
+- Character-select framing feels deliberate enough to capture in a short clip without extra cleanup.
+- Forest and mountain landmarks feel memorable, not just functional.
+- Placeholder figures have enough personality to support one more sprint before final art replacement.
