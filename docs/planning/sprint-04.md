@@ -182,6 +182,29 @@
 - Notes:
   - this is a stability fallback, not a full ambient-navigation polish pass
 
+### EG-52 Sprint 04 Scene And Material Sync
+- Story Order: `15.7`
+- Status: in progress
+- Owner: `Content`, `Game.Editor`, `ProjectSettings`
+- Module: `Assets/Scenes`, `Assets/Resources/Prefabs/Materials`, `ProjectSettings`
+- Files: `Assets/Scenes/*.unity`, `Assets/Resources/Prefabs/Materials/*.mat`, `ProjectSettings/SceneTemplateSettings.json`
+- Goal: sync the generated scene and material outputs from the Sprint 04 traversal and readability work without carrying editor-only noise.
+- Acceptance:
+  - generated village, forest, and mountain scenes reflect the new traversal anchors, signs, and landmarks
+  - newly created material assets for the Sprint 04 props are tracked
+  - `SceneTemplateSettings.json` is not carried into the sprint branch
+- Subtasks:
+  - stage the scaffold-generated scene updates
+  - track the new material assets created for traversal props and landmarks
+  - remove the editor-only scene template settings file from the sprint branch
+- Dependencies:
+  - `EG-45`
+  - `EG-46`
+  - `EG-47`
+  - `EG-48`
+- Notes:
+  - this is a serialized-asset sync task, not a new gameplay system
+
 ### EG-50 Unity Validation Workflow Implementation
 - Story Order: `16.1`
 - Status: planned

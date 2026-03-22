@@ -381,6 +381,12 @@
   - Files: `Assets/Game/Animals/AnimalRoamingAgent.cs`, `docs/planning/sprint-04.md`
   - Acceptance: passive animals stop spamming NavMesh warnings when a zone has no baked NavMesh, and the connected exploration slice remains playable without requiring navigation bake setup.
   - Sprint detail: `docs/planning/sprint-04.md#eg-51-animal-roaming-navmesh-fallback`
+- Story 15.7: sprint 04 scene and material sync
+  - Tracking ID: `EG-52`
+  - Owner: `Content`, `Game.Editor`, `ProjectSettings`
+  - Files: `Assets/Scenes/*.unity`, `Assets/Resources/Prefabs/Materials/*.mat`, `ProjectSettings/SceneTemplateSettings.json`
+  - Acceptance: the generated village, forest, and mountain scene assets plus their new material assets are synced to the Sprint 04 traversal baseline, and editor-only scene template noise is excluded from the sprint branch.
+  - Sprint detail: `docs/planning/sprint-04.md#eg-52-sprint-04-scene-and-material-sync`
 
 ## Epic 16: Validation Expansion
 - Status: planned
