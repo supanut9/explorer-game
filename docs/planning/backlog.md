@@ -4,13 +4,15 @@
 - Status: done
 - Goal: make the repo ready for a first playable exploration loop with clear AI ownership.
 
+## Sprint 02: First Playable Polish
+- Status: planned
+- Goal: turn the Sprint 01 foundation into a more believable first playable by adding content, scene verification, and stronger validation.
+
 ## Parallel Lanes
-- Docs: finalize repo guidance and planning docs.
-- Core: shared session state and scene constants.
-- Player/UI: character select and movement.
-- World: zone loading and player spawn.
-- Interaction: prompt and placeholder interaction behavior.
-- Editor/Tests: scaffolding, validation, and coverage.
+- Content: placeholder prefabs, ambient population, and zone dressing.
+- World: verify scene wiring and traversal flow in the editor.
+- Validation: expand CI and smoke checks beyond repo-only validation.
+- Support: license and project-settings cleanup that should not block gameplay scope.
 
 ## Epic 1: Documentation Foundation
 - Status: done
@@ -143,3 +145,61 @@
   - Files: `.github/workflows/repo-checks.yml`, `scripts/validate_repo.py`
   - Acceptance: pull requests to `main` and pushes to sprint branches run a lightweight validation workflow without needing a Unity license.
   - Sprint detail: `docs/planning/sprint-01.md#eg-16-repo-checks-workflow`
+
+## Epic 10: Repo Governance
+- Status: ready
+- Goal: formalize repo metadata and legal baseline after Sprint 01 merge
+- Story 10.1: license baseline
+  - Tracking ID: `EG-17`
+  - Owner: `Docs`
+  - Files: `LICENSE`, `README.md`, `CONTRIBUTING.md`
+  - Acceptance: the repo includes a tracked license file and contributor-facing docs acknowledge the chosen license baseline.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-17-license-baseline`
+- Story 10.2: shader graph settings baseline
+  - Tracking ID: `EG-18`
+  - Owner: `ProjectSettings`
+  - Files: `ProjectSettings/ShaderGraphSettings.asset`
+  - Acceptance: the Shader Graph project setting change is either adopted intentionally or reset deliberately, and the resulting project state is documented as a tracked repo decision.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-18-shadergraph-settings-baseline`
+
+## Epic 11: CI Expansion
+- Status: ready
+- Goal: add Unity-aware validation after repo-checks is stable
+- Story 11.1: unity validation workflow
+  - Tracking ID: `EG-19`
+  - Owner: `CI`
+  - Files: `.github/workflows/unity-validation.yml`, `docs/planning/sprint-02.md`
+  - Acceptance: Sprint 02 defines a concrete path for Unity-aware validation, including workflow scope, environment constraints, and the first required checks to automate next.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-19-unity-validation-workflow`
+
+## Epic 12: Content Pass 1
+- Status: ready
+- Goal: populate the first playable world with placeholder-first content that matches the game spec
+- Story 12.1: placeholder character and npc prefab hookup
+  - Tracking ID: `EG-20`
+  - Owner: `Game.Player`
+  - Files: `Assets/Resources/Configs/CharacterCatalog.asset`, `Assets/Scenes/CharacterSelect.unity`, `Assets/Scenes/WorldPersistent.unity`
+  - Acceptance: the player and placeholder NPC references are hooked up to real prefabs or stable placeholder prefabs in scene and catalog flow.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-20-placeholder-prefab-hookup`
+- Story 12.2: zone dressing pass
+  - Tracking ID: `EG-21`
+  - Owner: `Content`
+  - Files: `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
+  - Acceptance: each zone has a basic placeholder dressing pass with houses, terrain props, vegetation, and traversal landmarks.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-21-zone-dressing-pass`
+- Story 12.3: npc, inspectable, and animal placement pass
+  - Tracking ID: `EG-22`
+  - Owner: `Content`
+  - Files: `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
+  - Acceptance: the first playable world contains placed NPCs, inspectables, and passive animals that exercise the Sprint 01 systems.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-22-ambient-placement-pass`
+
+## Epic 13: First Playable Verification
+- Status: ready
+- Goal: verify that the first playable loop works in-editor and in CI-supported paths
+- Story 13.1: scene wiring and traversal verification
+  - Tracking ID: `EG-23`
+  - Owner: `Game.Editor`
+  - Files: `Assets/Scenes/Bootstrap.unity`, `Assets/Scenes/CharacterSelect.unity`, `Assets/Scenes/WorldPersistent.unity`, `docs/planning/sprint-02.md`
+  - Acceptance: Sprint 02 defines and captures a repeatable verification pass from bootstrap through character select into the world traversal loop.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-23-scene-wiring-verification`

@@ -35,4 +35,4 @@ Use this file for concrete content lists once a content pass is active.
 - `docs/planning/backlog.md`
 
 ## Status
-- pending
+- planned for Sprint 02

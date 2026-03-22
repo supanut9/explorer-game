@@ -5,6 +5,7 @@ Use this folder for live task state, not for AI instructions.
 ## Files
 - `backlog.md` - current epics, stories, and task order
 - `sprint-01.md` - first sprint plan with sprint overview and Sprint 01 task details
+- `sprint-02.md` - second sprint plan with repo stabilization and CI follow-up work
 - `sprint-template.md` - reusable sprint planning format
 - `task-template.md` - reusable task or subtask format
 
