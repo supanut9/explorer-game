@@ -1,0 +1,17 @@
+{
+  "name": "Game.Animals",
+  "rootNamespace": "ExplorerGame",
+  "references": [
+    "Game.Core",
+    "Unity.AI.Navigation"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

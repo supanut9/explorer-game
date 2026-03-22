@@ -1,0 +1,20 @@
+{
+  "name": "Game.Tests.PlayMode",
+  "rootNamespace": "ExplorerGame.Tests",
+  "references": [
+    "Game.Interaction",
+    "Game.UI",
+    "UnityEngine.TestRunner"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [
+    "UNITY_INCLUDE_TESTS"
+  ],
+  "versionDefines": [],
+  "noEngineReferences": false
+}
