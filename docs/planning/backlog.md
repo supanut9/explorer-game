@@ -215,3 +215,9 @@
   - Files: `Assets/Game/Interaction/InteractionProbe.cs`, `Assets/Game/World/WorldRuntimeController.cs`
   - Acceptance: the remaining verification compile error is removed and obsolete lookup warnings are cleared where they are part of the same blocker path.
   - Sprint detail: `docs/planning/sprint-02.md#eg-25-verification-compile-blocker-cleanup`
+- Story 13.4: editor bootstrapper compile baseline
+  - Tracking ID: `EG-26`
+  - Owner: `Game.Editor`
+  - Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
+  - Acceptance: the scaffold generator compiles cleanly after placeholder-prefab work and no longer fails on ambiguous `Object` references.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-26-editor-bootstrapper-compile-baseline`

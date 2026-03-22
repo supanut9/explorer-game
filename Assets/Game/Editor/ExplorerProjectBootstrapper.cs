@@ -11,6 +11,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using Object = UnityEngine.Object;
 
 namespace ExplorerGame.Editor
 {

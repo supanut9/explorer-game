@@ -259,3 +259,25 @@
   - `EG-24`
 - Notes:
   - this blocker was discovered immediately after restoring Input System assembly references
+
+### EG-26 Editor Bootstrapper Compile Baseline
+- Story Order: `13.4`
+- Status: done
+- Owner: `Game.Editor`
+- Module: `Assets/Game/Editor`
+- Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
+- Goal: restore clean compilation for the editor scaffold generator after the Sprint 02 placeholder-prefab changes.
+- Acceptance:
+  - `ExplorerProjectBootstrapper` compiles without ambiguous `Object` references
+  - placeholder prefab generation remains intact after the compile fix
+- Subtasks:
+  - inspect the editor compiler errors surfaced after `EG-25`
+  - disambiguate Unity object references in the bootstrapper
+  - let Unity continue compiling past the editor assembly
+- Dependencies:
+  - `EG-20`
+  - `EG-21`
+  - `EG-22`
+  - `EG-23`
+- Notes:
+  - this blocker was discovered during the same Sprint 02 verification pass after runtime compile blockers were cleared
