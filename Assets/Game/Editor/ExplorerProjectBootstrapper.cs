@@ -654,8 +654,9 @@ namespace ExplorerGame.Editor
             CreateBlock(parent, "MainPath", new Vector3(0.8f, 0.02f, 2.4f), new Vector3(2.4f, 0.04f, 6.4f), VillagePathColor);
             CreateHouse(parent, "VillageHouseA", new Vector3(-4f, 0f, 2f), VillageWallColor);
             CreateHouse(parent, "VillageHouseB", new Vector3(4f, 0f, -1.5f), VillageWallAltColor);
-            CreateBlock(parent, "VillageSign", new Vector3(1.5f, 0.8f, 1.2f), new Vector3(0.3f, 0.8f, 0.08f), WoodDarkColor);
-            CreateBlock(parent, "ForestTrailMarker", new Vector3(0f, 0.45f, 4.25f), new Vector3(0.25f, 0.9f, 0.25f), WoodDarkColor);
+            CreateBlock(parent, "VillageSign", new Vector3(1.5f, 1.05f, 1.2f), new Vector3(0.34f, 1.1f, 0.1f), WoodDarkColor);
+            CreateBlock(parent, "ForestTrailMarker", new Vector3(0f, 0.9f, 4.25f), new Vector3(0.32f, 1.8f, 0.32f), WoodDarkColor);
+            CreateBlock(parent, "ForestTrailMarkerCap", new Vector3(0f, 1.95f, 4.25f), new Vector3(0.9f, 0.18f, 0.9f), PromptAccentColor);
         }
 
         private static void DressForestZone(Transform parent)
@@ -669,8 +670,9 @@ namespace ExplorerGame.Editor
             CreateTree(parent, "ForestTreeE", new Vector3(4.2f, 0f, 6.2f));
             CreateBlock(parent, "ForestRockA", new Vector3(-1.5f, 0.35f, -3f), new Vector3(0.8f, 0.7f, 0.7f), StoneColor);
             CreateBlock(parent, "ForestRockB", new Vector3(2.5f, 0.25f, 1.5f), new Vector3(0.6f, 0.5f, 0.9f), StoneDarkColor);
-            CreateBlock(parent, "ForestLookoutMarker", new Vector3(0f, 1.2f, 4.6f), new Vector3(0.6f, 2.4f, 0.6f), PromptAccentColor);
-            CreateBlock(parent, "VillageMarker", new Vector3(0f, 0.45f, -4.1f), new Vector3(0.25f, 0.9f, 0.25f), WoodDarkColor);
+            CreateBlock(parent, "ForestLookoutMarker", new Vector3(0f, 1.45f, 4.6f), new Vector3(0.72f, 2.9f, 0.72f), PromptAccentColor);
+            CreateBlock(parent, "ForestLookoutMarkerTop", new Vector3(0f, 3.1f, 4.6f), new Vector3(1.1f, 0.22f, 1.1f), WoodSignColor);
+            CreateBlock(parent, "VillageMarker", new Vector3(0f, 0.75f, -4.1f), new Vector3(0.3f, 1.5f, 0.3f), WoodDarkColor);
         }
 
         private static void DressMountainZone(Transform parent)
@@ -680,7 +682,8 @@ namespace ExplorerGame.Editor
             CreateBlock(parent, "CliffB", new Vector3(3.5f, 1.6f, -1.5f), new Vector3(1.4f, 3.2f, 1.8f), StoneDarkColor);
             CreateBlock(parent, "MountainPath", new Vector3(0f, 0.05f, 1.8f), new Vector3(1.1f, 0.08f, 4.8f), MountainPathColor);
             CreateBlock(parent, "LookoutStone", new Vector3(1.8f, 0.3f, -2.8f), new Vector3(0.9f, 0.6f, 0.9f), StoneColor);
-            CreateBlock(parent, "MountainBeacon", new Vector3(0f, 1.1f, 3.9f), new Vector3(0.5f, 2.2f, 0.5f), MountainAccentColor);
+            CreateBlock(parent, "MountainBeacon", new Vector3(0f, 1.35f, 3.9f), new Vector3(0.65f, 2.7f, 0.65f), MountainAccentColor);
+            CreateBlock(parent, "MountainBeaconTop", new Vector3(0f, 2.95f, 3.9f), new Vector3(1.1f, 0.22f, 1.1f), WoodSignColor);
             CreateBlock(parent, "LookoutPath", new Vector3(1.2f, 0.05f, -1.4f), new Vector3(0.7f, 0.08f, 2.4f), MountainPathColor);
         }
 
@@ -792,8 +795,8 @@ namespace ExplorerGame.Editor
 
             var collider = GetOrAddComponent<BoxCollider>(root);
             collider.isTrigger = false;
-            collider.center = new Vector3(0f, 1f, 0f);
-            collider.size = new Vector3(0.7f, 2f, 0.3f);
+            collider.center = new Vector3(0f, 1.15f, 0f);
+            collider.size = new Vector3(0.95f, 2.4f, 0.35f);
 
             var inspectable = GetOrAddComponent<InspectableObject>(root);
             var serializedInspectable = new SerializedObject(inspectable);
@@ -801,8 +804,9 @@ namespace ExplorerGame.Editor
             serializedInspectable.FindProperty("descriptionText").stringValue = descriptionText;
             serializedInspectable.ApplyModifiedPropertiesWithoutUndo();
 
-            CreatePortalPillar(root.transform, "Post", new Vector3(0f, 0.8f, 0f), new Vector3(0.15f, 1.6f, 0.15f), WoodDarkColor);
-            CreatePortalPillar(root.transform, "Board", new Vector3(0f, 1.4f, 0f), new Vector3(0.8f, 0.45f, 0.12f), WoodSignColor);
+            CreatePortalPillar(root.transform, "Post", new Vector3(0f, 0.95f, 0f), new Vector3(0.18f, 1.9f, 0.18f), WoodDarkColor);
+            CreatePortalPillar(root.transform, "Board", new Vector3(0f, 1.65f, 0f), new Vector3(1.05f, 0.55f, 0.14f), WoodSignColor);
+            CreatePortalPillar(root.transform, "Cap", new Vector3(0f, 2.15f, 0f), new Vector3(1.2f, 0.12f, 0.22f), PromptAccentColor);
         }
 
         private static void CreateZonePortalAnchor(
@@ -831,12 +835,13 @@ namespace ExplorerGame.Editor
 
             var trigger = GetOrAddComponent<BoxCollider>(root);
             trigger.isTrigger = true;
-            trigger.center = new Vector3(0f, 1.2f, 0f);
-            trigger.size = new Vector3(1.6f, 2.4f, 1f);
+            trigger.center = new Vector3(0f, 1.35f, 0f);
+            trigger.size = new Vector3(1.9f, 2.8f, 1.2f);
 
-            CreatePortalPillar(root.transform, "LeftPillar", new Vector3(-0.75f, 1.1f, 0f), new Vector3(0.35f, 2.2f, 0.35f), color);
-            CreatePortalPillar(root.transform, "RightPillar", new Vector3(0.75f, 1.1f, 0f), new Vector3(0.35f, 2.2f, 0.35f), color);
-            CreatePortalPillar(root.transform, "TopBeam", new Vector3(0f, 2.1f, 0f), new Vector3(1.9f, 0.28f, 0.35f), color);
+            CreatePortalPillar(root.transform, "LeftPillar", new Vector3(-0.85f, 1.25f, 0f), new Vector3(0.42f, 2.5f, 0.42f), color);
+            CreatePortalPillar(root.transform, "RightPillar", new Vector3(0.85f, 1.25f, 0f), new Vector3(0.42f, 2.5f, 0.42f), color);
+            CreatePortalPillar(root.transform, "TopBeam", new Vector3(0f, 2.45f, 0f), new Vector3(2.2f, 0.34f, 0.42f), color);
+            CreatePortalPillar(root.transform, "Crest", new Vector3(0f, 2.95f, 0f), new Vector3(0.6f, 0.55f, 0.6f), PromptAccentColor);
             CreateBlock(root.transform, "PortalFloor", new Vector3(0f, 0.02f, 0f), new Vector3(archScale.x, 0.04f, archScale.z), PortalFloorColor);
         }
 

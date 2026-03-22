@@ -93,7 +93,7 @@
 
 ### EG-55 Landmark Silhouette Pass
 - Story Order: `17.3`
-- Status: planned
+- Status: in progress
 - Owner: `Content`
 - Module: `Assets/Scenes`
 - Files: `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
