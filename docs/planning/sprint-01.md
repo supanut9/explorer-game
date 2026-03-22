@@ -214,7 +214,7 @@
 
 ### EG-9 NPC Inspectable
 - Story Order: `5.2`
-- Status: blocked
+- Status: done
 - Owner: `Game.Interaction`
 - Module: `Assets/Game/Interaction`
 - Files: `Assets/Game/Interaction/DialogueNpc.cs`, `Assets/Game/Interaction/InspectableObject.cs`
@@ -231,7 +231,6 @@
   - `docs/content-decisions.md`
 - Notes:
   - no quest or inventory systems
-  - blocked until interaction runtime files are added to the repo
 
 ### EG-10 Editor Scaffold
 - Story Order: `6.1`
