@@ -6,6 +6,7 @@ namespace ExplorerGame.Player
     public sealed class ThirdPersonCameraRig : MonoBehaviour
     {
         private const float LookDeadzone = 0.01f;
+        private const float KeyboardLookSpeed = 120f;
 
         [SerializeField] private Transform target;
         [SerializeField] private Vector3 followOffset = new(0f, 1.8f, 0f);
@@ -63,9 +64,7 @@ namespace ExplorerGame.Player
 
         private Vector3 UpdateDesiredPosition()
         {
-            var lookInput = runtimeLookAction != null
-                ? ApplyDeadzone(runtimeLookAction.ReadValue<Vector2>(), LookDeadzone)
-                : Vector2.zero;
+            var lookInput = ReadLookInput();
             yaw += lookInput.x * lookSensitivity;
             pitch = Mathf.Clamp(pitch - lookInput.y * lookSensitivity, minPitch, maxPitch);
 
@@ -90,13 +89,80 @@ namespace ExplorerGame.Player
 
         private static bool HasUsableAction(InputActionProperty property)
         {
+            var reference = property.reference;
             var action = property.action;
-            return action != null && action.bindings.Count > 0;
+            return reference != null && action != null && action.bindings.Count > 0;
         }
 
         private static Vector2 ApplyDeadzone(Vector2 input, float deadzone)
         {
             return input.sqrMagnitude < deadzone * deadzone ? Vector2.zero : input;
+        }
+
+        private Vector2 ReadLookInput()
+        {
+            if (HasUsableAction(lookAction))
+            {
+                return ApplyDeadzone(runtimeLookAction.ReadValue<Vector2>(), LookDeadzone);
+            }
+
+            var mouse = Mouse.current;
+            var mouseInput = mouse != null ? ApplyDeadzone(mouse.delta.ReadValue(), LookDeadzone) : Vector2.zero;
+            if (mouseInput != Vector2.zero)
+            {
+                return mouseInput;
+            }
+
+            var keyboard = Keyboard.current;
+            if (keyboard == null)
+            {
+                return Vector2.zero;
+            }
+
+            var x = 0f;
+            var y = 0f;
+
+            if (keyboard.leftArrowKey.isPressed)
+            {
+                x -= KeyboardLookSpeed * Time.unscaledDeltaTime;
+            }
+
+            if (keyboard.rightArrowKey.isPressed)
+            {
+                x += KeyboardLookSpeed * Time.unscaledDeltaTime;
+            }
+
+            if (keyboard.qKey.isPressed)
+            {
+                x -= KeyboardLookSpeed * Time.unscaledDeltaTime;
+            }
+
+            if (keyboard.cKey.isPressed)
+            {
+                x += KeyboardLookSpeed * Time.unscaledDeltaTime;
+            }
+
+            if (keyboard.upArrowKey.isPressed)
+            {
+                y += KeyboardLookSpeed * Time.unscaledDeltaTime;
+            }
+
+            if (keyboard.downArrowKey.isPressed)
+            {
+                y -= KeyboardLookSpeed * Time.unscaledDeltaTime;
+            }
+
+            if (keyboard.rKey.isPressed)
+            {
+                y += KeyboardLookSpeed * Time.unscaledDeltaTime;
+            }
+
+            if (keyboard.fKey.isPressed)
+            {
+                y -= KeyboardLookSpeed * Time.unscaledDeltaTime;
+            }
+
+            return new Vector2(x, y);
         }
     }
 }

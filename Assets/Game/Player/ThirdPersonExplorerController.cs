@@ -44,9 +44,9 @@ namespace ExplorerGame.Player
         private void Update()
         {
             var reference = movementReference != null ? movementReference : Camera.main != null ? Camera.main.transform : null;
-            var moveInput = ApplyDeadzone(runtimeMoveAction.ReadValue<Vector2>(), MoveDeadzone);
+            var moveInput = ReadMoveInput();
             var moveDirection = ThirdPersonMovementMath.GetCameraRelativeDirection(moveInput, reference);
-            var isSprinting = runtimeSprintAction.IsPressed();
+            var isSprinting = ReadSprintInput();
             var speed = isSprinting ? sprintSpeed : walkSpeed;
 
             if (moveDirection.sqrMagnitude > 0.0001f)
@@ -104,13 +104,65 @@ namespace ExplorerGame.Player
 
         private static bool HasUsableAction(InputActionProperty property)
         {
+            var reference = property.reference;
             var action = property.action;
-            return action != null && action.bindings.Count > 0;
+            return reference != null && action != null && action.bindings.Count > 0;
         }
 
         private static Vector2 ApplyDeadzone(Vector2 input, float deadzone)
         {
             return input.sqrMagnitude < deadzone * deadzone ? Vector2.zero : input;
+        }
+
+        private Vector2 ReadMoveInput()
+        {
+            if (HasUsableAction(moveAction))
+            {
+                return ApplyDeadzone(runtimeMoveAction.ReadValue<Vector2>(), MoveDeadzone);
+            }
+
+            var keyboard = Keyboard.current;
+            if (keyboard == null)
+            {
+                return Vector2.zero;
+            }
+
+            var x = 0f;
+            var y = 0f;
+
+            if (keyboard.aKey.isPressed)
+            {
+                x -= 1f;
+            }
+
+            if (keyboard.dKey.isPressed)
+            {
+                x += 1f;
+            }
+
+            if (keyboard.sKey.isPressed)
+            {
+                y -= 1f;
+            }
+
+            if (keyboard.wKey.isPressed)
+            {
+                y += 1f;
+            }
+
+            var input = new Vector2(x, y);
+            return input.sqrMagnitude > 1f ? input.normalized : input;
+        }
+
+        private bool ReadSprintInput()
+        {
+            if (HasUsableAction(sprintAction))
+            {
+                return runtimeSprintAction.IsPressed();
+            }
+
+            var keyboard = Keyboard.current;
+            return keyboard != null && keyboard.leftShiftKey.isPressed;
         }
     }
 }

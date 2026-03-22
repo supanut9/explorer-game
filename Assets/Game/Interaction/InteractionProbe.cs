@@ -38,7 +38,7 @@ namespace ExplorerGame.Interaction
         private void Update()
         {
             RefreshCurrentTarget();
-            if (runtimeInteractAction.WasPressedThisFrame())
+            if (ReadInteractPressed())
             {
                 TriggerCurrentTarget();
             }
@@ -141,8 +141,20 @@ namespace ExplorerGame.Interaction
 
         private static bool HasUsableAction(InputActionProperty property)
         {
+            var reference = property.reference;
             var action = property.action;
-            return action != null && action.bindings.Count > 0;
+            return reference != null && action != null && action.bindings.Count > 0;
+        }
+
+        private bool ReadInteractPressed()
+        {
+            if (HasUsableAction(interactAction))
+            {
+                return runtimeInteractAction.WasPressedThisFrame();
+            }
+
+            var keyboard = Keyboard.current;
+            return keyboard != null && keyboard.eKey.wasPressedThisFrame;
         }
 
         private static class ListPool<T> where T : class
