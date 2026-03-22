@@ -456,3 +456,26 @@
   - `EG-32`
 - Notes:
   - this blocker was discovered when the spawned player kept moving to the right without deliberate input
+
+### EG-35 PC-First Fallback Input Baseline
+- Story Order: `13.13`
+- Status: in progress
+- Owner: `Game.Player`, `Game.Interaction`
+- Module: `Assets/Game/Player`, `Assets/Game/Interaction`
+- Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`, `Assets/Game/Interaction/InteractionProbe.cs`
+- Goal: keep the first playable stable on desktop by making fallback controls keyboard-and-mouse first.
+- Acceptance:
+  - fallback move uses `WASD`
+  - fallback sprint uses `Left Shift`
+  - fallback look uses mouse delta
+  - fallback interact uses `E`
+  - connected gamepads do not cause unintended movement in the default generated flow
+- Subtasks:
+  - inspect the fallback bindings used when no configured action asset is wired
+  - remove gamepad fallback from the default generated control path
+  - retest idle, movement, look, sprint, and interact on desktop
+- Dependencies:
+  - `EG-30`
+  - `EG-34`
+- Notes:
+  - this blocker was discovered when the player still drifted right after deadzone filtering, indicating a stronger fallback-input issue

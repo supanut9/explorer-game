@@ -87,7 +87,6 @@ namespace ExplorerGame.Player
                 .With("Down", "<Keyboard>/s")
                 .With("Left", "<Keyboard>/a")
                 .With("Right", "<Keyboard>/d");
-            action.AddBinding("<Gamepad>/leftStick");
             return action;
         }
 
@@ -100,7 +99,6 @@ namespace ExplorerGame.Player
 
             var action = new InputAction("Sprint", InputActionType.Button);
             action.AddBinding("<Keyboard>/leftShift");
-            action.AddBinding("<Gamepad>/leftStickPress");
             return action;
         }
 

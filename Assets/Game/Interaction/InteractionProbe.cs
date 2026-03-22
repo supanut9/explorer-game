@@ -136,7 +136,6 @@ namespace ExplorerGame.Interaction
 
             var action = new InputAction("Interact", InputActionType.Button);
             action.AddBinding("<Keyboard>/e");
-            action.AddBinding("<Gamepad>/buttonSouth");
             return action;
         }
 

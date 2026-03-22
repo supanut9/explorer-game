@@ -85,7 +85,6 @@ namespace ExplorerGame.Player
 
             var action = new InputAction("Look", InputActionType.Value);
             action.AddBinding("<Mouse>/delta");
-            action.AddBinding("<Gamepad>/rightStick");
             return action;
         }
 

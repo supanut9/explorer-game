@@ -269,3 +269,9 @@
   - Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`
   - Acceptance: the generated controller ignores small stray input values so the player does not move or rotate continuously without deliberate input.
   - Sprint detail: `docs/planning/sprint-02.md#eg-34-movement-input-drift-baseline`
+- Story 13.13: pc-first fallback input baseline
+  - Tracking ID: `EG-35`
+  - Owner: `Game.Player`, `Game.Interaction`
+  - Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`, `Assets/Game/Interaction/InteractionProbe.cs`
+  - Acceptance: the generated fallback controls are keyboard-and-mouse first and do not drift because of connected gamepads or stick noise.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-35-pc-first-fallback-input-baseline`
