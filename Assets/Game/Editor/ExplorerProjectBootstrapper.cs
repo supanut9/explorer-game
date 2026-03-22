@@ -177,7 +177,7 @@ namespace ExplorerGame.Editor
                 if (sceneName == GameConstants.VillageZoneScene)
                 {
                     DressVillageZone(root.transform);
-                    CreatePlaceholderNpc(root.transform, new Vector3(3f, 0f, 2f));
+                    CreatePlaceholderNpc(root.transform, new Vector3(1.8f, 0f, 0.8f));
                 }
 
                 if (sceneName == GameConstants.ForestZoneScene)
@@ -364,8 +364,8 @@ namespace ExplorerGame.Editor
 
         private static void DressVillageZone(Transform parent)
         {
-            CreateGround(parent, "VillageGround", new Vector3(0f, -0.05f, 0f), new Vector3(2.5f, 0.1f, 2.5f), new Color(0.42f, 0.64f, 0.35f));
-            CreateBlock(parent, "MainPath", new Vector3(0f, 0.02f, 0f), new Vector3(1.4f, 0.04f, 0.4f), new Color(0.58f, 0.49f, 0.38f));
+            CreateGround(parent, "VillageGround", new Vector3(0f, -0.05f, 0f), new Vector3(8f, 0.1f, 6f), new Color(0.42f, 0.64f, 0.35f));
+            CreateBlock(parent, "MainPath", new Vector3(1.6f, 0.02f, 0.8f), new Vector3(1.6f, 0.04f, 1.2f), new Color(0.58f, 0.49f, 0.38f));
             CreateHouse(parent, "VillageHouseA", new Vector3(-4f, 0f, 2f), new Color(0.82f, 0.73f, 0.58f));
             CreateHouse(parent, "VillageHouseB", new Vector3(4f, 0f, -1.5f), new Color(0.75f, 0.66f, 0.54f));
             CreateBlock(parent, "VillageSign", new Vector3(1.5f, 0.8f, 1.2f), new Vector3(0.3f, 0.8f, 0.08f), new Color(0.41f, 0.28f, 0.15f));
@@ -398,7 +398,12 @@ namespace ExplorerGame.Editor
                 return;
             }
 
-            var instance = PrefabUtility.InstantiatePrefab(npcPrefab) as GameObject;
+            var instance = parent.Find("GuideNpc")?.gameObject;
+            if (instance == null)
+            {
+                instance = PrefabUtility.InstantiatePrefab(npcPrefab) as GameObject;
+            }
+
             if (instance == null)
             {
                 return;
@@ -417,12 +422,18 @@ namespace ExplorerGame.Editor
                 return;
             }
 
-            var instance = PrefabUtility.InstantiatePrefab(animalPrefab) as GameObject;
+            var instance = parent.Find($"Animal_{localPosition.x}_{localPosition.z}")?.gameObject;
+            if (instance == null)
+            {
+                instance = PrefabUtility.InstantiatePrefab(animalPrefab) as GameObject;
+            }
+
             if (instance == null)
             {
                 return;
             }
 
+            instance.name = $"Animal_{localPosition.x}_{localPosition.z}";
             instance.transform.SetParent(parent, false);
             instance.transform.localPosition = localPosition;
         }
@@ -435,7 +446,12 @@ namespace ExplorerGame.Editor
                 return;
             }
 
-            var instance = PrefabUtility.InstantiatePrefab(inspectablePrefab) as GameObject;
+            var instance = parent.Find(instanceName)?.gameObject;
+            if (instance == null)
+            {
+                instance = PrefabUtility.InstantiatePrefab(inspectablePrefab) as GameObject;
+            }
+
             if (instance == null)
             {
                 return;
@@ -588,7 +604,7 @@ namespace ExplorerGame.Editor
 
         private static void CreateHouse(Transform parent, string name, Vector3 localPosition, Color color)
         {
-            var houseRoot = new GameObject(name);
+            var houseRoot = parent.Find(name)?.gameObject ?? new GameObject(name);
             houseRoot.transform.SetParent(parent, false);
             houseRoot.transform.localPosition = localPosition;
 
@@ -598,7 +614,7 @@ namespace ExplorerGame.Editor
 
         private static void CreateTree(Transform parent, string name, Vector3 localPosition)
         {
-            var treeRoot = new GameObject(name);
+            var treeRoot = parent.Find(name)?.gameObject ?? new GameObject(name);
             treeRoot.transform.SetParent(parent, false);
             treeRoot.transform.localPosition = localPosition;
 
@@ -613,8 +629,13 @@ namespace ExplorerGame.Editor
 
         private static GameObject CreatePrimitive(Transform parent, PrimitiveType type, string name, Vector3 localPosition, Vector3 localScale, Color color)
         {
-            var instance = GameObject.CreatePrimitive(type);
-            instance.name = name;
+            var instance = parent.Find(name)?.gameObject;
+            if (instance == null)
+            {
+                instance = GameObject.CreatePrimitive(type);
+                instance.name = name;
+            }
+
             instance.transform.SetParent(parent, false);
             instance.transform.localPosition = localPosition;
             instance.transform.localScale = localScale;

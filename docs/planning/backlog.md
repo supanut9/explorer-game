@@ -257,3 +257,9 @@
   - Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/World/WorldRuntimeController.cs`
   - Acceptance: rerunning project scaffolding repairs existing `WorldPersistent` camera setup and world movement remains camera-relative without manual Inspector edits.
   - Sprint detail: `docs/planning/sprint-02.md#eg-32-world-camera-repair-on-scaffold-rerun`
+- Story 13.11: village traversal layout baseline
+  - Tracking ID: `EG-33`
+  - Owner: `Game.Editor`, `Content`
+  - Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
+  - Acceptance: the scaffolded village floor and NPC placement support walking up to the villager without leaving the playable ground, and rerunning scaffolding updates existing placeholder layout instead of duplicating it.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-33-village-traversal-layout-baseline`

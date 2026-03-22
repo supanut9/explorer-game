@@ -412,3 +412,25 @@
   - `EG-31`
 - Notes:
   - this blocker was discovered when the code fix for camera-relative movement did not affect already-generated world scenes
+
+### EG-33 Village Traversal Layout Baseline
+- Story Order: `13.11`
+- Status: in progress
+- Owner: `Game.Editor`, `Content`
+- Module: `Assets/Game/Editor`
+- Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
+- Goal: make the scaffolded village traversable enough to walk to the placeholder NPC without falling off the generated ground.
+- Acceptance:
+  - the village ground covers the intended NPC interaction space
+  - the placeholder NPC stands on reachable ground
+  - rerunning project scaffolding updates existing placeholder village content instead of stacking duplicates
+- Subtasks:
+  - inspect the current village ground extents against NPC placement
+  - widen or reposition the scaffolded village floor and path
+  - make scaffolded placeholder objects update by name on rerun
+- Dependencies:
+  - `EG-21`
+  - `EG-22`
+  - `EG-23`
+- Notes:
+  - this blocker was discovered during manual play verification when the player could not reach the villager on supported ground
