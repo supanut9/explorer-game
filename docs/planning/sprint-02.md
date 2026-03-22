@@ -434,3 +434,25 @@
   - `EG-23`
 - Notes:
   - this blocker was discovered during manual play verification when the player could not reach the villager on supported ground
+
+### EG-34 Movement Input Drift Baseline
+- Story Order: `13.12`
+- Status: in progress
+- Owner: `Game.Player`
+- Module: `Assets/Game/Player`
+- Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`
+- Goal: prevent unintended continuous movement or camera drift caused by tiny fallback input values.
+- Acceptance:
+  - the player remains still with no deliberate movement input
+  - the camera yaw and pitch remain stable with no deliberate look input
+  - keyboard and mouse controls still work after the deadzone is applied
+- Subtasks:
+  - inspect the current fallback input path for drift-prone values
+  - add explicit deadzone filtering for move and look input
+  - retest spawn, idle, movement, and camera look
+- Dependencies:
+  - `EG-30`
+  - `EG-31`
+  - `EG-32`
+- Notes:
+  - this blocker was discovered when the spawned player kept moving to the right without deliberate input

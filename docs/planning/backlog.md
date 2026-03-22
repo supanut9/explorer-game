@@ -263,3 +263,9 @@
   - Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
   - Acceptance: the scaffolded village floor and NPC placement support walking up to the villager without leaving the playable ground, and rerunning scaffolding updates existing placeholder layout instead of duplicating it.
   - Sprint detail: `docs/planning/sprint-02.md#eg-33-village-traversal-layout-baseline`
+- Story 13.12: movement input drift baseline
+  - Tracking ID: `EG-34`
+  - Owner: `Game.Player`
+  - Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`
+  - Acceptance: the generated controller ignores small stray input values so the player does not move or rotate continuously without deliberate input.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-34-movement-input-drift-baseline`

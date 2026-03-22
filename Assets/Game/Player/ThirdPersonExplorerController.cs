@@ -7,6 +7,8 @@ namespace ExplorerGame.Player
     [RequireComponent(typeof(CharacterController))]
     public sealed class ThirdPersonExplorerController : MonoBehaviour
     {
+        private const float MoveDeadzone = 0.2f;
+
         [SerializeField] private Transform movementReference;
         [SerializeField] private float walkSpeed = 3.5f;
         [SerializeField] private float sprintSpeed = 5.5f;
@@ -42,7 +44,7 @@ namespace ExplorerGame.Player
         private void Update()
         {
             var reference = movementReference != null ? movementReference : Camera.main != null ? Camera.main.transform : null;
-            var moveInput = runtimeMoveAction.ReadValue<Vector2>();
+            var moveInput = ApplyDeadzone(runtimeMoveAction.ReadValue<Vector2>(), MoveDeadzone);
             var moveDirection = ThirdPersonMovementMath.GetCameraRelativeDirection(moveInput, reference);
             var isSprinting = runtimeSprintAction.IsPressed();
             var speed = isSprinting ? sprintSpeed : walkSpeed;
@@ -106,6 +108,11 @@ namespace ExplorerGame.Player
         {
             var action = property.action;
             return action != null && action.bindings.Count > 0;
+        }
+
+        private static Vector2 ApplyDeadzone(Vector2 input, float deadzone)
+        {
+            return input.sqrMagnitude < deadzone * deadzone ? Vector2.zero : input;
         }
     }
 }

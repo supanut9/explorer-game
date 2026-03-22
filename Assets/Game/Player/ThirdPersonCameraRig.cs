@@ -5,6 +5,8 @@ namespace ExplorerGame.Player
 {
     public sealed class ThirdPersonCameraRig : MonoBehaviour
     {
+        private const float LookDeadzone = 0.01f;
+
         [SerializeField] private Transform target;
         [SerializeField] private Vector3 followOffset = new(0f, 1.8f, 0f);
         [SerializeField] private float distance = 4.5f;
@@ -61,7 +63,9 @@ namespace ExplorerGame.Player
 
         private Vector3 UpdateDesiredPosition()
         {
-            var lookInput = runtimeLookAction != null ? runtimeLookAction.ReadValue<Vector2>() : Vector2.zero;
+            var lookInput = runtimeLookAction != null
+                ? ApplyDeadzone(runtimeLookAction.ReadValue<Vector2>(), LookDeadzone)
+                : Vector2.zero;
             yaw += lookInput.x * lookSensitivity;
             pitch = Mathf.Clamp(pitch - lookInput.y * lookSensitivity, minPitch, maxPitch);
 
@@ -89,6 +93,11 @@ namespace ExplorerGame.Player
         {
             var action = property.action;
             return action != null && action.bindings.Count > 0;
+        }
+
+        private static Vector2 ApplyDeadzone(Vector2 input, float deadzone)
+        {
+            return input.sqrMagnitude < deadzone * deadzone ? Vector2.zero : input;
         }
     }
 }
