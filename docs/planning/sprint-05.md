@@ -72,7 +72,7 @@
 
 ### EG-54 Lighting And Atmosphere Pass
 - Story Order: `17.2`
-- Status: planned
+- Status: in progress
 - Owner: `Content`, `Game.Editor`
 - Module: `Assets/Scenes`
 - Files: `Assets/Scenes/Bootstrap.unity`, `Assets/Scenes/CharacterSelect.unity`, `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`

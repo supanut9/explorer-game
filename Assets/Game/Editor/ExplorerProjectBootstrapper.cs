@@ -46,6 +46,18 @@ namespace ExplorerGame.Editor
         private static readonly Color CharacterFemaleColor = new Color(0.83f, 0.43f, 0.32f);
         private static readonly Color NpcGuideColor = new Color(0.45f, 0.66f, 0.46f);
         private static readonly Color AnimalColor = new Color(0.58f, 0.45f, 0.31f);
+        private static readonly Color BootstrapSkyAmbient = new Color(0.44f, 0.49f, 0.58f);
+        private static readonly Color BootstrapEquatorAmbient = new Color(0.29f, 0.32f, 0.38f);
+        private static readonly Color BootstrapGroundAmbient = new Color(0.12f, 0.11f, 0.1f);
+        private static readonly Color CharacterSkyAmbient = new Color(0.54f, 0.58f, 0.64f);
+        private static readonly Color CharacterEquatorAmbient = new Color(0.34f, 0.32f, 0.3f);
+        private static readonly Color CharacterGroundAmbient = new Color(0.13f, 0.12f, 0.11f);
+        private static readonly Color WorldSkyAmbient = new Color(0.52f, 0.57f, 0.51f);
+        private static readonly Color WorldEquatorAmbient = new Color(0.31f, 0.33f, 0.28f);
+        private static readonly Color WorldGroundAmbient = new Color(0.11f, 0.1f, 0.08f);
+        private static readonly Color BootstrapFogColor = new Color(0.28f, 0.32f, 0.38f);
+        private static readonly Color CharacterFogColor = new Color(0.35f, 0.34f, 0.33f);
+        private static readonly Color WorldFogColor = new Color(0.48f, 0.47f, 0.39f);
 
         [MenuItem("Tools/Explorer Game/Generate Project Scaffolding")]
         public static void GenerateProjectScaffolding()
@@ -170,6 +182,7 @@ namespace ExplorerGame.Editor
         {
             EnsureSceneWithSingleRoot(GameConstants.BootstrapScene, GameConstants.BootstrapScene, root =>
             {
+                ConfigureBootstrapAtmosphere(root.scene);
                 GetOrAddComponent<GameSession>(root);
                 GetOrAddComponent<BootstrapFlowController>(root);
                 EnsureOverlayCamera(root.scene, "BootstrapCamera", new Vector3(0f, 2f, -6f));
@@ -180,6 +193,7 @@ namespace ExplorerGame.Editor
         {
             EnsureSceneWithSingleRoot(GameConstants.CharacterSelectScene, GameConstants.CharacterSelectScene, root =>
             {
+                ConfigureCharacterSelectAtmosphere(root.scene);
                 GetOrAddComponent<CharacterSelectionView>(root);
                 EnsureOverlayCamera(root.scene, "CharacterSelectCamera", new Vector3(0f, 1.5f, -8f));
             });
@@ -192,6 +206,7 @@ namespace ExplorerGame.Editor
                 root.name = rootName;
                 if (sceneName == GameConstants.WorldPersistentScene)
                 {
+                    ConfigureWorldAtmosphere(root.gameObject.scene);
                     GetOrAddComponent<WorldRuntimeController>(root);
                     CreateCameraRig(root.transform);
                 }
@@ -360,7 +375,11 @@ namespace ExplorerGame.Editor
             var camera = cameraRoot.AddComponent<Camera>();
             cameraRoot.transform.position = position;
             cameraRoot.transform.rotation = Quaternion.Euler(10f, 0f, 0f);
-            camera.clearFlags = CameraClearFlags.Skybox;
+            camera.clearFlags = CameraClearFlags.SolidColor;
+            camera.backgroundColor = scene.name == GameConstants.BootstrapScene
+                ? BootstrapFogColor
+                : CharacterFogColor;
+            camera.fieldOfView = scene.name == GameConstants.CharacterSelectScene ? 38f : 45f;
             camera.tag = "MainCamera";
             cameraRoot.AddComponent<AudioListener>();
         }
@@ -469,10 +488,121 @@ namespace ExplorerGame.Editor
             cameraRig.transform.localPosition = new Vector3(0f, 2.5f, -4.5f);
             var camera = GetOrAddComponent<Camera>(cameraRig);
             cameraRig.tag = "MainCamera";
-            camera.clearFlags = CameraClearFlags.Skybox;
+            camera.clearFlags = CameraClearFlags.SolidColor;
+            camera.backgroundColor = WorldFogColor;
+            camera.fieldOfView = 50f;
             CleanupExtraSceneAudioListeners(parent.gameObject.scene, cameraRig);
             GetOrAddComponent<AudioListener>(cameraRig);
             GetOrAddComponent<ThirdPersonCameraRig>(cameraRig);
+        }
+
+        private static void ConfigureBootstrapAtmosphere(Scene scene)
+        {
+            ConfigureSceneAtmosphere(
+                scene,
+                BootstrapSkyAmbient,
+                BootstrapEquatorAmbient,
+                BootstrapGroundAmbient,
+                BootstrapFogColor,
+                0.015f,
+                new Color(0.96f, 0.89f, 0.77f),
+                1.1f,
+                new Vector3(35f, -28f, 0f));
+        }
+
+        private static void ConfigureCharacterSelectAtmosphere(Scene scene)
+        {
+            ConfigureSceneAtmosphere(
+                scene,
+                CharacterSkyAmbient,
+                CharacterEquatorAmbient,
+                CharacterGroundAmbient,
+                CharacterFogColor,
+                0.018f,
+                new Color(0.98f, 0.9f, 0.82f),
+                1.2f,
+                new Vector3(28f, -24f, 0f));
+        }
+
+        private static void ConfigureWorldAtmosphere(Scene scene)
+        {
+            ConfigureSceneAtmosphere(
+                scene,
+                WorldSkyAmbient,
+                WorldEquatorAmbient,
+                WorldGroundAmbient,
+                WorldFogColor,
+                0.012f,
+                new Color(0.95f, 0.91f, 0.79f),
+                1.15f,
+                new Vector3(42f, -32f, 0f));
+        }
+
+        private static void ConfigureSceneAtmosphere(
+            Scene scene,
+            Color skyAmbient,
+            Color equatorAmbient,
+            Color groundAmbient,
+            Color fogColor,
+            float fogDensity,
+            Color lightColor,
+            float lightIntensity,
+            Vector3 lightEuler)
+        {
+            SceneManager.SetActiveScene(scene);
+            RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Trilight;
+            RenderSettings.ambientSkyColor = skyAmbient;
+            RenderSettings.ambientEquatorColor = equatorAmbient;
+            RenderSettings.ambientGroundColor = groundAmbient;
+            RenderSettings.ambientIntensity = 1f;
+            RenderSettings.fog = true;
+            RenderSettings.fogMode = FogMode.ExponentialSquared;
+            RenderSettings.fogColor = fogColor;
+            RenderSettings.fogDensity = fogDensity;
+            EnsureDirectionalLight(scene, "SceneKeyLight", lightColor, lightIntensity, lightEuler);
+        }
+
+        private static void EnsureDirectionalLight(
+            Scene scene,
+            string lightName,
+            Color color,
+            float intensity,
+            Vector3 eulerAngles)
+        {
+            Light keyLight = null;
+            foreach (var root in scene.GetRootGameObjects())
+            {
+                var lights = root.GetComponentsInChildren<Light>(true);
+                foreach (var light in lights)
+                {
+                    if (light.type != LightType.Directional)
+                    {
+                        continue;
+                    }
+
+                    if (keyLight == null)
+                    {
+                        keyLight = light;
+                        continue;
+                    }
+
+                    Object.DestroyImmediate(light.gameObject);
+                }
+            }
+
+            if (keyLight == null)
+            {
+                var lightRoot = new GameObject(lightName);
+                keyLight = lightRoot.AddComponent<Light>();
+                keyLight.type = LightType.Directional;
+            }
+
+            keyLight.name = lightName;
+            keyLight.color = color;
+            keyLight.intensity = intensity;
+            keyLight.shadows = LightShadows.Soft;
+            keyLight.transform.position = Vector3.zero;
+            keyLight.transform.rotation = Quaternion.Euler(eulerAngles);
         }
 
         private static void CleanupExtraSceneAudioListeners(Scene scene, GameObject cameraRig)
