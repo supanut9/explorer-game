@@ -203,3 +203,16 @@
 - Notes:
   - this is the bridge between code-complete and actually playable
   - validation tooling and checklist are in place, but the manual Unity Editor verification pass still needs to be run
+- Verification Checklist:
+  - run `Tools/Explorer Game/Generate Project Scaffolding` in Unity
+  - run `Tools/Explorer Game/Validate Config Assets`
+  - run `Tools/Explorer Game/Validate Generated Scenes`
+  - enter Play Mode from `Bootstrap`
+  - confirm the flow routes into `CharacterSelect`
+  - choose `Male` and confirm the flow enters the world without missing-reference errors
+  - repeat with `Female` and confirm the selected avatar differs from the previous run
+  - confirm `WorldPersistent` loads with an active `WorldRuntimeController` and `ThirdPersonCameraRig`
+  - confirm at least one village NPC can be approached and interacted with
+  - confirm at least one forest animal is present and roaming
+  - confirm at least one inspectable in forest or mountain shows the placeholder interaction path
+  - capture any failure as a new `EG-*` backlog item before changing runtime scope
