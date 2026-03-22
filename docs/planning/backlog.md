@@ -147,7 +147,7 @@
   - Sprint detail: `docs/planning/sprint-01.md#eg-16-repo-checks-workflow`
 
 ## Epic 10: Repo Governance
-- Status: ready
+- Status: in progress
 - Goal: formalize repo metadata and legal baseline after Sprint 01 merge
 - Story 10.1: license baseline
   - Tracking ID: `EG-17`

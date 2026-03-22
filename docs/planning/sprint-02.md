@@ -50,7 +50,7 @@
 
 ### EG-17 License Baseline
 - Story Order: `10.1`
-- Status: stretch
+- Status: done
 - Owner: `Docs`
 - Module: `Repository Docs`
 - Files: `LICENSE`, `README.md`, `CONTRIBUTING.md`
@@ -66,7 +66,8 @@
 - Dependencies:
   - `EG-1`
 - Notes:
-  - the current workspace already contains an untracked MIT license file
+  - the repo now tracks the MIT license baseline directly in `LICENSE`
+  - README and contributor docs point contributors at the committed license text
 
 ### EG-18 ShaderGraph Settings Baseline
 - Story Order: `10.2`

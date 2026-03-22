@@ -12,6 +12,7 @@ Read these files first:
 - Prefer small changes in the module that owns the behavior.
 - Update docs when adding a new workflow, contract, or scene flow.
 - Treat `docs/game-spec.md` and `docs/repo-standards.md` as the source of truth.
+- Treat contributions as updates to a repository distributed under the MIT License in [LICENSE](LICENSE).
 
 ## Workflow
 1. Inspect the relevant docs and existing module.

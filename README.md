@@ -33,6 +33,10 @@ Use the docs as the source of truth for implementation decisions:
 - [docs/repo-standards.md](docs/repo-standards.md)
 - [docs/ai-workflow.md](docs/ai-workflow.md)
 
+## License
+- This repository is licensed under the MIT License.
+- See [LICENSE](LICENSE) for the full text.
+
 ## Notes
 - Unity editor: `6000.4.0f1`
 - Render pipeline: URP
