@@ -17,7 +17,7 @@
 - Goal: turn the stable first playable into a readable multi-zone exploration slice with visible traversal, guidance, and verification.
 
 ## Sprint 05: Visual Identity And Presentation Pass
-- Status: in progress
+- Status: done
 - Goal: give the connected exploration slice a coherent visual direction, stronger scene mood, and cleaner player-facing presentation without changing the core loop.
 
 ## Parallel Lanes
