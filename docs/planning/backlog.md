@@ -331,3 +331,9 @@
   - Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Tests/PlayMode/*`
   - Acceptance: the first-playable controller supports a basic grounded jump with predictable behavior and no regression to the current move/look baseline.
   - Sprint detail: `docs/planning/sprint-03.md#eg-43-player-jump-baseline`
+- Story 14.6: sprint 03 asset sync and noise cleanup
+  - Tracking ID: `EG-44`
+  - Owner: `Game.Player`, `Game.Tests.PlayMode`, `ProjectSettings`
+  - Files: `Assets/Resources/Prefabs/Characters/*.prefab`, `Assets/Game/Tests/PlayMode/*.meta`, `ProjectSettings/SceneTemplateSettings.json`
+  - Acceptance: serialized prefab and test assets are brought into line with the Sprint 03 runtime baseline, and editor-only scene-template noise is excluded from the sprint branch.
+  - Sprint detail: `docs/planning/sprint-03.md#eg-44-sprint-03-asset-sync-and-noise-cleanup`

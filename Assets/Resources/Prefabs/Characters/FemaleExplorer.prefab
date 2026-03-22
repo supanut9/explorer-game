@@ -77,6 +77,7 @@ MonoBehaviour:
   sprintSpeed: 5.5
   rotationSpeed: 540
   gravity: -20
+  jumpHeight: 1.2
   moveAction:
     m_UseReference: 0
     m_Action:
@@ -96,6 +97,18 @@ MonoBehaviour:
       m_Type: 0
       m_ExpectedControlType: 
       m_Id: b85d9c6a-22fb-4b5c-bdc0-7bb5f66233c5
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  jumpAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 28b984f4-0d97-4af1-8b8d-3b5264287a66
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []

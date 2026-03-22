@@ -168,3 +168,25 @@
 - Notes:
   - this remains stretch until the camera/listener regression is closed
   - the controller now supports a grounded keyboard jump and includes a focused play mode test for lift-off from the grounded baseline
+
+### EG-44 Sprint 03 Asset Sync And Noise Cleanup
+- Story Order: `14.6`
+- Status: done
+- Owner: `Game.Player`, `Game.Tests.PlayMode`, `ProjectSettings`
+- Module: `Assets/Resources/Prefabs/Characters`, `Assets/Game/Tests/PlayMode`, `ProjectSettings`
+- Files: `Assets/Resources/Prefabs/Characters/*.prefab`, `Assets/Game/Tests/PlayMode/*.meta`, `ProjectSettings/SceneTemplateSettings.json`
+- Goal: close Sprint 03 with serialized prefab and test assets aligned to the runtime baseline while keeping editor-only scene-template noise out of the branch.
+- Acceptance:
+  - placeholder character prefabs serialize the jump baseline introduced by `EG-43`
+  - new play mode tests have tracked Unity `.meta` files
+  - editor-only `SceneTemplateSettings.json` is not carried into the sprint branch
+- Subtasks:
+  - stage the serialized prefab updates for the jump-enabled placeholder characters
+  - track the new play mode test `.meta` files
+  - remove the untracked scene-template settings file from the sprint branch
+- Dependencies:
+  - `EG-41`
+  - `EG-42`
+  - `EG-43`
+- Notes:
+  - this is a sprint closeout task, not a new runtime feature
