@@ -44,6 +44,8 @@ Read these files first:
 
 ## Pull Requests
 - Open sprint completion PRs from the sprint branch into `main`.
+- Merge sprint completion PRs into `main` with a merge commit, not squash merge, so the sprint `EG-*` commit history is preserved.
+- After a sprint PR is merged, delete the sprint branch or stop using it.
 - Use this PR checklist for every merge:
   - summary
   - linked `EG-*` tracking ids

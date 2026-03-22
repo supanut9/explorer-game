@@ -52,6 +52,8 @@
 
 ## Pull Requests
 - Open sprint completion PRs from the sprint branch into `main`.
+- Merge sprint completion PRs into `main` with a merge commit, not squash merge, so the sprint's `EG-*` commit history stays preserved on `main`.
+- After a sprint PR is merged, the sprint branch can be deleted.
 - Every PR should include body metadata for summary, linked `EG-*` tracking ids, linked project card, target branch, touched modules, touched scenes or config assets when applicable, test evidence, sprint or milestone metadata, risks or notes, and a merge readiness checklist.
 - Every GitHub PR should also set metadata on the PR itself: labels, project, milestone, and assignee.
 - PRs can and should carry multiple labels when the scope spans multiple kinds of work or modules.

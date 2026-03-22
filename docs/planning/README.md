@@ -19,4 +19,5 @@ Use this folder for live task state, not for AI instructions.
 - Include PR body metadata for summary, linked `EG-*` tracking ids, linked project card, target branch, scope, touched scenes or config assets when applicable, test evidence, sprint or milestone metadata, risks or notes, and merge readiness.
 - Set GitHub PR metadata for labels, project, milestone, and assignee before review or merge.
 - Use the repo label taxonomy: one or more `type:*` labels, the active `sprint:*` label, and one or more `area:*` labels. Add `status:*` labels only when needed.
+- Merge sprint PRs into `main` with a merge commit, then delete the sprint branch after merge.
 - Open a final PR from the sprint branch into `main` to finish the sprint.

@@ -37,6 +37,7 @@
 - Keep each commit scoped to one logical change and one `EG-*` task.
 - Track active work on the GitHub Project board and apply the Sprint 01 milestone.
 - After all Sprint 01 tasks are merged, open a final PR from `sprint/01` into `main`.
+- Merge the sprint PR with a merge commit so Sprint 01 commit history is preserved on `main`.
 
 ## Review Notes
 - Confirm the first playable loop is reachable from bootstrap to world.
