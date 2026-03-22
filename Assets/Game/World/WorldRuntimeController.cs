@@ -73,6 +73,11 @@ namespace ExplorerGame.World
             if (cameraRig != null)
             {
                 cameraRig.SetTarget(spawnedPlayer.transform);
+                var controller = spawnedPlayer.GetComponent<ThirdPersonExplorerController>();
+                if (controller != null)
+                {
+                    controller.SetMovementReference(cameraRig.transform);
+                }
             }
         }
 

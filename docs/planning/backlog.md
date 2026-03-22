@@ -251,3 +251,9 @@
   - Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Game/Player/ThirdPersonExplorerController.cs`
   - Acceptance: generated world flow uses the active third-person camera as the movement reference so `WASD` follows the current view direction.
   - Sprint detail: `docs/planning/sprint-02.md#eg-31-camera-relative-movement-baseline`
+- Story 13.10: world camera repair on scaffold rerun
+  - Tracking ID: `EG-32`
+  - Owner: `Game.Editor`, `Game.Player`, `Game.World`
+  - Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/World/WorldRuntimeController.cs`
+  - Acceptance: rerunning project scaffolding repairs existing `WorldPersistent` camera setup and world movement remains camera-relative without manual Inspector edits.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-32-world-camera-repair-on-scaffold-rerun`

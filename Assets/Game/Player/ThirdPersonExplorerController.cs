@@ -67,6 +67,11 @@ namespace ExplorerGame.Player
             characterController.Move(displacement * Time.deltaTime);
         }
 
+        public void SetMovementReference(Transform reference)
+        {
+            movementReference = reference;
+        }
+
         private static InputAction PrepareMoveAction(InputActionProperty property)
         {
             if (HasUsableAction(property))

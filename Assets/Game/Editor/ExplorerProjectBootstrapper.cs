@@ -165,12 +165,12 @@ namespace ExplorerGame.Editor
 
         private static void CreateWorldScene(string sceneName, string rootName)
         {
-            CreateSceneWithSingleRoot(sceneName, root =>
+            EnsureSceneWithSingleRoot(sceneName, root =>
             {
                 root.name = rootName;
                 if (sceneName == GameConstants.WorldPersistentScene)
                 {
-                    root.AddComponent<WorldRuntimeController>();
+                    GetOrAddComponent<WorldRuntimeController>(root);
                     CreateCameraRig(root.transform);
                 }
 
@@ -352,14 +352,14 @@ namespace ExplorerGame.Editor
 
         private static void CreateCameraRig(Transform parent)
         {
-            var cameraRig = new GameObject("ThirdPersonCameraRig");
+            var cameraRig = parent.Find("ThirdPersonCameraRig")?.gameObject ?? new GameObject("ThirdPersonCameraRig");
             cameraRig.transform.SetParent(parent, false);
-            cameraRig.transform.position = new Vector3(0f, 2.5f, -4.5f);
-            var camera = cameraRig.AddComponent<Camera>();
+            cameraRig.transform.localPosition = new Vector3(0f, 2.5f, -4.5f);
+            var camera = GetOrAddComponent<Camera>(cameraRig);
             cameraRig.tag = "MainCamera";
             camera.clearFlags = CameraClearFlags.Skybox;
-            cameraRig.AddComponent<AudioListener>();
-            cameraRig.AddComponent<ThirdPersonCameraRig>();
+            GetOrAddComponent<AudioListener>(cameraRig);
+            GetOrAddComponent<ThirdPersonCameraRig>(cameraRig);
         }
 
         private static void DressVillageZone(Transform parent)

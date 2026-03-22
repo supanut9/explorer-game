@@ -390,3 +390,25 @@
   - `EG-29`
 - Notes:
   - this blocker was discovered after movement started working but stayed world-relative
+
+### EG-32 World Camera Repair On Scaffold Rerun
+- Story Order: `13.10`
+- Status: in progress
+- Owner: `Game.Editor`, `Game.Player`, `Game.World`
+- Module: `Assets/Game/Editor`, `Assets/Game/Player`, `Assets/Game/World`
+- Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/World/WorldRuntimeController.cs`
+- Goal: make camera-relative movement survive existing generated scenes by repairing the world camera on scaffold rerun and wiring the movement reference explicitly at runtime.
+- Acceptance:
+  - rerunning project scaffolding updates existing `WorldPersistent` scenes instead of leaving stale camera setup behind
+  - the player controller receives the world camera rig as its movement reference when the player spawns
+  - camera-relative movement works without manual scene edits
+- Subtasks:
+  - patch `WorldPersistent` on scaffold rerun
+  - ensure the generated camera rig is tagged and reused instead of duplicated
+  - wire the spawned player controller to the active camera rig transform
+- Dependencies:
+  - `EG-27`
+  - `EG-29`
+  - `EG-31`
+- Notes:
+  - this blocker was discovered when the code fix for camera-relative movement did not affect already-generated world scenes
