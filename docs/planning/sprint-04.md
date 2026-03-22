@@ -117,7 +117,7 @@
 
 ### EG-48 Landmark And Traversal Dressing Pass
 - Story Order: `15.4`
-- Status: planned
+- Status: in progress
 - Owner: `Content`
 - Module: `Assets/Scenes`
 - Files: `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
@@ -136,6 +136,7 @@
   - `EG-45`
 - Notes:
   - this is a readability pass, not a fidelity pass
+  - the current slice focuses on stronger forest and mountain landmarks so traversal anchors and lookout paths are easier to spot from normal movement
 
 ### EG-49 Multi-Zone Verification Coverage
 - Story Order: `15.5`

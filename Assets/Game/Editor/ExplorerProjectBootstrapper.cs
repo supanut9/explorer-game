@@ -513,18 +513,23 @@ namespace ExplorerGame.Editor
             CreateTree(parent, "ForestTreeA", new Vector3(-4f, 0f, 3f));
             CreateTree(parent, "ForestTreeB", new Vector3(3f, 0f, -2f));
             CreateTree(parent, "ForestTreeC", new Vector3(5f, 0f, 4f));
+            CreateTree(parent, "ForestTreeD", new Vector3(-5.2f, 0f, -1.8f));
+            CreateTree(parent, "ForestTreeE", new Vector3(4.2f, 0f, 6.2f));
             CreateBlock(parent, "ForestRockA", new Vector3(-1.5f, 0.35f, -3f), new Vector3(0.8f, 0.7f, 0.7f), new Color(0.45f, 0.47f, 0.48f));
             CreateBlock(parent, "ForestRockB", new Vector3(2.5f, 0.25f, 1.5f), new Vector3(0.6f, 0.5f, 0.9f), new Color(0.43f, 0.45f, 0.46f));
+            CreateBlock(parent, "ForestLookoutMarker", new Vector3(0f, 1.2f, 4.6f), new Vector3(0.6f, 2.4f, 0.6f), new Color(0.66f, 0.72f, 0.34f));
             CreateBlock(parent, "VillageMarker", new Vector3(0f, 0.45f, -4.1f), new Vector3(0.25f, 0.9f, 0.25f), new Color(0.35f, 0.24f, 0.11f));
         }
 
         private static void DressMountainZone(Transform parent)
         {
-            CreateGround(parent, "MountainGround", new Vector3(0f, -0.05f, 0f), new Vector3(3f, 0.1f, 3f), new Color(0.38f, 0.38f, 0.36f));
+            CreateGround(parent, "MountainGround", new Vector3(0f, -0.05f, 0f), new Vector3(5f, 0.1f, 8f), new Color(0.38f, 0.38f, 0.36f));
             CreateBlock(parent, "CliffA", new Vector3(-4f, 1.2f, 2f), new Vector3(1.6f, 2.4f, 2f), new Color(0.47f, 0.47f, 0.46f));
             CreateBlock(parent, "CliffB", new Vector3(3.5f, 1.6f, -1.5f), new Vector3(1.4f, 3.2f, 1.8f), new Color(0.44f, 0.44f, 0.43f));
-            CreateBlock(parent, "MountainPath", new Vector3(0f, 0.05f, 1.5f), new Vector3(0.6f, 0.08f, 2.1f), new Color(0.54f, 0.5f, 0.43f));
+            CreateBlock(parent, "MountainPath", new Vector3(0f, 0.05f, 1.8f), new Vector3(1.1f, 0.08f, 4.8f), new Color(0.54f, 0.5f, 0.43f));
             CreateBlock(parent, "LookoutStone", new Vector3(1.8f, 0.3f, -2.8f), new Vector3(0.9f, 0.6f, 0.9f), new Color(0.5f, 0.5f, 0.49f));
+            CreateBlock(parent, "MountainBeacon", new Vector3(0f, 1.1f, 3.9f), new Vector3(0.5f, 2.2f, 0.5f), new Color(0.77f, 0.66f, 0.28f));
+            CreateBlock(parent, "LookoutPath", new Vector3(1.2f, 0.05f, -1.4f), new Vector3(0.7f, 0.08f, 2.4f), new Color(0.56f, 0.52f, 0.44f));
         }
 
         private static void CreatePlaceholderNpc(Transform parent, Vector3 localPosition, string promptText, string dialogueText)
