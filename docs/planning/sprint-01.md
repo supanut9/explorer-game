@@ -33,12 +33,9 @@
 - Use `sprint/01` as the integration branch for Sprint 01.
 - Checkout `main`.
 - Create or checkout `sprint/01`.
-- Create one fresh `feature/<task-slug>` branch from `sprint/01`.
-- Implement one task on that feature branch.
-- Open a PR from the feature branch into `sprint/01`.
-- Merge the PR into `sprint/01`.
-- Stop using the merged feature branch.
-- Create the next feature branch from the updated `sprint/01`.
+- Commit Sprint 01 work directly on `sprint/01`.
+- Keep each commit scoped to one logical change and one `EG-*` task.
+- Track active work on the GitHub Project board and apply the Sprint 01 milestone.
 - After all Sprint 01 tasks are merged, open a final PR from `sprint/01` into `main`.
 
 ## Review Notes

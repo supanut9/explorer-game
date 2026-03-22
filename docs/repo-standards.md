@@ -35,11 +35,8 @@
 - Start from `main` before beginning sprint work.
 - Use one sprint branch per sprint, such as `sprint/01`.
 - Create the sprint branch from `main`, or check it out if it already exists.
-- Create one fresh feature branch at a time from the current sprint branch, such as `feature/core-session` or `feature/character-select`.
-- Open a pull request from the feature branch into the sprint branch before merging.
-- After a feature branch is merged, delete it or stop using it.
-- Create the next feature branch from the updated sprint branch, not from an older feature branch.
-- Do not revive an older feature branch after the sprint branch has moved.
+- Commit sprint work directly on the sprint branch unless a separate feature branch is explicitly needed.
+- Keep each commit scoped to one logical change and one `EG-*` task.
 - Open a final pull request from the sprint branch into `main` when the sprint is complete.
 - Keep branch scope narrow and aligned with the owning module.
 
@@ -54,10 +51,9 @@
 - Example formats: `docs(repo): [EG-1] standardize git workflow`, `feat(core): [EG-2] restore shared session state`, `feat(world): [EG-6] add stable zone catalog`, `test(tests): [EG-11] cover session persistence`.
 
 ## Pull Requests
-- Keep feature PRs narrow and targeted to one sprint branch.
-- Open feature PRs into the sprint branch, not directly into `main`.
 - Open sprint completion PRs from the sprint branch into `main`.
-- Do not continue work on an already-merged feature branch.
-- Every PR should include summary, linked `EG-*` tracking id, linked project card, target branch, touched modules, touched scenes or config assets when applicable, test evidence, sprint or milestone metadata, and a merge readiness checklist.
+- Every PR should include body metadata for summary, linked `EG-*` tracking ids, linked project card, target branch, touched modules, touched scenes or config assets when applicable, test evidence, sprint or milestone metadata, risks or notes, and a merge readiness checklist.
+- Every GitHub PR should also set metadata on the PR itself: labels, project, milestone, and assignee.
+- Add reviewers when the change needs explicit review ownership.
 - Include screenshots or a short video for UI or gameplay changes.
 - Mention any Unity editor steps required to verify the change.

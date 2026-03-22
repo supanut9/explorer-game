@@ -17,6 +17,8 @@ This repository is built for AI-assisted implementation of a small Unity explora
 - Do not depend on hidden scene state when a contract or config asset can own the behavior.
 - Add docs when introducing a new workflow, rule, or runtime contract.
 - Follow the repo docs before personal assumptions or generic defaults.
+- Keep sprint implementation commits on the active sprint branch unless the docs explicitly require a separate feature branch.
+- Do not open or merge a sprint PR without the required PR body metadata and GitHub PR metadata.
 
 ## Preferred workflow
 1. Inspect current files and confirm the owning module.
@@ -25,6 +27,8 @@ This repository is built for AI-assisted implementation of a small Unity explora
 4. Implement the feature in the nearest runtime module.
 5. Add validation or tests.
 6. Update the relevant docs if the task changed behavior, workflow, or ownership.
+7. When preparing the sprint PR, include summary, linked `EG-*` ids, project card, target branch, scope, scenes or config assets touched, test evidence, sprint or milestone metadata, risks or notes, and a merge readiness checklist.
+8. When preparing the sprint PR, set GitHub metadata for labels, project, milestone, and assignee before review or merge.
 
 ## Task ownership
 - `Game.Core` for shared enums, constants, and session state.

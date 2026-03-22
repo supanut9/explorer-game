@@ -27,11 +27,8 @@ Read these files first:
 ## Branches
 - Start from `main`.
 - Create or checkout the sprint branch for the active sprint, such as `sprint/01`.
-- Create one fresh feature branch at a time from the current sprint branch, such as `feature/core-session` or `feature/character-select`.
-- Open a PR from the feature branch into the sprint branch before merging.
-- After the PR is merged, delete the feature branch or stop using it.
-- Create the next feature branch from the updated sprint branch.
-- Do not continue work on an already-merged feature branch.
+- Commit sprint work directly on the sprint branch unless a separate feature branch is explicitly needed.
+- Keep each commit scoped to one logical change and one `EG-*` task.
 - Open a final PR from the sprint branch into `main` when the sprint is complete.
 - Keep branch scope narrow and aligned with the owning module.
 
@@ -46,18 +43,24 @@ Read these files first:
 - Example commits: `docs(repo): [EG-1] standardize git workflow`, `feat(core): [EG-2] restore shared session state`, `feat(world): [EG-6] add stable zone catalog`, `test(tests): [EG-11] cover session persistence`.
 
 ## Pull Requests
-- Open feature PRs into the active sprint branch.
 - Open sprint completion PRs from the sprint branch into `main`.
 - Use this PR checklist for every merge:
   - summary
-  - linked `EG-*` tracking id
+  - linked `EG-*` tracking ids
   - linked project card
   - target branch
   - touched modules or scope
   - touched scenes or config assets when applicable
   - test evidence
   - sprint or milestone metadata
+  - risks or notes
   - merge readiness checklist
+- Set GitHub PR metadata before review or merge:
+  - labels
+  - project
+  - milestone
+  - assignee
+- Add reviewers when the change needs explicit review ownership.
 - Include screenshots or a short video for UI or gameplay changes.
 - Mention any Unity editor steps required to verify the change.
 - Keep PRs narrow enough to review in one pass.
