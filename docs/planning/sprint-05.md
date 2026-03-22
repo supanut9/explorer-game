@@ -114,7 +114,7 @@
 
 ### EG-56 Character Select Presentation Refresh
 - Story Order: `18.1`
-- Status: planned
+- Status: in progress
 - Owner: `Game.UI`, `Game.Editor`
 - Module: `Assets/Game/UI`, `Assets/Scenes`
 - Files: `Assets/Game/UI/CharacterSelectionView.cs`, `Assets/Scenes/CharacterSelect.unity`
