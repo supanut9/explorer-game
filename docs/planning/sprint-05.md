@@ -135,7 +135,7 @@
 
 ### EG-57 Interaction Prompt Presentation Polish
 - Story Order: `18.2`
-- Status: planned
+- Status: in progress
 - Owner: `Game.UI`, `Game.Interaction`
 - Module: `Assets/Game/UI`, `Assets/Scenes`
 - Files: `Assets/Game/UI/InteractionPromptLabel.cs`, `Assets/Scenes/WorldPersistent.unity`
