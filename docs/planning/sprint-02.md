@@ -89,7 +89,7 @@
 
 ### EG-19 Unity Validation Workflow
 - Story Order: `11.1`
-- Status: ready
+- Status: done
 - Owner: `CI`
 - Module: `.github/workflows`
 - Files: `.github/workflows/unity-validation.yml`, `docs/planning/sprint-02.md`
@@ -106,6 +106,7 @@
   - `EG-16`
 - Notes:
   - keep the first pass pragmatic and avoid overcommitting on full Unity CI too early
+  - first pass uses GameCI EditMode validation and skips the Unity test job until license secrets are configured
 
 ### EG-20 Placeholder Prefab Hookup
 - Story Order: `12.1`

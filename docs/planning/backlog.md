@@ -163,7 +163,7 @@
   - Sprint detail: `docs/planning/sprint-02.md#eg-18-shadergraph-settings-baseline`
 
 ## Epic 11: CI Expansion
-- Status: ready
+- Status: done
 - Goal: add Unity-aware validation after repo-checks is stable
 - Story 11.1: unity validation workflow
   - Tracking ID: `EG-19`
