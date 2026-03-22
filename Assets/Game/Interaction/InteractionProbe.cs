@@ -20,7 +20,7 @@ namespace ExplorerGame.Interaction
 
         private void Awake()
         {
-            promptLabel ??= FindFirstObjectByType<InteractionPromptLabel>();
+            promptLabel ??= FindAnyObjectByType<InteractionPromptLabel>();
         }
 
         private void OnEnable()
@@ -110,7 +110,7 @@ namespace ExplorerGame.Interaction
         private static bool TryGetInteractable(Collider collider, out IInteractable interactable)
         {
             var behaviours = ListPool<MonoBehaviour>.Get();
-            collider.GetComponentsInParent(behaviours);
+            collider.GetComponentsInParent(true, behaviours);
 
             foreach (var behaviour in behaviours)
             {

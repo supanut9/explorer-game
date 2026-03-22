@@ -209,3 +209,9 @@
   - Files: `Assets/Game/Player/Game.Player.asmdef`, `Assets/Game/Interaction/Game.Interaction.asmdef`
   - Acceptance: assemblies that use `UnityEngine.InputSystem` compile cleanly because their asmdefs reference `Unity.InputSystem`.
   - Sprint detail: `docs/planning/sprint-02.md#eg-24-input-system-assembly-baseline`
+- Story 13.3: verification compile blocker cleanup
+  - Tracking ID: `EG-25`
+  - Owner: `Game.Interaction`, `Game.World`
+  - Files: `Assets/Game/Interaction/InteractionProbe.cs`, `Assets/Game/World/WorldRuntimeController.cs`
+  - Acceptance: the remaining verification compile error is removed and obsolete lookup warnings are cleared where they are part of the same blocker path.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-25-verification-compile-blocker-cleanup`

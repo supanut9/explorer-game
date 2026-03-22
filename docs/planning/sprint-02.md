@@ -238,3 +238,24 @@
 - Notes:
   - this blocker was discovered during Sprint 02 verification
   - the Input System package was already installed; only the asmdef references were missing
+
+### EG-25 Verification Compile Blocker Cleanup
+- Story Order: `13.3`
+- Status: done
+- Owner: `Game.Interaction`, `Game.World`
+- Module: `Assets/Game/Interaction`, `Assets/Game/World`
+- Files: `Assets/Game/Interaction/InteractionProbe.cs`, `Assets/Game/World/WorldRuntimeController.cs`
+- Goal: remove the next compile blocker surfaced by the Sprint 02 verification pass and clear adjacent obsolete API usage in the same path.
+- Acceptance:
+  - `InteractionProbe` compiles without the invalid `GetComponentsInParent` call
+  - obsolete object lookup warnings in the affected runtime path are removed
+  - Unity can continue compiling beyond this blocker
+- Subtasks:
+  - inspect the updated Unity compile error after `EG-24`
+  - replace the invalid component query call with the correct overload
+  - replace obsolete `FindFirstObjectByType` calls in the same verification path
+- Dependencies:
+  - `EG-23`
+  - `EG-24`
+- Notes:
+  - this blocker was discovered immediately after restoring Input System assembly references

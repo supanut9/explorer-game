@@ -67,7 +67,7 @@ namespace ExplorerGame.World
             var spawnPosition = zone.PlayerSpawnPoint + definition.SpawnOffset;
             spawnedPlayer = Instantiate(definition.Prefab, spawnPosition, Quaternion.identity);
 
-            var cameraRig = FindFirstObjectByType<ThirdPersonCameraRig>();
+            var cameraRig = FindAnyObjectByType<ThirdPersonCameraRig>();
             if (cameraRig != null)
             {
                 cameraRig.SetTarget(spawnedPlayer.transform);
