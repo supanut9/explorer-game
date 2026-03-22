@@ -18,6 +18,7 @@
 - Animal roaming placeholder behavior
 - Selected character HUD label
 - Repo Codex workflow assets
+- Repo checks GitHub Actions workflow
 
 ## Dependencies
 - `docs/game-spec.md`
@@ -345,3 +346,23 @@
   - `EG-1`
 - Notes:
   - commit only project-owned Codex assets, not personal machine config
+
+### EG-16 Repo Checks Workflow
+- Story Order: `9.1`
+- Status: done
+- Owner: `CI`
+- Module: `.github/workflows`, `scripts`
+- Files: `.github/workflows/repo-checks.yml`, `scripts/validate_repo.py`
+- Goal: add a lightweight GitHub Actions workflow that validates repo structure and planning contracts without requiring a Unity license.
+- Acceptance:
+  - pull requests to `main` run the repo checks workflow
+  - pushes to sprint branches run the repo checks workflow
+  - the workflow validates repo and planning structure with a project-owned script
+- Subtasks:
+  - add the GitHub Actions workflow file
+  - add a repo validation script
+  - connect the workflow to sprint and PR events
+- Dependencies:
+  - `EG-1`
+- Notes:
+  - keep this lightweight until Unity CI is added

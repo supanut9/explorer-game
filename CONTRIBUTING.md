@@ -18,6 +18,7 @@ Read these files first:
 2. Make the smallest change that solves the task.
 3. Add or update tests when behavior changes.
 4. Run the Unity Editor checks when the task touches scenes, input, or config assets.
+5. Expect the `repo-checks` GitHub Actions workflow to validate repo structure and planning contracts on sprint pushes and PRs to `main`.
 
 ## GitHub Tracking
 - Track active work in the GitHub Project board for this repo.

@@ -133,3 +133,13 @@
   - Files: `.codex/instructions.md`, `.codex/agents/*.md`, `.codex/skills/*.md`
   - Acceptance: repo-owned Codex instructions, agent roles, and task skills are tracked with the project docs.
   - Sprint detail: `docs/planning/sprint-01.md#eg-15-codex-workflow-assets`
+
+## Epic 9: CI Foundation
+- Status: done
+- Goal: add lightweight GitHub Actions validation before Unity CI is introduced
+- Story 9.1: repo checks workflow
+  - Tracking ID: `EG-16`
+  - Owner: `CI`
+  - Files: `.github/workflows/repo-checks.yml`, `scripts/validate_repo.py`
+  - Acceptance: pull requests to `main` and pushes to sprint branches run a lightweight validation workflow without needing a Unity license.
+  - Sprint detail: `docs/planning/sprint-01.md#eg-16-repo-checks-workflow`
