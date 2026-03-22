@@ -74,7 +74,7 @@
 
 ### EG-40 Input Action Configuration Contract
 - Story Order: `14.2`
-- Status: todo
+- Status: done
 - Owner: `Game.Player`, `Game.Interaction`, `Docs`
 - Module: `Assets/Game/Player`, `Assets/Game/Interaction`, `docs`
 - Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`, `Assets/Game/Interaction/InteractionProbe.cs`, `docs/repo-standards.md`
@@ -91,6 +91,7 @@
   - `EG-35`
 - Notes:
   - this task comes directly from the Sprint 02 PR review finding
+  - the runtime now accepts both valid inline `InputActionProperty.action` bindings and referenced action assets, while still falling back when serialized actions are empty
 
 ### EG-41 Placeholder Player Collision Baseline
 - Story Order: `14.3`

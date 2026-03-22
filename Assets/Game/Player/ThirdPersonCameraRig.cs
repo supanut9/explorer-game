@@ -94,9 +94,8 @@ namespace ExplorerGame.Player
 
         private static bool HasUsableAction(InputActionProperty property)
         {
-            var reference = property.reference;
             var action = property.action;
-            return reference != null && action != null && action.bindings.Count > 0;
+            return action != null && action.bindings.Count > 0;
         }
 
         private static Vector2 ApplyDeadzone(Vector2 input, float deadzone)
