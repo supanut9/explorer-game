@@ -317,7 +317,7 @@
 
 ### EG-14 Selected Character Label
 - Story Order: `8.2`
-- Status: ready
+- Status: done
 - Owner: `Game.UI`
 - Module: `Assets/Game/UI`
 - Files: `Assets/Game/UI/SelectedCharacterLabel.cs`
