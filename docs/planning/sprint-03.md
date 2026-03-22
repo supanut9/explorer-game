@@ -95,7 +95,7 @@
 
 ### EG-41 Placeholder Player Collision Baseline
 - Story Order: `14.3`
-- Status: todo
+- Status: done
 - Owner: `Game.Editor`, `Game.Player`
 - Module: `Assets/Game/Editor`, `Assets/Resources/Prefabs/Characters`
 - Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Resources/Prefabs/Characters/MaleExplorer.prefab`, `Assets/Resources/Prefabs/Characters/FemaleExplorer.prefab`
@@ -113,6 +113,7 @@
   - `EG-36`
 - Notes:
   - this task also comes from the Sprint 02 PR review finding
+  - generated placeholder character prefabs now converge to a single root `CharacterController` without a second collider on the visual child
 
 ### EG-42 First-Playable Regression Coverage
 - Story Order: `14.4`

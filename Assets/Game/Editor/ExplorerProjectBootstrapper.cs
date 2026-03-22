@@ -356,6 +356,12 @@ namespace ExplorerGame.Editor
             visual.transform.localPosition = new Vector3(0f, 1f, 0f);
             visual.transform.localScale = new Vector3(1f, 2f, 1f);
 
+            var visualCollider = visual.GetComponent<Collider>();
+            if (visualCollider != null)
+            {
+                Object.DestroyImmediate(visualCollider);
+            }
+
             var material = CreateMaterialAsset(prefabName, color);
             var renderer = visual.GetComponent<Renderer>();
             if (renderer != null)
