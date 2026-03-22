@@ -14,6 +14,7 @@ REQUIRED_DOCS = [
     "docs/planning/README.md",
     "docs/planning/backlog.md",
     "docs/planning/sprint-01.md",
+    "docs/planning/sprint-02.md",
 ]
 
 REQUIRED_ASSET_DIRS = [
@@ -64,13 +65,14 @@ def validate_meta_files() -> None:
 
 def validate_planning_ids() -> None:
     backlog_path = ROOT / "docs/planning/backlog.md"
-    sprint_path = ROOT / "docs/planning/sprint-01.md"
 
     backlog_text = backlog_path.read_text(encoding="utf-8")
-    sprint_text = sprint_path.read_text(encoding="utf-8")
-
     backlog_ids = BACKLOG_ID_PATTERN.findall(backlog_text)
-    sprint_ids = SPRINT_ID_PATTERN.findall(sprint_text)
+
+    sprint_ids: list[str] = []
+    for sprint_path in sorted((ROOT / "docs/planning").glob("sprint-*.md")):
+        sprint_text = sprint_path.read_text(encoding="utf-8")
+        sprint_ids.extend(SPRINT_ID_PATTERN.findall(sprint_text))
 
     if not backlog_ids:
         fail("no EG ids found in backlog")

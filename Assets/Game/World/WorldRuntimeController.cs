@@ -1,4 +1,5 @@
 using ExplorerGame.Core;
+using ExplorerGame.Interaction;
 using ExplorerGame.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,6 +8,8 @@ namespace ExplorerGame.World
 {
     public sealed class WorldRuntimeController : MonoBehaviour
     {
+        private static readonly Vector3 SpawnSafetyOffset = new(0f, 0.15f, 0f);
+
         [SerializeField] private CharacterCatalog characterCatalog;
         [SerializeField] private WorldCatalog worldCatalog;
 
@@ -59,19 +62,38 @@ namespace ExplorerGame.World
                 return;
             }
 
-            if (spawnedPlayer != null)
+            DestroyExistingPlayers();
+
+            var spawnPosition = zone.PlayerSpawnPoint + definition.SpawnOffset + SpawnSafetyOffset;
+            spawnedPlayer = Instantiate(definition.Prefab, spawnPosition, Quaternion.identity);
+            if (spawnedPlayer.GetComponent<InteractionProbe>() == null)
             {
-                Destroy(spawnedPlayer);
+                spawnedPlayer.AddComponent<InteractionProbe>();
             }
 
-            var spawnPosition = zone.PlayerSpawnPoint + definition.SpawnOffset;
-            spawnedPlayer = Instantiate(definition.Prefab, spawnPosition, Quaternion.identity);
-
-            var cameraRig = FindFirstObjectByType<ThirdPersonCameraRig>();
+            var cameraRig = FindAnyObjectByType<ThirdPersonCameraRig>();
             if (cameraRig != null)
             {
                 cameraRig.SetTarget(spawnedPlayer.transform);
+                var controller = spawnedPlayer.GetComponent<ThirdPersonExplorerController>();
+                if (controller != null)
+                {
+                    controller.SetMovementReference(cameraRig.transform);
+                }
             }
+        }
+
+        private void DestroyExistingPlayers()
+        {
+            foreach (var controller in FindObjectsByType<ThirdPersonExplorerController>(FindObjectsInactive.Exclude, FindObjectsSortMode.None))
+            {
+                if (controller != null)
+                {
+                    Destroy(controller.gameObject);
+                }
+            }
+
+            spawnedPlayer = null;
         }
 
         private async Awaitable UnloadInactiveZonesAsync(string activeZoneScene)

@@ -19,6 +19,7 @@ Start here when contributing to this repository.
 - [docs/planning/README.md](planning/README.md)
 - [docs/planning/backlog.md](planning/backlog.md)
 - [docs/planning/sprint-01.md](planning/sprint-01.md)
+- [docs/planning/sprint-02.md](planning/sprint-02.md)
 
 ## Skills
 - [docs/task-skills.md](task-skills.md)

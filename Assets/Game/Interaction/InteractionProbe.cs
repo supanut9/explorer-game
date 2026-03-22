@@ -20,7 +20,7 @@ namespace ExplorerGame.Interaction
 
         private void Awake()
         {
-            promptLabel ??= FindFirstObjectByType<InteractionPromptLabel>();
+            promptLabel ??= FindAnyObjectByType<InteractionPromptLabel>();
         }
 
         private void OnEnable()
@@ -38,7 +38,7 @@ namespace ExplorerGame.Interaction
         private void Update()
         {
             RefreshCurrentTarget();
-            if (runtimeInteractAction.WasPressedThisFrame())
+            if (ReadInteractPressed())
             {
                 TriggerCurrentTarget();
             }
@@ -110,7 +110,7 @@ namespace ExplorerGame.Interaction
         private static bool TryGetInteractable(Collider collider, out IInteractable interactable)
         {
             var behaviours = ListPool<MonoBehaviour>.Get();
-            collider.GetComponentsInParent(behaviours);
+            collider.GetComponentsInParent(true, behaviours);
 
             foreach (var behaviour in behaviours)
             {
@@ -129,15 +129,32 @@ namespace ExplorerGame.Interaction
 
         private static InputAction PrepareInteractAction(InputActionProperty property)
         {
-            if (property.action != null)
+            if (HasUsableAction(property))
             {
                 return property.action;
             }
 
             var action = new InputAction("Interact", InputActionType.Button);
             action.AddBinding("<Keyboard>/e");
-            action.AddBinding("<Gamepad>/buttonSouth");
             return action;
+        }
+
+        private static bool HasUsableAction(InputActionProperty property)
+        {
+            var reference = property.reference;
+            var action = property.action;
+            return reference != null && action != null && action.bindings.Count > 0;
+        }
+
+        private bool ReadInteractPressed()
+        {
+            if (HasUsableAction(interactAction))
+            {
+                return runtimeInteractAction.WasPressedThisFrame();
+            }
+
+            var keyboard = Keyboard.current;
+            return keyboard != null && keyboard.eKey.wasPressedThisFrame;
         }
 
         private static class ListPool<T> where T : class

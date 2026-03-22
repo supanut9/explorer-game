@@ -1,0 +1,552 @@
+# Sprint 02
+
+## Sprint Goal
+- Turn the Sprint 01 foundation into a more believable first playable by adding content, scene verification, and stronger validation.
+
+## Committed Items
+- Placeholder prefab hookup
+- Zone dressing pass
+- Ambient placement pass
+- Scene wiring and traversal verification
+- Unity validation workflow definition
+
+## Stretch Items
+- License baseline
+- Shader Graph settings baseline
+- CI expansion beyond the first Unity-aware workflow
+- Additional repo metadata cleanup if new untracked files appear
+
+## Dependencies
+- `docs/game-spec.md`
+- `docs/content-plan.md`
+- `docs/content-decisions.md`
+- `docs/repo-standards.md`
+- `docs/planning/backlog.md`
+- `docs/planning/sprint-01.md`
+- `ProjectSettings/ShaderGraphSettings.asset`
+
+## Risks
+- Placeholder content may drift into asset-detail decisions that belong in later passes.
+- Scene editing work can create noisy diffs if ownership is not kept clear.
+- Unity CI may require environment, licensing, or caching decisions that are not yet documented.
+- Project settings files can change implicitly when the editor version or packages change.
+
+## Workflow
+- Use `sprint/02` as the integration branch for Sprint 02.
+- Checkout `main`.
+- Create or checkout `sprint/02`.
+- Commit Sprint 02 work directly on `sprint/02`.
+- Keep each commit scoped to one logical change and one `EG-*` task.
+- Track active work on the GitHub Project board and apply the Sprint 02 milestone once it exists.
+- Open a final PR from `sprint/02` into `main`.
+- Merge the sprint PR with a merge commit so Sprint 02 history is preserved on `main`.
+
+## Review Notes
+- Confirm the first playable loop feels populated, not just technically functional.
+- Confirm scene and content changes are intentional and not editor noise.
+- Confirm support work stays in support scope and does not crowd out playable progress.
+- Sprint 02 closed with the generated first-playable baseline committed and Unity AI/editor-local metadata removed from the branch.
+
+## Sprint Tasks
+
+### EG-17 License Baseline
+- Story Order: `10.1`
+- Status: done
+- Owner: `Docs`
+- Module: `Repository Docs`
+- Files: `LICENSE`, `README.md`, `CONTRIBUTING.md`
+- Goal: track the repository license intentionally and make the chosen baseline visible to contributors.
+- Acceptance:
+  - `LICENSE` is committed
+  - the repo docs acknowledge the chosen license baseline where appropriate
+  - license handling is no longer left as an untracked file
+- Subtasks:
+  - review the current license file
+  - decide whether the current text is the intended repo license
+  - update contributor-facing docs if needed
+- Dependencies:
+  - `EG-1`
+- Notes:
+  - the repo now tracks the MIT license baseline directly in `LICENSE`
+  - README and contributor docs point contributors at the committed license text
+
+### EG-18 ShaderGraph Settings Baseline
+- Story Order: `10.2`
+- Status: done
+- Owner: `ProjectSettings`
+- Module: `ProjectSettings`
+- Files: `ProjectSettings/ShaderGraphSettings.asset`
+- Goal: make the Shader Graph project setting change intentional and reviewable.
+- Acceptance:
+  - the current `overrideShaderVariantLimit` change is either committed or reverted deliberately
+  - the final project state is treated as tracked repo configuration
+- Subtasks:
+  - inspect the current serialized setting change
+  - decide whether the override belongs in the repo baseline
+  - commit or revert the change under a tracked task
+- Dependencies:
+  - `EG-16`
+- Notes:
+  - the repo keeps `overrideShaderVariantLimit: 0` as the current Unity-generated baseline
+  - project settings changes should be treated as intentional repository configuration, not ignored editor noise
+
+### EG-19 Unity Validation Workflow
+- Story Order: `11.1`
+- Status: done
+- Owner: `CI`
+- Module: `.github/workflows`
+- Files: `.github/workflows/unity-validation.yml`, `docs/planning/sprint-02.md`
+- Goal: define and implement the first Unity-aware CI workflow after `repo-checks`.
+- Acceptance:
+  - Sprint 02 has a tracked Unity validation task
+  - the workflow scope is documented before implementation
+  - the first Unity-aware validation path is ready to become a required check once stable
+- Subtasks:
+  - define whether the first workflow covers edit mode tests, play mode tests, or config validation only
+  - document environment and licensing constraints
+  - implement the first Unity-aware workflow once the scope is chosen
+- Dependencies:
+  - `EG-16`
+- Notes:
+  - keep the first pass pragmatic and avoid overcommitting on full Unity CI too early
+  - first pass uses GameCI EditMode validation and skips the Unity test job until license secrets are configured
+
+### EG-20 Placeholder Prefab Hookup
+- Story Order: `12.1`
+- Status: done
+- Owner: `Game.Player`
+- Module: `Assets/Resources/Configs`, `Assets/Scenes`
+- Files: `Assets/Resources/Configs/CharacterCatalog.asset`, `Assets/Scenes/CharacterSelect.unity`, `Assets/Scenes/WorldPersistent.unity`
+- Goal: move the first playable away from empty prefab references by hooking character and placeholder NPC content into the runtime flow.
+- Acceptance:
+  - character selection resolves to real or stable placeholder prefabs
+  - the world flow has placeholder NPC content available for the interaction systems
+  - the first playable loop no longer depends on missing prefab references
+- Subtasks:
+  - review the current character catalog asset contents
+  - hook up stable placeholder prefabs where references are missing
+  - confirm world-facing placeholder actors exist for interaction coverage
+- Dependencies:
+  - `EG-3`
+  - `EG-7`
+  - `EG-8`
+- Notes:
+  - keep placeholder-first and do not overdesign final art structure
+  - implemented through scaffold generation so new project bootstrap runs create placeholder character and NPC prefabs
+
+### EG-21 Zone Dressing Pass
+- Story Order: `12.2`
+- Status: done
+- Owner: `Content`
+- Module: `Assets/Scenes`
+- Files: `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
+- Goal: give each zone a readable placeholder environment so traversal feels intentional.
+- Acceptance:
+  - village, forest, and mountain each have a distinct placeholder dressing pass
+  - zones contain basic landmarks and traversal cues
+  - content stays placeholder-first and aligned with the content plan
+- Subtasks:
+  - add houses and path cues to village
+  - add trees, shrubs, and terrain dressing to forest
+  - add rock and cliff cues to mountain
+- Dependencies:
+  - `docs/content-plan.md`
+  - `docs/content-decisions.md`
+  - `EG-6`
+- Notes:
+  - focus on readability over asset detail
+  - implemented through scaffold generation so new zone scenes start with distinct placeholder dressing
+
+### EG-22 Ambient Placement Pass
+- Story Order: `12.3`
+- Status: done
+- Owner: `Content`
+- Module: `Assets/Scenes`
+- Files: `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
+- Goal: place NPCs, inspectables, and animals so the first playable loop exercises Sprint 01 systems in the world.
+- Acceptance:
+  - at least one talk interaction is reachable in the playable flow
+  - at least one inspectable is reachable in the playable flow
+  - passive animals are placed where the ambient behavior is visible
+- Subtasks:
+  - place villagers or guide NPCs in the village
+  - place inspectables in at least one zone
+  - place passive animals in forest or mountain areas
+- Dependencies:
+  - `EG-8`
+  - `EG-9`
+  - `EG-13`
+  - `EG-21`
+- Notes:
+  - use existing placeholder systems instead of inventing new gameplay
+  - implemented through scaffold generation so village, forest, and mountain scenes start with talk, inspect, and passive-animal placeholder content
+
+### EG-23 Scene Wiring Verification
+- Story Order: `13.1`
+- Status: done
+- Owner: `Game.Editor`
+- Module: `Assets/Scenes`, `docs/planning`
+- Files: `Assets/Scenes/Bootstrap.unity`, `Assets/Scenes/CharacterSelect.unity`, `Assets/Scenes/WorldPersistent.unity`, `docs/planning/sprint-02.md`
+- Goal: define and execute a repeatable in-editor verification pass for the first playable loop.
+- Acceptance:
+  - bootstrap to character select to world traversal is verified with explicit steps
+  - major scene wiring assumptions are documented
+  - blockers found during verification are captured as tracked follow-up work
+- Subtasks:
+  - define the verification checklist
+  - run the playable loop manually in the editor
+  - record follow-up issues if scene wiring breaks
+- Dependencies:
+  - `EG-4`
+  - `EG-7`
+  - `EG-20`
+  - `EG-22`
+- Notes:
+  - this is the bridge between code-complete and actually playable
+  - manual Unity Editor verification confirmed the generated flow reaches character select, enters the world, supports camera-relative movement, and can trigger placeholder interaction after scaffold reruns and runtime repairs
+- Verification Checklist:
+  - run `Tools/Explorer Game/Generate Project Scaffolding` in Unity
+  - run `Tools/Explorer Game/Validate Config Assets`
+  - run `Tools/Explorer Game/Validate Generated Scenes`
+  - enter Play Mode from `Bootstrap`
+  - confirm the flow routes into `CharacterSelect`
+  - choose `Male` and confirm the flow enters the world without missing-reference errors
+  - repeat with `Female` and confirm the selected avatar differs from the previous run
+  - confirm `WorldPersistent` loads with an active `WorldRuntimeController` and `ThirdPersonCameraRig`
+  - confirm at least one village NPC can be approached and interacted with
+  - confirm at least one forest animal is present and roaming
+  - confirm at least one inspectable in forest or mountain shows the placeholder interaction path
+  - capture any failure as a new `EG-*` backlog item before changing runtime scope
+
+### EG-24 Input System Assembly Baseline
+- Story Order: `13.2`
+- Status: done
+- Owner: `Game.Player`, `Game.Interaction`
+- Module: `Assets/Game/Player`, `Assets/Game/Interaction`
+- Files: `Assets/Game/Player/Game.Player.asmdef`, `Assets/Game/Interaction/Game.Interaction.asmdef`
+- Goal: restore compile-time assembly references for modules that use the Unity Input System.
+- Acceptance:
+  - assemblies using `UnityEngine.InputSystem` reference `Unity.InputSystem` in their asmdefs
+  - Unity compilation no longer fails with missing `InputAction` or `InputActionProperty` types because of asmdef omissions
+- Subtasks:
+  - inspect the compile errors from the Unity console or `Editor.log`
+  - add missing package references to the affected asmdefs
+  - let Unity reimport and recompile with the corrected assembly graph
+- Dependencies:
+  - `EG-5`
+  - `EG-8`
+  - `EG-23`
+- Notes:
+  - this blocker was discovered during Sprint 02 verification
+  - the Input System package was already installed; only the asmdef references were missing
+
+### EG-25 Verification Compile Blocker Cleanup
+- Story Order: `13.3`
+- Status: done
+- Owner: `Game.Interaction`, `Game.World`
+- Module: `Assets/Game/Interaction`, `Assets/Game/World`
+- Files: `Assets/Game/Interaction/InteractionProbe.cs`, `Assets/Game/World/WorldRuntimeController.cs`
+- Goal: remove the next compile blocker surfaced by the Sprint 02 verification pass and clear adjacent obsolete API usage in the same path.
+- Acceptance:
+  - `InteractionProbe` compiles without the invalid `GetComponentsInParent` call
+  - obsolete object lookup warnings in the affected runtime path are removed
+  - Unity can continue compiling beyond this blocker
+- Subtasks:
+  - inspect the updated Unity compile error after `EG-24`
+  - replace the invalid component query call with the correct overload
+  - replace obsolete `FindFirstObjectByType` calls in the same verification path
+- Dependencies:
+  - `EG-23`
+  - `EG-24`
+- Notes:
+  - this blocker was discovered immediately after restoring Input System assembly references
+
+### EG-26 Editor Bootstrapper Compile Baseline
+- Story Order: `13.4`
+- Status: done
+- Owner: `Game.Editor`
+- Module: `Assets/Game/Editor`
+- Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
+- Goal: restore clean compilation for the editor scaffold generator after the Sprint 02 placeholder-prefab changes.
+- Acceptance:
+  - `ExplorerProjectBootstrapper` compiles without ambiguous `Object` references
+  - placeholder prefab generation remains intact after the compile fix
+- Subtasks:
+  - inspect the editor compiler errors surfaced after `EG-25`
+  - disambiguate Unity object references in the bootstrapper
+  - let Unity continue compiling past the editor assembly
+- Dependencies:
+  - `EG-20`
+  - `EG-21`
+  - `EG-22`
+  - `EG-23`
+- Notes:
+  - this blocker was discovered during the same Sprint 02 verification pass after runtime compile blockers were cleared
+
+### EG-27 Playable Bootstrap Presentation Baseline
+- Story Order: `13.5`
+- Status: done
+- Owner: `Game.UI`, `Game.Editor`
+- Module: `Assets/Game/UI`, `Assets/Game/Editor`
+- Files: `Assets/Game/UI/CharacterSelectionView.cs`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
+- Goal: make the generated first-playable path visible and interactable without manual scene authoring.
+- Acceptance:
+  - generated `Bootstrap` and `CharacterSelect` scenes contain a camera that renders on play
+  - character selection is possible from the generated scene without custom manual UI setup
+  - rerunning project scaffolding can repair older generated scenes that were missing these pieces
+- Subtasks:
+  - add visible camera setup for bootstrap and character-select scenes
+  - add a minimal built-in selection UI path for the generated character-select scene
+  - make scaffold generation patch existing generated scenes, not just create missing files
+- Dependencies:
+  - `EG-4`
+  - `EG-10`
+  - `EG-23`
+- Notes:
+  - this blocker was discovered when the generated flow entered play mode but rendered no camera output
+
+### EG-28 Scaffold Spawn Safety Baseline
+- Story Order: `13.6`
+- Status: done
+- Owner: `Game.World`, `Game.Editor`
+- Module: `Assets/Game/World`, `Assets/Game/Editor`
+- Files: `Assets/Game/World/WorldRuntimeController.cs`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
+- Goal: align scaffolded spawn data with the generated placeholder world so entering the first playable loop starts on supported ground.
+- Acceptance:
+  - scaffold generation updates zone spawn points to positions that match the generated placeholder zones
+  - entering the world starts the player above valid ground instead of inside or below the floor
+  - rerunning scaffold generation can repair stale config assets from earlier runs
+- Subtasks:
+  - inspect the generated zone layout against current spawn data
+  - update scaffolded zone assets on rerun instead of leaving old spawn values in place
+  - add a small safe vertical offset to the runtime spawn path if needed
+- Dependencies:
+  - `EG-20`
+  - `EG-21`
+  - `EG-23`
+- Notes:
+  - this blocker was discovered during manual play verification after entering the world from character select
+
+### EG-29 World Camera Snap Baseline
+- Story Order: `13.7`
+- Status: done
+- Owner: `Game.Player`, `Game.World`
+- Module: `Assets/Game/Player`, `Assets/Game/World`
+- Files: `Assets/Game/Player/ThirdPersonCameraRig.cs`, `Assets/Game/World/WorldRuntimeController.cs`
+- Goal: make the first frame after world entry readable by snapping the follow camera to a correct third-person position around the spawned player.
+- Acceptance:
+  - assigning the spawned player as camera target immediately places the camera at a sensible follow position
+  - world entry no longer starts with the camera buried in the player or too close to nearby props
+- Subtasks:
+  - inspect the current world-entry camera framing
+  - snap the rig to its desired follow position when a target is assigned
+  - retest the first frame after character selection
+- Dependencies:
+  - `EG-5`
+  - `EG-23`
+  - `EG-28`
+- Notes:
+  - this blocker was discovered during manual play verification after world entry started working
+
+### EG-30 Input Fallback Binding Baseline
+- Story Order: `13.8`
+- Status: done
+- Owner: `Game.Player`, `Game.Interaction`
+- Module: `Assets/Game/Player`, `Assets/Game/Interaction`
+- Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`, `Assets/Game/Interaction/InteractionProbe.cs`
+- Goal: make generated placeholder prefabs playable without hand-configuring Input System references in the Inspector.
+- Acceptance:
+  - movement works with `WASD`
+  - look works with mouse delta
+  - interaction works with `E`
+  - empty serialized `InputActionProperty` values do not block fallback bindings
+- Subtasks:
+  - inspect the generated player prefab component state in Play Mode
+  - treat empty serialized input actions as missing inputs
+  - retest movement and look after recompilation
+- Dependencies:
+  - `EG-5`
+  - `EG-8`
+  - `EG-23`
+- Notes:
+  - this blocker was discovered when the spawned player had controller components but still did not respond to input
+
+### EG-31 Camera-Relative Movement Baseline
+- Story Order: `13.9`
+- Status: done
+- Owner: `Game.Player`, `Game.Editor`
+- Module: `Assets/Game/Player`, `Assets/Game/Editor`
+- Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Game/Player/ThirdPersonExplorerController.cs`
+- Goal: make generated third-person movement follow the active camera view instead of world axes.
+- Acceptance:
+  - the generated world camera is discoverable as the main camera
+  - `WASD` movement follows the current third-person camera orientation in the first playable flow
+- Subtasks:
+  - inspect how the controller chooses its movement reference
+  - ensure the scaffolded runtime camera is tagged for `Camera.main`
+  - retest movement after rerunning the scaffold if needed
+- Dependencies:
+  - `EG-5`
+  - `EG-27`
+  - `EG-29`
+- Notes:
+  - this blocker was discovered after movement started working but stayed world-relative
+
+### EG-32 World Camera Repair On Scaffold Rerun
+- Story Order: `13.10`
+- Status: done
+- Owner: `Game.Editor`, `Game.Player`, `Game.World`
+- Module: `Assets/Game/Editor`, `Assets/Game/Player`, `Assets/Game/World`
+- Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/World/WorldRuntimeController.cs`
+- Goal: make camera-relative movement survive existing generated scenes by repairing the world camera on scaffold rerun and wiring the movement reference explicitly at runtime.
+- Acceptance:
+  - rerunning project scaffolding updates existing `WorldPersistent` scenes instead of leaving stale camera setup behind
+  - the player controller receives the world camera rig as its movement reference when the player spawns
+  - camera-relative movement works without manual scene edits
+- Subtasks:
+  - patch `WorldPersistent` on scaffold rerun
+  - ensure the generated camera rig is tagged and reused instead of duplicated
+  - wire the spawned player controller to the active camera rig transform
+- Dependencies:
+  - `EG-27`
+  - `EG-29`
+  - `EG-31`
+- Notes:
+  - this blocker was discovered when the code fix for camera-relative movement did not affect already-generated world scenes
+
+### EG-33 Village Traversal Layout Baseline
+- Story Order: `13.11`
+- Status: done
+- Owner: `Game.Editor`, `Content`
+- Module: `Assets/Game/Editor`
+- Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
+- Goal: make the scaffolded village traversable enough to walk to the placeholder NPC without falling off the generated ground.
+- Acceptance:
+  - the village ground covers the intended NPC interaction space
+  - the placeholder NPC stands on reachable ground
+  - rerunning project scaffolding updates existing placeholder village content instead of stacking duplicates
+- Subtasks:
+  - inspect the current village ground extents against NPC placement
+  - widen or reposition the scaffolded village floor and path
+  - make scaffolded placeholder objects update by name on rerun
+- Dependencies:
+  - `EG-21`
+  - `EG-22`
+  - `EG-23`
+- Notes:
+  - this blocker was discovered during manual play verification when the player could not reach the villager on supported ground
+
+### EG-34 Movement Input Drift Baseline
+- Story Order: `13.12`
+- Status: done
+- Owner: `Game.Player`
+- Module: `Assets/Game/Player`
+- Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`
+- Goal: prevent unintended continuous movement or camera drift caused by tiny fallback input values.
+- Acceptance:
+  - the player remains still with no deliberate movement input
+  - the camera yaw and pitch remain stable with no deliberate look input
+  - keyboard and mouse controls still work after the deadzone is applied
+- Subtasks:
+  - inspect the current fallback input path for drift-prone values
+  - add explicit deadzone filtering for move and look input
+  - retest spawn, idle, movement, and camera look
+- Dependencies:
+  - `EG-30`
+  - `EG-31`
+  - `EG-32`
+- Notes:
+  - this blocker was discovered when the spawned player kept moving to the right without deliberate input
+
+### EG-35 PC-First Fallback Input Baseline
+- Story Order: `13.13`
+- Status: done
+- Owner: `Game.Player`, `Game.Interaction`
+- Module: `Assets/Game/Player`, `Assets/Game/Interaction`
+- Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`, `Assets/Game/Interaction/InteractionProbe.cs`
+- Goal: keep the first playable stable on desktop by making fallback controls keyboard-and-mouse first.
+- Acceptance:
+  - fallback move uses `WASD`
+  - fallback sprint uses `Left Shift`
+  - fallback look uses mouse delta
+  - fallback interact uses `E`
+  - connected gamepads do not cause unintended movement in the default generated flow
+- Subtasks:
+  - inspect the fallback bindings used when no configured action asset is wired
+  - remove gamepad fallback from the default generated control path
+  - retest idle, movement, look, sprint, and interact on desktop
+- Dependencies:
+  - `EG-30`
+  - `EG-34`
+- Notes:
+  - this blocker was discovered when the player still drifted right after deadzone filtering, indicating a stronger fallback-input issue
+
+### EG-36 Single-Player Spawn And Probe Baseline
+- Story Order: `13.14`
+- Status: done
+- Owner: `Game.World`, `Game.Editor`
+- Module: `Assets/Game/World`, `Assets/Game/Editor`
+- Files: `Assets/Game/World/WorldRuntimeController.cs`, `Assets/Game/World/Game.World.asmdef`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
+- Goal: keep the first playable world flow limited to one active player while guaranteeing the spawned player can use the interaction path.
+- Acceptance:
+  - world entry leaves only one spawned player active
+  - the spawned player can interact even if older generated prefabs lacked an `InteractionProbe`
+  - the world assembly references the interaction module needed for that runtime path
+- Subtasks:
+  - remove stale duplicate players before spawning a new one
+  - ensure the spawned player has an `InteractionProbe`
+  - update generated placeholder character prefabs on scaffold rerun so the interaction probe is part of the baseline
+- Dependencies:
+  - `EG-22`
+  - `EG-30`
+  - `EG-32`
+- Notes:
+  - this blocker was discovered after play verification exposed duplicate spawned characters and missing interaction behavior
+  - final verification confirmed the world flow keeps a single active player and the placeholder interaction path works without manual prefab repair
+
+### EG-37 Generated Playable Baseline Assets
+- Story Order: `13.15`
+- Status: done
+- Owner: `Content`, `Game.Editor`
+- Module: `Assets/Scenes`, `Assets/Resources`, `ProjectSettings`
+- Files: `Assets/Scenes/*.unity`, `Assets/Resources/Configs/*`, `Assets/Resources/Prefabs/*`, `ProjectSettings/EditorBuildSettings.asset`
+- Goal: track the generated first-playable scenes, config assets, prefabs, and build settings as the verified Sprint 02 content baseline.
+- Acceptance:
+  - generated playable scenes are committed as project assets
+  - generated config assets and placeholder prefabs are committed as project assets
+  - build settings reference the generated first-playable scene flow instead of `SampleScene`
+  - the committed assets reflect the verified playable loop rather than incidental editor noise
+- Subtasks:
+  - separate generated baseline assets from package and editor metadata noise
+  - confirm the generated assets match the manually verified playable flow
+  - commit scenes, resources, and build settings together as the Sprint 02 baseline
+- Dependencies:
+  - `EG-20`
+  - `EG-21`
+  - `EG-22`
+  - `EG-23`
+  - `EG-36`
+- Notes:
+  - package manifest churn and editor-local settings remain out of scope for this baseline commit
+
+### EG-38 Package And Editor Noise Cleanup
+- Story Order: `13.16`
+- Status: done
+- Owner: `Repo`
+- Module: `Packages`, `ProjectSettings`
+- Files: `Packages/manifest.json`, `Packages/packages-lock.json`, `ProjectSettings/Packages/*`, `ProjectSettings/SceneTemplateSettings.json`
+- Goal: close Sprint 02 with only intentional gameplay, content, and planning changes in the branch.
+- Acceptance:
+  - Unity AI Assistant package additions are removed from the sprint branch
+  - package lockfile churn caused by those additions is removed from the sprint branch
+  - editor-local package settings and scene template metadata are removed from the sprint branch
+  - `git status` is clean after the cleanup commit
+- Subtasks:
+  - inspect the remaining package and project-settings diff after the playable baseline commit
+  - revert package dependency additions that were not required for the verified playable loop
+  - delete untracked editor-local settings files generated by the package/editor session
+- Dependencies:
+  - `EG-19`
+  - `EG-37`
+- Notes:
+  - this cleanup keeps Sprint 02 focused on the playable baseline rather than incidental Unity editor churn
