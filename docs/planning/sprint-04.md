@@ -208,7 +208,7 @@
 
 ### EG-50 Unity Validation Workflow Implementation
 - Story Order: `16.1`
-- Status: planned
+- Status: done
 - Owner: `CI`
 - Module: `.github/workflows`, `docs/planning`
 - Files: `.github/workflows/unity-validation.yml`, `docs/planning/sprint-04.md`
@@ -225,4 +225,4 @@
   - `EG-19`
   - `EG-49`
 - Notes:
-  - treat this as stretch unless the multi-zone slice stabilizes early
+  - the implemented path should always run a Unity project sanity check, while licensed EditMode tests remain conditional on Unity secrets
