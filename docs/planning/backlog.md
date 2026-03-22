@@ -375,6 +375,12 @@
   - Files: `Assets/Game/Tests/PlayMode/*`, `docs/planning/sprint-04.md`
   - Acceptance: Sprint 04 captures a repeatable verification path for entering a secondary zone, returning, and confirming that prompts and traversal still work after scene transitions.
   - Sprint detail: `docs/planning/sprint-04.md#eg-49-multi-zone-verification-coverage`
+- Story 15.6: animal roaming navmesh fallback
+  - Tracking ID: `EG-51`
+  - Owner: `Game.Animals`
+  - Files: `Assets/Game/Animals/AnimalRoamingAgent.cs`, `docs/planning/sprint-04.md`
+  - Acceptance: passive animals stop spamming NavMesh warnings when a zone has no baked NavMesh, and the connected exploration slice remains playable without requiring navigation bake setup.
+  - Sprint detail: `docs/planning/sprint-04.md#eg-51-animal-roaming-navmesh-fallback`
 
 ## Epic 16: Validation Expansion
 - Status: planned

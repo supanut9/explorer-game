@@ -161,6 +161,27 @@
 - Notes:
   - prioritize confidence in the connected slice over broad but brittle test coverage
 
+### EG-51 Animal Roaming NavMesh Fallback
+- Story Order: `15.6`
+- Status: in progress
+- Owner: `Game.Animals`
+- Module: `Assets/Game/Animals`
+- Files: `Assets/Game/Animals/AnimalRoamingAgent.cs`
+- Goal: keep passive animal behavior quiet and safe in zones that do not yet have a baked NavMesh.
+- Acceptance:
+  - entering a zone with roaming animals does not spam NavMeshAgent warnings
+  - animals still idle safely when no valid NavMesh is available
+  - connected exploration verification is not blocked on navigation bake setup
+- Subtasks:
+  - guard the roaming update loop against inactive or off-NavMesh agents
+  - skip destination changes cleanly when sampling fails or no NavMesh is available
+  - retest the forest traversal loop for warning-free runtime behavior
+- Dependencies:
+  - `EG-13`
+  - `EG-45`
+- Notes:
+  - this is a stability fallback, not a full ambient-navigation polish pass
+
 ### EG-50 Unity Validation Workflow Implementation
 - Story Order: `16.1`
 - Status: planned
