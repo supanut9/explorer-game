@@ -73,7 +73,7 @@
 
 ### EG-46 Guide NPC And Signposting Pass
 - Story Order: `15.2`
-- Status: planned
+- Status: in progress
 - Owner: `Content`, `Game.Interaction`
 - Module: `Assets/Scenes`, `Assets/Game/Interaction`
 - Files: `Assets/Scenes/VillageZone.unity`, `Assets/Game/Interaction/DialogueNpc.cs`
@@ -90,6 +90,7 @@
   - `EG-45`
 - Notes:
   - keep the guidance diegetic and lightweight
+  - the current implementation targets a start-area guide NPC plus forest and mountain route signs in the village
 
 ### EG-47 Zone-Specific Interaction Copy
 - Story Order: `15.3`

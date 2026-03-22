@@ -177,7 +177,23 @@ namespace ExplorerGame.Editor
                 if (sceneName == GameConstants.VillageZoneScene)
                 {
                     DressVillageZone(root.transform);
-                    CreatePlaceholderNpc(root.transform, new Vector3(1.8f, 0f, 0.8f));
+                    CreatePlaceholderNpc(
+                        root.transform,
+                        new Vector3(1.4f, 0f, 1.2f),
+                        "Ask for directions",
+                        "The forest trail is straight ahead. Follow the marked path past the sign and step through the green arch.");
+                    CreateGuideSignpost(
+                        root.transform,
+                        "ForestTrailSign",
+                        new Vector3(0.6f, 0f, 4f),
+                        "Read forest sign",
+                        "Forest trail ahead. Pass through the green arch to continue.");
+                    CreateGuideSignpost(
+                        root.transform,
+                        "MountainTrailSign",
+                        new Vector3(2.8f, 0f, -0.2f),
+                        "Read mountain sign",
+                        "Mountain route remains closed in this slice. Start with the forest trail.");
                     CreateZonePortalAnchor(
                         root.transform,
                         "ForestTrailPortal",
@@ -501,7 +517,7 @@ namespace ExplorerGame.Editor
             CreateBlock(parent, "LookoutStone", new Vector3(1.8f, 0.3f, -2.8f), new Vector3(0.9f, 0.6f, 0.9f), new Color(0.5f, 0.5f, 0.49f));
         }
 
-        private static void CreatePlaceholderNpc(Transform parent, Vector3 localPosition)
+        private static void CreatePlaceholderNpc(Transform parent, Vector3 localPosition, string promptText, string dialogueText)
         {
             var npcPrefab = CreatePlaceholderNpcPrefab();
             if (npcPrefab == null)
@@ -523,6 +539,12 @@ namespace ExplorerGame.Editor
             instance.name = "GuideNpc";
             instance.transform.SetParent(parent, false);
             instance.transform.localPosition = localPosition;
+
+            var npc = GetOrAddComponent<DialogueNpc>(instance);
+            var serializedNpc = new SerializedObject(npc);
+            serializedNpc.FindProperty("promptText").stringValue = promptText;
+            serializedNpc.FindProperty("dialogueText").stringValue = dialogueText;
+            serializedNpc.ApplyModifiedPropertiesWithoutUndo();
         }
 
         private static void CreatePlaceholderAnimal(Transform parent, Vector3 localPosition)
@@ -571,6 +593,38 @@ namespace ExplorerGame.Editor
             instance.name = instanceName;
             instance.transform.SetParent(parent, false);
             instance.transform.localPosition = localPosition;
+        }
+
+        private static void CreateGuideSignpost(
+            Transform parent,
+            string instanceName,
+            Vector3 localPosition,
+            string promptText,
+            string descriptionText)
+        {
+            var root = parent.Find(instanceName)?.gameObject;
+            if (root == null)
+            {
+                root = new GameObject(instanceName);
+            }
+
+            root.transform.SetParent(parent, false);
+            root.transform.localPosition = localPosition;
+            root.transform.localRotation = Quaternion.identity;
+
+            var collider = GetOrAddComponent<BoxCollider>(root);
+            collider.isTrigger = false;
+            collider.center = new Vector3(0f, 1f, 0f);
+            collider.size = new Vector3(0.7f, 2f, 0.3f);
+
+            var inspectable = GetOrAddComponent<InspectableObject>(root);
+            var serializedInspectable = new SerializedObject(inspectable);
+            serializedInspectable.FindProperty("promptText").stringValue = promptText;
+            serializedInspectable.FindProperty("descriptionText").stringValue = descriptionText;
+            serializedInspectable.ApplyModifiedPropertiesWithoutUndo();
+
+            CreatePortalPillar(root.transform, "Post", new Vector3(0f, 0.8f, 0f), new Vector3(0.15f, 1.6f, 0.15f), new Color(0.35f, 0.24f, 0.11f));
+            CreatePortalPillar(root.transform, "Board", new Vector3(0f, 1.4f, 0f), new Vector3(0.8f, 0.45f, 0.12f), new Color(0.62f, 0.52f, 0.3f));
         }
 
         private static void CreateZonePortalAnchor(

@@ -65,7 +65,7 @@ namespace ExplorerGame.Tests.PlayMode
 
             Assert.AreSame(npc, probe.CurrentTarget, "Expected the nearest interaction target to resolve to the village NPC.");
 
-            LogAssert.Expect(LogType.Log, "Hello, explorer.");
+            LogAssert.Expect(LogType.Log, "The forest trail is straight ahead. Follow the marked path past the sign and step through the green arch.");
             Assert.IsTrue(probe.TriggerCurrentTarget(), "Expected the probe to trigger the current NPC target.");
         }
 
