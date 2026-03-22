@@ -221,3 +221,9 @@
   - Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
   - Acceptance: the scaffold generator compiles cleanly after placeholder-prefab work and no longer fails on ambiguous `Object` references.
   - Sprint detail: `docs/planning/sprint-02.md#eg-26-editor-bootstrapper-compile-baseline`
+- Story 13.5: playable bootstrap presentation baseline
+  - Tracking ID: `EG-27`
+  - Owner: `Game.UI`, `Game.Editor`
+  - Files: `Assets/Game/UI/CharacterSelectionView.cs`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
+  - Acceptance: generated bootstrap and character-select scenes render through a camera and the player can make a character choice without hand-building UI.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-27-playable-bootstrap-presentation-baseline`

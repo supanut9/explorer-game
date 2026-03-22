@@ -281,3 +281,25 @@
   - `EG-23`
 - Notes:
   - this blocker was discovered during the same Sprint 02 verification pass after runtime compile blockers were cleared
+
+### EG-27 Playable Bootstrap Presentation Baseline
+- Story Order: `13.5`
+- Status: in progress
+- Owner: `Game.UI`, `Game.Editor`
+- Module: `Assets/Game/UI`, `Assets/Game/Editor`
+- Files: `Assets/Game/UI/CharacterSelectionView.cs`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
+- Goal: make the generated first-playable path visible and interactable without manual scene authoring.
+- Acceptance:
+  - generated `Bootstrap` and `CharacterSelect` scenes contain a camera that renders on play
+  - character selection is possible from the generated scene without custom manual UI setup
+  - rerunning project scaffolding can repair older generated scenes that were missing these pieces
+- Subtasks:
+  - add visible camera setup for bootstrap and character-select scenes
+  - add a minimal built-in selection UI path for the generated character-select scene
+  - make scaffold generation patch existing generated scenes, not just create missing files
+- Dependencies:
+  - `EG-4`
+  - `EG-10`
+  - `EG-23`
+- Notes:
+  - this blocker was discovered when the generated flow entered play mode but rendered no camera output

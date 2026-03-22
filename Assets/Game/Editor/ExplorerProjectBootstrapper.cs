@@ -75,8 +75,8 @@ namespace ExplorerGame.Editor
         [MenuItem("Tools/Explorer Game/Validate Generated Scenes")]
         public static void ValidateGeneratedScenes()
         {
-            ValidateScene(GameConstants.BootstrapScene, typeof(GameSession), typeof(BootstrapFlowController));
-            ValidateScene(GameConstants.CharacterSelectScene, typeof(CharacterSelectionView));
+            ValidateScene(GameConstants.BootstrapScene, typeof(GameSession), typeof(BootstrapFlowController), typeof(Camera));
+            ValidateScene(GameConstants.CharacterSelectScene, typeof(CharacterSelectionView), typeof(Camera));
             ValidateScene(GameConstants.WorldPersistentScene, typeof(WorldRuntimeController), typeof(ThirdPersonCameraRig));
             ValidateScene(GameConstants.VillageZoneScene, typeof(DialogueNpc));
             ValidateScene(GameConstants.ForestZoneScene, typeof(AnimalRoamingAgent), typeof(InspectableObject));
@@ -147,18 +147,20 @@ namespace ExplorerGame.Editor
 
         private static void CreateBootstrapScene()
         {
-            CreateSceneWithSingleRoot(GameConstants.BootstrapScene, root =>
+            EnsureSceneWithSingleRoot(GameConstants.BootstrapScene, root =>
             {
-                root.AddComponent<GameSession>();
-                root.AddComponent<BootstrapFlowController>();
+                GetOrAddComponent<GameSession>(root);
+                GetOrAddComponent<BootstrapFlowController>(root);
+                EnsureOverlayCamera(root.scene, "BootstrapCamera", new Vector3(0f, 2f, -6f));
             });
         }
 
         private static void CreateCharacterSelectScene()
         {
-            CreateSceneWithSingleRoot(GameConstants.CharacterSelectScene, root =>
+            EnsureSceneWithSingleRoot(GameConstants.CharacterSelectScene, root =>
             {
-                root.AddComponent<CharacterSelectionView>();
+                GetOrAddComponent<CharacterSelectionView>(root);
+                EnsureOverlayCamera(root.scene, "CharacterSelectCamera", new Vector3(0f, 1.5f, -8f));
             });
         }
 
@@ -210,6 +212,26 @@ namespace ExplorerGame.Editor
             EditorSceneManager.SaveScene(scene, path);
         }
 
+        private static void EnsureSceneWithSingleRoot(string sceneName, Action<GameObject> configureRoot)
+        {
+            var path = $"{SceneFolder}/{sceneName}.unity";
+            Scene scene;
+
+            if (File.Exists(path))
+            {
+                scene = EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
+            }
+            else
+            {
+                scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            }
+
+            SceneManager.SetActiveScene(scene);
+            var root = GetOrCreateRoot(scene, sceneName);
+            configureRoot(root);
+            EditorSceneManager.SaveScene(scene, path);
+        }
+
         private static void SaveBuildSettings()
         {
             EditorBuildSettings.scenes = new[]
@@ -226,6 +248,44 @@ namespace ExplorerGame.Editor
         private static EditorBuildSettingsScene BuildScene(string sceneName)
         {
             return new EditorBuildSettingsScene($"{SceneFolder}/{sceneName}.unity", true);
+        }
+
+        private static GameObject GetOrCreateRoot(Scene scene, string rootName)
+        {
+            foreach (var root in scene.GetRootGameObjects())
+            {
+                if (root.name == rootName)
+                {
+                    return root;
+                }
+            }
+
+            return new GameObject(rootName);
+        }
+
+        private static T GetOrAddComponent<T>(GameObject gameObject) where T : Component
+        {
+            var existing = gameObject.GetComponent<T>();
+            return existing != null ? existing : gameObject.AddComponent<T>();
+        }
+
+        private static void EnsureOverlayCamera(Scene scene, string cameraName, Vector3 position)
+        {
+            foreach (var root in scene.GetRootGameObjects())
+            {
+                if (root.GetComponentInChildren<Camera>(true) != null)
+                {
+                    return;
+                }
+            }
+
+            var cameraRoot = new GameObject(cameraName);
+            var camera = cameraRoot.AddComponent<Camera>();
+            cameraRoot.transform.position = position;
+            cameraRoot.transform.rotation = Quaternion.Euler(10f, 0f, 0f);
+            camera.clearFlags = CameraClearFlags.Skybox;
+            camera.tag = "MainCamera";
+            cameraRoot.AddComponent<AudioListener>();
         }
 
         private static void ValidateScene(string sceneName, params Type[] requiredComponents)
