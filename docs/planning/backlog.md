@@ -245,3 +245,9 @@
   - Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`, `Assets/Game/Interaction/InteractionProbe.cs`
   - Acceptance: generated placeholder prefabs move, look, and interact with default bindings even when serialized `InputActionProperty` fields exist but contain no bindings.
   - Sprint detail: `docs/planning/sprint-02.md#eg-30-input-fallback-binding-baseline`
+- Story 13.9: camera-relative movement baseline
+  - Tracking ID: `EG-31`
+  - Owner: `Game.Player`, `Game.Editor`
+  - Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Game/Player/ThirdPersonExplorerController.cs`
+  - Acceptance: generated world flow uses the active third-person camera as the movement reference so `WASD` follows the current view direction.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-31-camera-relative-movement-baseline`

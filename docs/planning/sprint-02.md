@@ -369,3 +369,24 @@
   - `EG-23`
 - Notes:
   - this blocker was discovered when the spawned player had controller components but still did not respond to input
+
+### EG-31 Camera-Relative Movement Baseline
+- Story Order: `13.9`
+- Status: in progress
+- Owner: `Game.Player`, `Game.Editor`
+- Module: `Assets/Game/Player`, `Assets/Game/Editor`
+- Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Game/Player/ThirdPersonExplorerController.cs`
+- Goal: make generated third-person movement follow the active camera view instead of world axes.
+- Acceptance:
+  - the generated world camera is discoverable as the main camera
+  - `WASD` movement follows the current third-person camera orientation in the first playable flow
+- Subtasks:
+  - inspect how the controller chooses its movement reference
+  - ensure the scaffolded runtime camera is tagged for `Camera.main`
+  - retest movement after rerunning the scaffold if needed
+- Dependencies:
+  - `EG-5`
+  - `EG-27`
+  - `EG-29`
+- Notes:
+  - this blocker was discovered after movement started working but stayed world-relative
