@@ -1,31 +1,45 @@
 # sprint-planning
 
 ## Use for
-- Turning refined backlog items into a sprint plan
-- Setting a sprint goal
-- Choosing committed and stretch work
-- Checking dependencies, capacity, and risk
+- building or updating a sprint plan from the backlog
+- choosing committed and stretch work
+- tracking sprint status as implementation progresses
+- deciding when a new backlog item belongs in the current sprint
 
-## Inputs
-- A refined backlog
-- Team capacity or time box
-- Known dependencies and priorities
+## Read first
+- `docs/index.md`
+- `docs/repo-standards.md`
+- `docs/planning/backlog.md`
+- `docs/planning/sprint-01.md`
+
+## Scope
+- sprint goal
+- committed items
+- stretch items
+- status, blockers, dependencies, and risks
+
+## Rules
+- keep the sprint goal to one sentence
+- commit only realistic work to the sprint
+- place dependency-heavy work after the tasks they depend on
+- add new work to the sprint before implementing it if it affects current sprint scope
+- update sprint status when tasks move from ready to in progress, blocked, or done
+
+## Concerns
+- do not leave blocked tasks marked ready
+- do not hide stretch work inside committed scope
+- do not add work that has no owner, acceptance, or dependency notes
+- do not let the sprint file diverge from the backlog
 
 ## Outputs
-- Sprint goal
-- Committed items
-- Stretch items
-- Dependency list
-- Open questions and risks
+- sprint goal
+- committed and stretch items
+- dependency list
+- risks and blockers
+- up-to-date task status
 
-## Planning Rules
-- Group work by outcome, not by person.
-- Keep committed items realistic for the time box.
-- Put dependency-heavy work behind the items it depends on.
-- Separate stretch work from committed work.
-
-## Validation
-- Sprint goal is one sentence.
-- Every committed item has a clear owner and acceptance criteria.
-- Dependencies and risks are visible.
-- The plan can be reviewed without extra interpretation.
+## Done checks
+- sprint goal is clear
+- every tracked item has an owner and acceptance criteria
+- blockers and dependencies are visible
+- sprint and backlog docs agree on task identity and status

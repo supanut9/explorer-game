@@ -1,30 +1,49 @@
 # backlog-refinement
 
 ## Use for
-- Turning rough ideas into Scrum-ready work
-- Splitting large tasks into parallel lanes
-- Defining acceptance criteria
-- Assigning module or file ownership
+- turning rough ideas into tracked backlog items
+- splitting oversized tasks before implementation starts
+- defining acceptance criteria, dependencies, and ownership
+- creating a new `EG-*` item before untracked work is committed
+
+## Read first
+- `docs/index.md`
+- `docs/repo-standards.md`
+- `docs/planning/backlog.md`
+- `docs/planning/sprint-01.md`
 
 ## Inputs
-- A feature idea, bug, or planning note
-- Current repo docs and module layout
-- Known dependencies or constraints
+- a feature idea, bug, gap, or untracked file
+- current repo modules and file layout
+- known blockers or dependencies
+
+## Scope
+- planning docs only
+- backlog and sprint task structure
+- acceptance criteria and ownership boundaries
+
+## Rules
+- add a backlog item before implementing real work that has no `EG-*` id
+- split by outcome, not by person
+- keep each task tied to one primary module or file family
+- separate docs work from runtime work unless the doc update is part of the same task contract
+- use stable `EG-*` ids for commits and references
+
+## Concerns
+- do not create tasks that touch many unrelated modules
+- do not leave dependencies implicit
+- do not create vague acceptance criteria like "works" or "improved"
+- do not implement untracked work first and plan it later
 
 ## Outputs
-- Epic and story breakdown
-- Clear task titles
-- Testable acceptance criteria
-- Ownership and dependency notes
+- backlog entry with `EG-*`
+- sprint task entry or sprint status update
+- clear acceptance criteria
+- ownership and dependency notes
 
-## Splitting Rules
-- Split by outcome, not by person.
-- Keep each task to one primary module or file family.
-- Move shared contracts into `Game.Core` before feature work.
-- Separate docs work from runtime work when both are needed.
-
-## Validation
-- Each task can be completed and reviewed on its own.
-- Dependencies are explicit.
-- Acceptance criteria are observable and testable.
-- Parallel work does not overlap on the same files.
+## Done checks
+- each task can be reviewed as one logical unit
+- acceptance criteria are observable and testable
+- dependencies are explicit
+- overlapping file ownership is minimized
+- planning docs match the current branch state
