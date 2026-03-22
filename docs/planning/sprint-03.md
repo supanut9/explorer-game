@@ -45,6 +45,15 @@
 - Confirm any input-policy change is explicit in docs and in runtime behavior.
 - Confirm new tests prove the repaired baseline instead of only mirroring manual steps.
 
+## Outcome
+- Status: done
+- Verified in Unity after scaffold rerun:
+  - one active world camera and one active audio listener
+  - rendered view stays aligned with third-person movement reference
+  - player spawn remains single-instance
+  - reachable NPC interaction works in the generated village baseline
+  - grounded jump works without regressing the repaired control loop
+
 ## Sprint Tasks
 
 ### EG-39 Generated World Camera And Listener Cleanup

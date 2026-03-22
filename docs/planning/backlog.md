@@ -9,7 +9,7 @@
 - Goal: turn the Sprint 01 foundation into a more believable first playable by adding content, scene verification, and stronger validation.
 
 ## Sprint 03: Playable Stability And Control Polish
-- Status: in progress
+- Status: done
 - Goal: stabilize the first playable after Sprint 02 by repairing generated-scene camera state, tightening input contracts, and adding regression coverage for the verified runtime loop.
 
 ## Parallel Lanes
@@ -299,7 +299,7 @@
   - Sprint detail: `docs/planning/sprint-02.md#eg-38-package-and-editor-noise-cleanup`
 
 ## Epic 14: Post-Playable Stability
-- Status: in progress
+- Status: done
 - Goal: remove the remaining runtime regressions and tighten the generated first-playable baseline after Sprint 02 merge
 - Story 14.1: generated world camera and listener cleanup
   - Tracking ID: `EG-39`
