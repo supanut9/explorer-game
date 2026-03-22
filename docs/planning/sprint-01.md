@@ -173,7 +173,7 @@
 
 ### EG-7 World Spawn
 - Story Order: `4.2`
-- Status: blocked
+- Status: done
 - Owner: `Game.World`
 - Module: `Assets/Game/World`
 - Files: `Assets/Game/World/WorldRuntimeController.cs`, `Assets/Game/World/ZonePortal.cs`
@@ -190,7 +190,6 @@
   - `EG-6`
 - Notes:
   - depends on stable scene-name contracts
-  - blocked until `ZonePortal.cs` is added to the repo
 
 ### EG-8 Interaction Probe
 - Story Order: `5.1`

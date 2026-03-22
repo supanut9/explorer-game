@@ -10,6 +10,8 @@ namespace ExplorerGame.World
         [SerializeField] private CharacterCatalog characterCatalog;
         [SerializeField] private WorldCatalog worldCatalog;
 
+        private GameObject spawnedPlayer;
+
         private async void Start()
         {
             var session = GameSession.EnsureInstance();
@@ -28,6 +30,8 @@ namespace ExplorerGame.World
                 Debug.LogError($"Zone '{sceneName}' was not found in WorldCatalog.");
                 return;
             }
+
+            await UnloadInactiveZonesAsync(zone.SceneName);
 
             if (!SceneManager.GetSceneByName(zone.SceneName).isLoaded)
             {
@@ -55,8 +59,42 @@ namespace ExplorerGame.World
                 return;
             }
 
+            if (spawnedPlayer != null)
+            {
+                Destroy(spawnedPlayer);
+            }
+
             var spawnPosition = zone.PlayerSpawnPoint + definition.SpawnOffset;
-            Instantiate(definition.Prefab, spawnPosition, Quaternion.identity);
+            spawnedPlayer = Instantiate(definition.Prefab, spawnPosition, Quaternion.identity);
+
+            var cameraRig = FindFirstObjectByType<ThirdPersonCameraRig>();
+            if (cameraRig != null)
+            {
+                cameraRig.SetTarget(spawnedPlayer.transform);
+            }
+        }
+
+        private async Awaitable UnloadInactiveZonesAsync(string activeZoneScene)
+        {
+            foreach (var zone in worldCatalog.Zones)
+            {
+                if (zone == null || zone.SceneName == activeZoneScene)
+                {
+                    continue;
+                }
+
+                var loadedScene = SceneManager.GetSceneByName(zone.SceneName);
+                if (!loadedScene.isLoaded)
+                {
+                    continue;
+                }
+
+                var operation = SceneManager.UnloadSceneAsync(zone.SceneName);
+                while (operation != null && !operation.isDone)
+                {
+                    await Awaitable.NextFrameAsync();
+                }
+            }
         }
     }
 }
