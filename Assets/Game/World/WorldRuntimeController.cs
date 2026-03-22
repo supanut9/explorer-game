@@ -7,6 +7,8 @@ namespace ExplorerGame.World
 {
     public sealed class WorldRuntimeController : MonoBehaviour
     {
+        private static readonly Vector3 SpawnSafetyOffset = new(0f, 0.15f, 0f);
+
         [SerializeField] private CharacterCatalog characterCatalog;
         [SerializeField] private WorldCatalog worldCatalog;
 
@@ -64,7 +66,7 @@ namespace ExplorerGame.World
                 Destroy(spawnedPlayer);
             }
 
-            var spawnPosition = zone.PlayerSpawnPoint + definition.SpawnOffset;
+            var spawnPosition = zone.PlayerSpawnPoint + definition.SpawnOffset + SpawnSafetyOffset;
             spawnedPlayer = Instantiate(definition.Prefab, spawnPosition, Quaternion.identity);
 
             var cameraRig = FindAnyObjectByType<ThirdPersonCameraRig>();

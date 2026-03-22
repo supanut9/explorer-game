@@ -96,9 +96,9 @@ namespace ExplorerGame.Editor
             AddCharacterIfMissing(characterCatalog, maleCharacter);
             AddCharacterIfMissing(characterCatalog, femaleCharacter);
 
-            var villageZone = CreateZoneAsset("VillageZone", "Village", new Vector3(0f, 0f, 0f));
-            var forestZone = CreateZoneAsset("ForestZone", "Forest", new Vector3(10f, 0f, 10f));
-            var mountainZone = CreateZoneAsset("MountainZone", "Mountain", new Vector3(20f, 0f, 20f));
+            var villageZone = CreateZoneAsset("VillageZone", "Village", new Vector3(0f, 1.1f, 0f));
+            var forestZone = CreateZoneAsset("ForestZone", "Forest", new Vector3(0f, 1.1f, 0f));
+            var mountainZone = CreateZoneAsset("MountainZone", "Mountain", new Vector3(0f, 1.1f, 0f));
             AddZoneIfMissing(worldCatalog, villageZone);
             AddZoneIfMissing(worldCatalog, forestZone);
             AddZoneIfMissing(worldCatalog, mountainZone);
@@ -129,19 +129,18 @@ namespace ExplorerGame.Editor
         {
             var path = $"{GameConstants.ConfigFolder}/{sceneName}.asset";
             var existing = AssetDatabase.LoadAssetAtPath<ZoneDefinition>(path);
-            if (existing != null)
-            {
-                return existing;
-            }
-
-            var zone = ScriptableObject.CreateInstance<ZoneDefinition>();
+            var zone = existing != null ? existing : ScriptableObject.CreateInstance<ZoneDefinition>();
             var serializedZone = new SerializedObject(zone);
             serializedZone.FindProperty("sceneName").stringValue = sceneName;
             serializedZone.FindProperty("displayName").stringValue = displayName;
             serializedZone.FindProperty("description").stringValue = $"{displayName} exploration zone";
             serializedZone.FindProperty("playerSpawnPoint").vector3Value = spawnPoint;
             serializedZone.ApplyModifiedPropertiesWithoutUndo();
-            AssetDatabase.CreateAsset(zone, path);
+            if (existing == null)
+            {
+                AssetDatabase.CreateAsset(zone, path);
+            }
+
             return zone;
         }
 

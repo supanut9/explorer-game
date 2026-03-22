@@ -227,3 +227,9 @@
   - Files: `Assets/Game/UI/CharacterSelectionView.cs`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
   - Acceptance: generated bootstrap and character-select scenes render through a camera and the player can make a character choice without hand-building UI.
   - Sprint detail: `docs/planning/sprint-02.md#eg-27-playable-bootstrap-presentation-baseline`
+- Story 13.6: scaffold spawn safety baseline
+  - Tracking ID: `EG-28`
+  - Owner: `Game.World`, `Game.Editor`
+  - Files: `Assets/Game/World/WorldRuntimeController.cs`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
+  - Acceptance: generated zone spawn points match the placeholder scene layout and entering the world does not immediately drop the player below the playable ground.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-28-scaffold-spawn-safety-baseline`

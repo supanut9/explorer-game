@@ -303,3 +303,25 @@
   - `EG-23`
 - Notes:
   - this blocker was discovered when the generated flow entered play mode but rendered no camera output
+
+### EG-28 Scaffold Spawn Safety Baseline
+- Story Order: `13.6`
+- Status: in progress
+- Owner: `Game.World`, `Game.Editor`
+- Module: `Assets/Game/World`, `Assets/Game/Editor`
+- Files: `Assets/Game/World/WorldRuntimeController.cs`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
+- Goal: align scaffolded spawn data with the generated placeholder world so entering the first playable loop starts on supported ground.
+- Acceptance:
+  - scaffold generation updates zone spawn points to positions that match the generated placeholder zones
+  - entering the world starts the player above valid ground instead of inside or below the floor
+  - rerunning scaffold generation can repair stale config assets from earlier runs
+- Subtasks:
+  - inspect the generated zone layout against current spawn data
+  - update scaffolded zone assets on rerun instead of leaving old spawn values in place
+  - add a small safe vertical offset to the runtime spawn path if needed
+- Dependencies:
+  - `EG-20`
+  - `EG-21`
+  - `EG-23`
+- Notes:
+  - this blocker was discovered during manual play verification after entering the world from character select
