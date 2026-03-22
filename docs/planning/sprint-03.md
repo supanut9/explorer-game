@@ -116,7 +116,7 @@
 
 ### EG-42 First-Playable Regression Coverage
 - Story Order: `14.4`
-- Status: todo
+- Status: done
 - Owner: `Game.Tests.PlayMode`, `Game.Editor`
 - Module: `Assets/Game/Tests/PlayMode`, `Assets/Game/Editor`
 - Files: `Assets/Game/Tests/PlayMode/*`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
@@ -135,6 +135,7 @@
   - `EG-41`
 - Notes:
   - prefer stable generated setup over scene-by-scene manual fixture authoring
+  - coverage now targets the generated world path directly for one-player startup, one-audio-listener startup, and reachable NPC interaction
 
 ### EG-43 Player Jump Baseline
 - Story Order: `14.5`
