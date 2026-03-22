@@ -298,7 +298,7 @@
 
 ### EG-13 Animal Roaming
 - Story Order: `8.1`
-- Status: ready
+- Status: done
 - Owner: `Game.Animals`
 - Module: `Assets/Game/Animals`
 - Files: `Assets/Game/Animals/AnimalRoamingAgent.cs`, `Assets/Game/Animals/Game.Animals.asmdef`
