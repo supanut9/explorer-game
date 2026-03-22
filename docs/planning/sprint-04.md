@@ -140,7 +140,7 @@
 
 ### EG-49 Multi-Zone Verification Coverage
 - Story Order: `15.5`
-- Status: planned
+- Status: in progress
 - Owner: `Game.Tests.PlayMode`, `Game.Editor`
 - Module: `Assets/Game/Tests/PlayMode`, `docs/planning`
 - Files: `Assets/Game/Tests/PlayMode/*`, `docs/planning/sprint-04.md`
@@ -160,6 +160,7 @@
   - `EG-47`
 - Notes:
   - prioritize confidence in the connected slice over broad but brittle test coverage
+  - the current verification path targets village startup, forest traversal, and destination-zone interaction after the scene transition
 
 ### EG-51 Animal Roaming NavMesh Fallback
 - Story Order: `15.6`
