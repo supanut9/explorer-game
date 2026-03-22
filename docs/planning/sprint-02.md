@@ -346,3 +346,26 @@
   - `EG-28`
 - Notes:
   - this blocker was discovered during manual play verification after world entry started working
+
+### EG-30 Input Fallback Binding Baseline
+- Story Order: `13.8`
+- Status: in progress
+- Owner: `Game.Player`, `Game.Interaction`
+- Module: `Assets/Game/Player`, `Assets/Game/Interaction`
+- Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`, `Assets/Game/Interaction/InteractionProbe.cs`
+- Goal: make generated placeholder prefabs playable without hand-configuring Input System references in the Inspector.
+- Acceptance:
+  - movement works with `WASD`
+  - look works with mouse delta
+  - interaction works with `E`
+  - empty serialized `InputActionProperty` values do not block fallback bindings
+- Subtasks:
+  - inspect the generated player prefab component state in Play Mode
+  - treat empty serialized input actions as missing inputs
+  - retest movement and look after recompilation
+- Dependencies:
+  - `EG-5`
+  - `EG-8`
+  - `EG-23`
+- Notes:
+  - this blocker was discovered when the spawned player had controller components but still did not respond to input

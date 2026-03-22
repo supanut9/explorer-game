@@ -129,7 +129,7 @@ namespace ExplorerGame.Interaction
 
         private static InputAction PrepareInteractAction(InputActionProperty property)
         {
-            if (property.action != null)
+            if (HasUsableAction(property))
             {
                 return property.action;
             }
@@ -138,6 +138,12 @@ namespace ExplorerGame.Interaction
             action.AddBinding("<Keyboard>/e");
             action.AddBinding("<Gamepad>/buttonSouth");
             return action;
+        }
+
+        private static bool HasUsableAction(InputActionProperty property)
+        {
+            var action = property.action;
+            return action != null && action.bindings.Count > 0;
         }
 
         private static class ListPool<T> where T : class

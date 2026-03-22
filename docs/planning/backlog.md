@@ -239,3 +239,9 @@
   - Files: `Assets/Game/Player/ThirdPersonCameraRig.cs`, `Assets/Game/World/WorldRuntimeController.cs`
   - Acceptance: when the world scene loads, the camera snaps to a readable third-person framing on the spawned player instead of starting too close or inside the character.
   - Sprint detail: `docs/planning/sprint-02.md#eg-29-world-camera-snap-baseline`
+- Story 13.8: input fallback binding baseline
+  - Tracking ID: `EG-30`
+  - Owner: `Game.Player`, `Game.Interaction`
+  - Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`, `Assets/Game/Interaction/InteractionProbe.cs`
+  - Acceptance: generated placeholder prefabs move, look, and interact with default bindings even when serialized `InputActionProperty` fields exist but contain no bindings.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-30-input-fallback-binding-baseline`

@@ -69,7 +69,7 @@ namespace ExplorerGame.Player
 
         private static InputAction PrepareMoveAction(InputActionProperty property)
         {
-            if (property.action != null)
+            if (HasUsableAction(property))
             {
                 return property.action;
             }
@@ -86,7 +86,7 @@ namespace ExplorerGame.Player
 
         private static InputAction PrepareSprintAction(InputActionProperty property)
         {
-            if (property.action != null)
+            if (HasUsableAction(property))
             {
                 return property.action;
             }
@@ -95,6 +95,12 @@ namespace ExplorerGame.Player
             action.AddBinding("<Keyboard>/leftShift");
             action.AddBinding("<Gamepad>/leftStickPress");
             return action;
+        }
+
+        private static bool HasUsableAction(InputActionProperty property)
+        {
+            var action = property.action;
+            return action != null && action.bindings.Count > 0;
         }
     }
 }

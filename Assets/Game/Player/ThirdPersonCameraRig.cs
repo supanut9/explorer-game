@@ -74,7 +74,7 @@ namespace ExplorerGame.Player
 
         private static InputAction PrepareLookAction(InputActionProperty property)
         {
-            if (property.action != null)
+            if (HasUsableAction(property))
             {
                 return property.action;
             }
@@ -83,6 +83,12 @@ namespace ExplorerGame.Player
             action.AddBinding("<Mouse>/delta");
             action.AddBinding("<Gamepad>/rightStick");
             return action;
+        }
+
+        private static bool HasUsableAction(InputActionProperty property)
+        {
+            var action = property.action;
+            return action != null && action.bindings.Count > 0;
         }
     }
 }
