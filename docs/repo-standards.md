@@ -54,6 +54,13 @@
 - Open sprint completion PRs from the sprint branch into `main`.
 - Every PR should include body metadata for summary, linked `EG-*` tracking ids, linked project card, target branch, touched modules, touched scenes or config assets when applicable, test evidence, sprint or milestone metadata, risks or notes, and a merge readiness checklist.
 - Every GitHub PR should also set metadata on the PR itself: labels, project, milestone, and assignee.
+- PRs can and should carry multiple labels when the scope spans multiple kinds of work or modules.
+- Use repo labels from these groups:
+  - type: `type:docs`, `type:feature`, `type:fix`, `type:test`, `type:refactor`, `type:chore`
+  - sprint: `sprint:01` for Sprint 01 work
+  - area: `area:repo`, `area:core`, `area:player`, `area:world`, `area:interaction`, `area:animals`, `area:ui`, `area:editor`, `area:tests`
+  - optional status: `status:review`, `status:blocked`
+- Sprint PRs should include at least one `type:*` label, one `sprint:*` label, and one or more `area:*` labels.
 - Add reviewers when the change needs explicit review ownership.
 - Include screenshots or a short video for UI or gameplay changes.
 - Mention any Unity editor steps required to verify the change.

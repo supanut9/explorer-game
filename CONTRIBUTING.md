@@ -60,6 +60,12 @@ Read these files first:
   - project
   - milestone
   - assignee
+- Use repo labels from these groups:
+  - type: `type:docs`, `type:feature`, `type:fix`, `type:test`, `type:refactor`, `type:chore`
+  - sprint: `sprint:01`
+  - area: `area:repo`, `area:core`, `area:player`, `area:world`, `area:interaction`, `area:animals`, `area:ui`, `area:editor`, `area:tests`
+  - optional status: `status:review`, `status:blocked`
+- PRs may carry multiple labels. Sprint PRs should include at least one `type:*`, one `sprint:*`, and one or more `area:*` labels.
 - Add reviewers when the change needs explicit review ownership.
 - Include screenshots or a short video for UI or gameplay changes.
 - Mention any Unity editor steps required to verify the change.
