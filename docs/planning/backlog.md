@@ -467,3 +467,9 @@
   - Files: `.gitignore`, `ProjectSettings/ProjectSettings.asset`, `Assets/Scenes/SampleScene.unity`, `Assets/Readme.asset`, `Assets/TutorialInfo/*`, `Assets/Settings/SampleSceneProfile.asset`
   - Acceptance: editor-local scene template noise is ignored, the default scene template points at the project bootstrap scene, and unused Unity starter assets are removed from the tracked repo.
   - Sprint detail: `docs/planning/sprint-05.md#eg-61-repo-ignore-and-starter-asset-cleanup`
+- Story 19.4: sprint 05 material serialization sync
+  - Tracking ID: `EG-62`
+  - Owner: `Content`, `Game.Editor`
+  - Files: `Assets/Resources/Prefabs/Materials/*.mat`
+  - Acceptance: tracked presentation materials serialize the updated Sprint 05 palette consistently, including `_Color` normalization matching the reviewed baseline.
+  - Sprint detail: `docs/planning/sprint-05.md#eg-62-sprint-05-material-serialization-sync`

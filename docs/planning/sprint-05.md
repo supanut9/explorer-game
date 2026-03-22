@@ -275,3 +275,24 @@
   - `EG-60`
 - Notes:
   - this is repository cleanup, not gameplay scope
+
+### EG-62 Sprint 05 Material Serialization Sync
+- Story Order: `19.4`
+- Status: done
+- Owner: `Content`, `Game.Editor`
+- Module: `Assets/Resources/Prefabs/Materials`
+- Files: `Assets/Resources/Prefabs/Materials/*.mat`
+- Goal: align the tracked material serialization with the reviewed Sprint 05 palette so `_Color` and `_BaseColor` no longer drift.
+- Acceptance:
+  - material files serialize the Sprint 05 palette consistently
+  - the sync does not introduce new colors or alter the approved presentation direction
+  - the diff remains limited to material serialization updates
+- Subtasks:
+  - inspect representative material diffs
+  - confirm the updates are consistent normalization, not new art direction
+  - commit the material sync separately from starter-asset cleanup
+- Dependencies:
+  - `EG-53`
+  - `EG-60`
+- Notes:
+  - this is a serialization sync, not a new visual pass
