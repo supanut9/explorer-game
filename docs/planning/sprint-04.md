@@ -51,7 +51,7 @@
 
 ### EG-45 Zone Traversal Exposure
 - Story Order: `15.1`
-- Status: planned
+- Status: in progress
 - Owner: `Game.World`, `Game.Editor`
 - Module: `Assets/Game/World`, `Assets/Game/Editor`, `Assets/Scenes`
 - Files: `Assets/Game/World/ZonePortal.cs`, `Assets/Game/World/WorldRuntimeController.cs`, `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
@@ -69,6 +69,7 @@
   - `EG-39`
 - Notes:
   - prioritize one polished secondary route over exposing every zone poorly
+  - implementation is currently focused on a readable village-to-forest route with a stable return path
 
 ### EG-46 Guide NPC And Signposting Pass
 - Story Order: `15.2`
