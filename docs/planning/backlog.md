@@ -5,7 +5,7 @@
 - Goal: make the repo ready for a first playable exploration loop with clear AI ownership.
 
 ## Sprint 02: First Playable Polish
-- Status: in progress
+- Status: done
 - Goal: turn the Sprint 01 foundation into a more believable first playable by adding content, scene verification, and stronger validation.
 
 ## Parallel Lanes
@@ -287,3 +287,9 @@
   - Files: `Assets/Scenes/*.unity`, `Assets/Resources/Configs/*`, `Assets/Resources/Prefabs/*`, `ProjectSettings/EditorBuildSettings.asset`
   - Acceptance: the generated first-playable scenes, config assets, prefabs, materials, and build settings are tracked as the Sprint 02 baseline after manual verification.
   - Sprint detail: `docs/planning/sprint-02.md#eg-37-generated-playable-baseline-assets`
+- Story 13.16: package and editor noise cleanup
+  - Tracking ID: `EG-38`
+  - Owner: `Repo`
+  - Files: `Packages/manifest.json`, `Packages/packages-lock.json`, `ProjectSettings/Packages/*`, `ProjectSettings/SceneTemplateSettings.json`
+  - Acceptance: Unity AI assistant package churn and editor-local scene template metadata are removed from the sprint branch so Sprint 02 closes with only intentional gameplay and planning changes.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-38-package-and-editor-noise-cleanup`
