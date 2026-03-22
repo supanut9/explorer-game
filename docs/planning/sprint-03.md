@@ -140,7 +140,7 @@
 
 ### EG-43 Player Jump Baseline
 - Story Order: `14.5`
-- Status: todo
+- Status: done
 - Owner: `Game.Player`
 - Module: `Assets/Game/Player`, `Assets/Game/Tests/PlayMode`
 - Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Tests/PlayMode/*`
@@ -158,3 +158,4 @@
   - `EG-42`
 - Notes:
   - this remains stretch until the camera/listener regression is closed
+  - the controller now supports a grounded keyboard jump and includes a focused play mode test for lift-off from the grounded baseline
