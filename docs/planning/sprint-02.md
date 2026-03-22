@@ -182,7 +182,7 @@
 
 ### EG-23 Scene Wiring Verification
 - Story Order: `13.1`
-- Status: in progress
+- Status: done
 - Owner: `Game.Editor`
 - Module: `Assets/Scenes`, `docs/planning`
 - Files: `Assets/Scenes/Bootstrap.unity`, `Assets/Scenes/CharacterSelect.unity`, `Assets/Scenes/WorldPersistent.unity`, `docs/planning/sprint-02.md`
@@ -202,7 +202,7 @@
   - `EG-22`
 - Notes:
   - this is the bridge between code-complete and actually playable
-  - validation tooling and checklist are in place, but the manual Unity Editor verification pass still needs to be run
+  - manual Unity Editor verification confirmed the generated flow reaches character select, enters the world, supports camera-relative movement, and can trigger placeholder interaction after scaffold reruns and runtime repairs
 - Verification Checklist:
   - run `Tools/Explorer Game/Generate Project Scaffolding` in Unity
   - run `Tools/Explorer Game/Validate Config Assets`
@@ -284,7 +284,7 @@
 
 ### EG-27 Playable Bootstrap Presentation Baseline
 - Story Order: `13.5`
-- Status: in progress
+- Status: done
 - Owner: `Game.UI`, `Game.Editor`
 - Module: `Assets/Game/UI`, `Assets/Game/Editor`
 - Files: `Assets/Game/UI/CharacterSelectionView.cs`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
@@ -306,7 +306,7 @@
 
 ### EG-28 Scaffold Spawn Safety Baseline
 - Story Order: `13.6`
-- Status: in progress
+- Status: done
 - Owner: `Game.World`, `Game.Editor`
 - Module: `Assets/Game/World`, `Assets/Game/Editor`
 - Files: `Assets/Game/World/WorldRuntimeController.cs`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
@@ -328,7 +328,7 @@
 
 ### EG-29 World Camera Snap Baseline
 - Story Order: `13.7`
-- Status: in progress
+- Status: done
 - Owner: `Game.Player`, `Game.World`
 - Module: `Assets/Game/Player`, `Assets/Game/World`
 - Files: `Assets/Game/Player/ThirdPersonCameraRig.cs`, `Assets/Game/World/WorldRuntimeController.cs`
@@ -349,7 +349,7 @@
 
 ### EG-30 Input Fallback Binding Baseline
 - Story Order: `13.8`
-- Status: in progress
+- Status: done
 - Owner: `Game.Player`, `Game.Interaction`
 - Module: `Assets/Game/Player`, `Assets/Game/Interaction`
 - Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`, `Assets/Game/Interaction/InteractionProbe.cs`
@@ -372,7 +372,7 @@
 
 ### EG-31 Camera-Relative Movement Baseline
 - Story Order: `13.9`
-- Status: in progress
+- Status: done
 - Owner: `Game.Player`, `Game.Editor`
 - Module: `Assets/Game/Player`, `Assets/Game/Editor`
 - Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Game/Player/ThirdPersonExplorerController.cs`
@@ -393,7 +393,7 @@
 
 ### EG-32 World Camera Repair On Scaffold Rerun
 - Story Order: `13.10`
-- Status: in progress
+- Status: done
 - Owner: `Game.Editor`, `Game.Player`, `Game.World`
 - Module: `Assets/Game/Editor`, `Assets/Game/Player`, `Assets/Game/World`
 - Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/World/WorldRuntimeController.cs`
@@ -415,7 +415,7 @@
 
 ### EG-33 Village Traversal Layout Baseline
 - Story Order: `13.11`
-- Status: in progress
+- Status: done
 - Owner: `Game.Editor`, `Content`
 - Module: `Assets/Game/Editor`
 - Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
@@ -437,7 +437,7 @@
 
 ### EG-34 Movement Input Drift Baseline
 - Story Order: `13.12`
-- Status: in progress
+- Status: done
 - Owner: `Game.Player`
 - Module: `Assets/Game/Player`
 - Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`
@@ -459,7 +459,7 @@
 
 ### EG-35 PC-First Fallback Input Baseline
 - Story Order: `13.13`
-- Status: in progress
+- Status: done
 - Owner: `Game.Player`, `Game.Interaction`
 - Module: `Assets/Game/Player`, `Assets/Game/Interaction`
 - Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`, `Assets/Game/Interaction/InteractionProbe.cs`
@@ -482,7 +482,7 @@
 
 ### EG-36 Single-Player Spawn And Probe Baseline
 - Story Order: `13.14`
-- Status: in progress
+- Status: done
 - Owner: `Game.World`, `Game.Editor`
 - Module: `Assets/Game/World`, `Assets/Game/Editor`
 - Files: `Assets/Game/World/WorldRuntimeController.cs`, `Assets/Game/World/Game.World.asmdef`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
@@ -501,3 +501,29 @@
   - `EG-32`
 - Notes:
   - this blocker was discovered after play verification exposed duplicate spawned characters and missing interaction behavior
+  - final verification confirmed the world flow keeps a single active player and the placeholder interaction path works without manual prefab repair
+
+### EG-37 Generated Playable Baseline Assets
+- Story Order: `13.15`
+- Status: done
+- Owner: `Content`, `Game.Editor`
+- Module: `Assets/Scenes`, `Assets/Resources`, `ProjectSettings`
+- Files: `Assets/Scenes/*.unity`, `Assets/Resources/Configs/*`, `Assets/Resources/Prefabs/*`, `ProjectSettings/EditorBuildSettings.asset`
+- Goal: track the generated first-playable scenes, config assets, prefabs, and build settings as the verified Sprint 02 content baseline.
+- Acceptance:
+  - generated playable scenes are committed as project assets
+  - generated config assets and placeholder prefabs are committed as project assets
+  - build settings reference the generated first-playable scene flow instead of `SampleScene`
+  - the committed assets reflect the verified playable loop rather than incidental editor noise
+- Subtasks:
+  - separate generated baseline assets from package and editor metadata noise
+  - confirm the generated assets match the manually verified playable flow
+  - commit scenes, resources, and build settings together as the Sprint 02 baseline
+- Dependencies:
+  - `EG-20`
+  - `EG-21`
+  - `EG-22`
+  - `EG-23`
+  - `EG-36`
+- Notes:
+  - package manifest churn and editor-local settings remain out of scope for this baseline commit

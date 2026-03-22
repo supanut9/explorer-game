@@ -6,7 +6,23 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/Bootstrap.unity
+    guid: 14c5526f0e66440f1a9cb316be0a1ed9
+  - enabled: 1
+    path: Assets/Scenes/CharacterSelect.unity
+    guid: ae5c6c056a00e47dfa9b4056bbd821e8
+  - enabled: 1
+    path: Assets/Scenes/WorldPersistent.unity
+    guid: 65efb745821914f3d8ca7b7d75d8902a
+  - enabled: 1
+    path: Assets/Scenes/VillageZone.unity
+    guid: 9c640e9f7ac76411aa9d862aed15aca0
+  - enabled: 1
+    path: Assets/Scenes/ForestZone.unity
+    guid: 9f38e38b1fafb45bba9211db1dd67f99
+  - enabled: 1
+    path: Assets/Scenes/MountainZone.unity
+    guid: 84f8cc4f99b754becbcf00f05f736770
   m_configObjects:
+    com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

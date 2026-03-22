@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7508ab1f3e08471f8488d5ffa13b41af, type: 3}
+  m_Name: WorldCatalog
+  m_EditorClassIdentifier: Game.World::ExplorerGame.World.WorldCatalog
+  zones:
+  - {fileID: 11400000, guid: 5c111cb187d6c4ae49419ec3d0e46a39, type: 2}
+  - {fileID: 11400000, guid: 2b112b66fac9849caa8b9a26f77b20db, type: 2}
+  - {fileID: 11400000, guid: f67f2ef9fe5d44e4aba32d8251d6b1d0, type: 2}

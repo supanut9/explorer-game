@@ -281,3 +281,9 @@
   - Files: `Assets/Game/World/WorldRuntimeController.cs`, `Assets/Game/World/Game.World.asmdef`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
   - Acceptance: world entry keeps a single player instance active, the spawned player can interact without manual prefab repair, and the world assembly graph supports that runtime path.
   - Sprint detail: `docs/planning/sprint-02.md#eg-36-single-player-spawn-and-probe-baseline`
+- Story 13.15: generated playable baseline assets
+  - Tracking ID: `EG-37`
+  - Owner: `Content`, `Game.Editor`
+  - Files: `Assets/Scenes/*.unity`, `Assets/Resources/Configs/*`, `Assets/Resources/Prefabs/*`, `ProjectSettings/EditorBuildSettings.asset`
+  - Acceptance: the generated first-playable scenes, config assets, prefabs, materials, and build settings are tracked as the Sprint 02 baseline after manual verification.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-37-generated-playable-baseline-assets`
