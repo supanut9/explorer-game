@@ -146,7 +146,7 @@ namespace ExplorerGame.Editor
 
         private static void CreateBootstrapScene()
         {
-            EnsureSceneWithSingleRoot(GameConstants.BootstrapScene, root =>
+            EnsureSceneWithSingleRoot(GameConstants.BootstrapScene, GameConstants.BootstrapScene, root =>
             {
                 GetOrAddComponent<GameSession>(root);
                 GetOrAddComponent<BootstrapFlowController>(root);
@@ -156,7 +156,7 @@ namespace ExplorerGame.Editor
 
         private static void CreateCharacterSelectScene()
         {
-            EnsureSceneWithSingleRoot(GameConstants.CharacterSelectScene, root =>
+            EnsureSceneWithSingleRoot(GameConstants.CharacterSelectScene, GameConstants.CharacterSelectScene, root =>
             {
                 GetOrAddComponent<CharacterSelectionView>(root);
                 EnsureOverlayCamera(root.scene, "CharacterSelectCamera", new Vector3(0f, 1.5f, -8f));
@@ -165,7 +165,7 @@ namespace ExplorerGame.Editor
 
         private static void CreateWorldScene(string sceneName, string rootName)
         {
-            EnsureSceneWithSingleRoot(sceneName, root =>
+            EnsureSceneWithSingleRoot(sceneName, rootName, root =>
             {
                 root.name = rootName;
                 if (sceneName == GameConstants.WorldPersistentScene)
@@ -211,7 +211,7 @@ namespace ExplorerGame.Editor
             EditorSceneManager.SaveScene(scene, path);
         }
 
-        private static void EnsureSceneWithSingleRoot(string sceneName, Action<GameObject> configureRoot)
+        private static void EnsureSceneWithSingleRoot(string sceneName, string rootName, Action<GameObject> configureRoot)
         {
             var path = $"{SceneFolder}/{sceneName}.unity";
             Scene scene;
@@ -226,7 +226,7 @@ namespace ExplorerGame.Editor
             }
 
             SceneManager.SetActiveScene(scene);
-            var root = GetOrCreateRoot(scene, sceneName);
+            var root = GetOrCreateRoot(scene, rootName, sceneName);
             configureRoot(root);
             EditorSceneManager.SaveScene(scene, path);
         }
@@ -249,14 +249,30 @@ namespace ExplorerGame.Editor
             return new EditorBuildSettingsScene($"{SceneFolder}/{sceneName}.unity", true);
         }
 
-        private static GameObject GetOrCreateRoot(Scene scene, string rootName)
+        private static GameObject GetOrCreateRoot(Scene scene, string rootName, params string[] aliases)
         {
-            foreach (var root in scene.GetRootGameObjects())
+            var roots = scene.GetRootGameObjects();
+            GameObject found = null;
+            foreach (var root in roots)
             {
-                if (root.name == rootName)
+                if (root.name != rootName && Array.IndexOf(aliases, root.name) < 0)
                 {
-                    return root;
+                    continue;
                 }
+
+                if (found == null)
+                {
+                    found = root;
+                    continue;
+                }
+
+                Object.DestroyImmediate(root);
+            }
+
+            if (found != null)
+            {
+                found.name = rootName;
+                return found;
             }
 
             return new GameObject(rootName);
@@ -361,14 +377,77 @@ namespace ExplorerGame.Editor
 
         private static void CreateCameraRig(Transform parent)
         {
-            var cameraRig = parent.Find("ThirdPersonCameraRig")?.gameObject ?? new GameObject("ThirdPersonCameraRig");
+            CleanupDuplicateNamedChildren(parent, "ThirdPersonCameraRig");
+            GameObject cameraRig = null;
+            for (var i = parent.childCount - 1; i >= 0; i--)
+            {
+                var child = parent.GetChild(i);
+                if (child.name != "ThirdPersonCameraRig")
+                {
+                    continue;
+                }
+
+                if (cameraRig == null)
+                {
+                    cameraRig = child.gameObject;
+                    continue;
+                }
+
+                Object.DestroyImmediate(child.gameObject);
+            }
+
+            cameraRig ??= new GameObject("ThirdPersonCameraRig");
             cameraRig.transform.SetParent(parent, false);
             cameraRig.transform.localPosition = new Vector3(0f, 2.5f, -4.5f);
             var camera = GetOrAddComponent<Camera>(cameraRig);
             cameraRig.tag = "MainCamera";
             camera.clearFlags = CameraClearFlags.Skybox;
+            CleanupExtraSceneAudioListeners(parent.gameObject.scene, cameraRig);
             GetOrAddComponent<AudioListener>(cameraRig);
             GetOrAddComponent<ThirdPersonCameraRig>(cameraRig);
+        }
+
+        private static void CleanupExtraSceneAudioListeners(Scene scene, GameObject cameraRig)
+        {
+            foreach (var root in scene.GetRootGameObjects())
+            {
+                var listeners = root.GetComponentsInChildren<AudioListener>(true);
+                foreach (var listener in listeners)
+                {
+                    if (listener == null)
+                    {
+                        continue;
+                    }
+
+                    if (listener.gameObject == cameraRig)
+                    {
+                        continue;
+                    }
+
+                    Object.DestroyImmediate(listener);
+                }
+            }
+        }
+
+        private static void CleanupDuplicateNamedChildren(Transform parent, string childName)
+        {
+            Transform keep = null;
+            for (var i = parent.childCount - 1; i >= 0; i--)
+            {
+                var child = parent.GetChild(i);
+                if (child.name != childName)
+                {
+                    continue;
+                }
+
+                if (keep == null)
+                {
+                    keep = child;
+                    continue;
+                }
+
+                Object.DestroyImmediate(child.gameObject);
+            }
         }
 
         private static void DressVillageZone(Transform parent)

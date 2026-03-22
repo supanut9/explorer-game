@@ -49,7 +49,7 @@
 
 ### EG-39 Generated World Camera And Listener Cleanup
 - Story Order: `14.1`
-- Status: in progress
+- Status: done
 - Owner: `Game.Editor`, `Game.World`, `Game.Player`
 - Module: `Assets/Game/Editor`, `Assets/Game/World`, `Assets/Game/Player`
 - Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Game/World/WorldRuntimeController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`
@@ -70,6 +70,7 @@
 - Notes:
   - the current uncommitted runtime/editor fixes on `sprint/03` belong to this task
   - the regression appeared only after Sprint 02 merged because the generated scene carried duplicated serialized camera state
+  - verification confirmed that rerunning project scaffolding collapses the duplicated world roots and camera rigs back to one active runtime camera and one audio listener
 
 ### EG-40 Input Action Configuration Contract
 - Story Order: `14.2`
