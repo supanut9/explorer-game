@@ -8,6 +8,10 @@
 - Status: done
 - Goal: turn the Sprint 01 foundation into a more believable first playable by adding content, scene verification, and stronger validation.
 
+## Sprint 03: Playable Stability And Control Polish
+- Status: in progress
+- Goal: stabilize the first playable after Sprint 02 by repairing generated-scene camera state, tightening input contracts, and adding regression coverage for the verified runtime loop.
+
 ## Parallel Lanes
 - Content: placeholder prefabs, ambient population, and zone dressing.
 - World: verify scene wiring and traversal flow in the editor.
@@ -195,7 +199,7 @@
   - Sprint detail: `docs/planning/sprint-02.md#eg-22-ambient-placement-pass`
 
 ## Epic 13: First Playable Verification
-- Status: in progress
+- Status: done
 - Goal: verify that the first playable loop works in-editor and in CI-supported paths
 - Story 13.1: scene wiring and traversal verification
   - Tracking ID: `EG-23`
@@ -293,3 +297,37 @@
   - Files: `Packages/manifest.json`, `Packages/packages-lock.json`, `ProjectSettings/Packages/*`, `ProjectSettings/SceneTemplateSettings.json`
   - Acceptance: Unity AI assistant package churn and editor-local scene template metadata are removed from the sprint branch so Sprint 02 closes with only intentional gameplay and planning changes.
   - Sprint detail: `docs/planning/sprint-02.md#eg-38-package-and-editor-noise-cleanup`
+
+## Epic 14: Post-Playable Stability
+- Status: in progress
+- Goal: remove the remaining runtime regressions and tighten the generated first-playable baseline after Sprint 02 merge
+- Story 14.1: generated world camera and listener cleanup
+  - Tracking ID: `EG-39`
+  - Owner: `Game.Editor`, `Game.World`, `Game.Player`
+  - Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Game/World/WorldRuntimeController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`
+  - Acceptance: rerunning project scaffolding collapses duplicate `World Root` and `ThirdPersonCameraRig` objects, the world scene contains exactly one active audio listener, and the rendered camera view matches the control reference during play.
+  - Sprint detail: `docs/planning/sprint-03.md#eg-39-generated-world-camera-and-listener-cleanup`
+- Story 14.2: input action configuration contract
+  - Tracking ID: `EG-40`
+  - Owner: `Game.Player`, `Game.Interaction`, `Docs`
+  - Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`, `Assets/Game/Interaction/InteractionProbe.cs`, `docs/repo-standards.md`, `docs/planning/sprint-03.md`
+  - Acceptance: the repo defines whether inline `InputActionProperty` values are supported, and the runtime either honors valid inline actions or clearly rejects them with documented intent.
+  - Sprint detail: `docs/planning/sprint-03.md#eg-40-input-action-configuration-contract`
+- Story 14.3: placeholder player collision baseline
+  - Tracking ID: `EG-41`
+  - Owner: `Game.Editor`, `Game.Player`
+  - Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Resources/Prefabs/Characters/*.prefab`
+  - Acceptance: generated placeholder player prefabs use a single intended collision setup and no longer ship with an extra primitive collider on the visual child.
+  - Sprint detail: `docs/planning/sprint-03.md#eg-41-placeholder-player-collision-baseline`
+- Story 14.4: first-playable regression coverage
+  - Tracking ID: `EG-42`
+  - Owner: `Game.Tests.PlayMode`, `Game.Editor`
+  - Files: `Assets/Game/Tests/PlayMode/*`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
+  - Acceptance: the generated first-playable path has regression coverage for one-camera world startup, player spawn uniqueness, and basic interaction reachability.
+  - Sprint detail: `docs/planning/sprint-03.md#eg-42-first-playable-regression-coverage`
+- Story 14.5: player jump baseline
+  - Tracking ID: `EG-43`
+  - Owner: `Game.Player`
+  - Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Tests/PlayMode/*`
+  - Acceptance: the first-playable controller supports a basic grounded jump with predictable behavior and no regression to the current move/look baseline.
+  - Sprint detail: `docs/planning/sprint-03.md#eg-43-player-jump-baseline`
