@@ -47,11 +47,22 @@
 - Confirm different zones expose different placeholder interaction text.
 - Confirm multi-zone traversal does not regress the stable camera, spawn, and interaction baseline from Sprint 03.
 
+## Outcome
+- Status: done
+- Verified in Unity:
+  - village to forest portal travel works and returns safely to village
+  - route guidance is visible through the guide NPC, signs, and traversal landmarks
+  - forest and mountain placeholder interactions expose distinct zone-specific text
+  - animal roaming no longer spams NavMesh warnings when no baked NavMesh is present
+- Verified in repo checks:
+  - `python3 scripts/validate_repo.py`
+  - `python3 scripts/validate_unity_project.py`
+
 ## Sprint Tasks
 
 ### EG-45 Zone Traversal Exposure
 - Story Order: `15.1`
-- Status: in progress
+- Status: done
 - Owner: `Game.World`, `Game.Editor`
 - Module: `Assets/Game/World`, `Assets/Game/Editor`, `Assets/Scenes`
 - Files: `Assets/Game/World/ZonePortal.cs`, `Assets/Game/World/WorldRuntimeController.cs`, `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
@@ -73,7 +84,7 @@
 
 ### EG-46 Guide NPC And Signposting Pass
 - Story Order: `15.2`
-- Status: in progress
+- Status: done
 - Owner: `Content`, `Game.Interaction`
 - Module: `Assets/Scenes`, `Assets/Game/Interaction`
 - Files: `Assets/Scenes/VillageZone.unity`, `Assets/Game/Interaction/DialogueNpc.cs`
@@ -94,7 +105,7 @@
 
 ### EG-47 Zone-Specific Interaction Copy
 - Story Order: `15.3`
-- Status: in progress
+- Status: done
 - Owner: `Game.Interaction`, `Content`
 - Module: `Assets/Game/Interaction`, `Assets/Scenes`
 - Files: `Assets/Game/Interaction/DialogueNpc.cs`, `Assets/Game/Interaction/InspectableObject.cs`, `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
@@ -117,7 +128,7 @@
 
 ### EG-48 Landmark And Traversal Dressing Pass
 - Story Order: `15.4`
-- Status: in progress
+- Status: done
 - Owner: `Content`
 - Module: `Assets/Scenes`
 - Files: `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
@@ -140,7 +151,7 @@
 
 ### EG-49 Multi-Zone Verification Coverage
 - Story Order: `15.5`
-- Status: in progress
+- Status: done
 - Owner: `Game.Tests.PlayMode`, `Game.Editor`
 - Module: `Assets/Game/Tests/PlayMode`, `docs/planning`
 - Files: `Assets/Game/Tests/PlayMode/*`, `docs/planning/sprint-04.md`
@@ -164,7 +175,7 @@
 
 ### EG-51 Animal Roaming NavMesh Fallback
 - Story Order: `15.6`
-- Status: in progress
+- Status: done
 - Owner: `Game.Animals`
 - Module: `Assets/Game/Animals`
 - Files: `Assets/Game/Animals/AnimalRoamingAgent.cs`
@@ -185,7 +196,7 @@
 
 ### EG-52 Sprint 04 Scene And Material Sync
 - Story Order: `15.7`
-- Status: in progress
+- Status: done
 - Owner: `Content`, `Game.Editor`, `ProjectSettings`
 - Module: `Assets/Scenes`, `Assets/Resources/Prefabs/Materials`, `ProjectSettings`
 - Files: `Assets/Scenes/*.unity`, `Assets/Resources/Prefabs/Materials/*.mat`, `ProjectSettings/SceneTemplateSettings.json`

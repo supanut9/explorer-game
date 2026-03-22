@@ -13,7 +13,7 @@
 - Goal: stabilize the first playable after Sprint 02 by repairing generated-scene camera state, tightening input contracts, and adding regression coverage for the verified runtime loop.
 
 ## Sprint 04: Connected Exploration Slice
-- Status: in progress
+- Status: done
 - Goal: turn the stable first playable into a readable multi-zone exploration slice with visible traversal, guidance, and verification.
 
 ## Parallel Lanes
@@ -343,7 +343,7 @@
   - Sprint detail: `docs/planning/sprint-03.md#eg-44-sprint-03-asset-sync-and-noise-cleanup`
 
 ## Epic 15: Connected Exploration
-- Status: in progress
+- Status: done
 - Goal: make the world traversal loop readable and worthwhile beyond the initial spawn area
 - Story 15.1: zone traversal exposure
   - Tracking ID: `EG-45`
@@ -389,7 +389,7 @@
   - Sprint detail: `docs/planning/sprint-04.md#eg-52-sprint-04-scene-and-material-sync`
 
 ## Epic 16: Validation Expansion
-- Status: planned
+- Status: done
 - Goal: turn the Unity validation plan into real automated coverage after the connected exploration slice is stable
 - Story 16.1: unity validation workflow implementation
   - Tracking ID: `EG-50`
