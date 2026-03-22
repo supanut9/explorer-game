@@ -132,7 +132,7 @@
 
 ### EG-5 Movement Camera
 - Story Order: `3.2`
-- Status: blocked
+- Status: done
 - Owner: `Game.Player`
 - Module: `Assets/Game/Player`
 - Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`
@@ -150,7 +150,6 @@
   - `EG-2`
 - Notes:
   - keep movement simple and PC-first
-  - blocked until the movement source files are added to the repo
 
 ### EG-6 Zone Catalog
 - Story Order: `4.1`
