@@ -193,7 +193,7 @@
 
 ### EG-8 Interaction Probe
 - Story Order: `5.1`
-- Status: blocked
+- Status: done
 - Owner: `Game.Interaction`
 - Module: `Assets/Game/Interaction`
 - Files: `Assets/Game/Interaction/InteractionProbe.cs`, `Assets/Game/UI/InteractionPromptLabel.cs`
@@ -211,7 +211,6 @@
   - `EG-2`
 - Notes:
   - keep interactions light and non-hostile
-  - blocked until interaction runtime files are added to the repo
 
 ### EG-9 NPC Inspectable
 - Story Order: `5.2`
