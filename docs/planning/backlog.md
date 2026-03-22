@@ -16,6 +16,10 @@
 - Status: done
 - Goal: turn the stable first playable into a readable multi-zone exploration slice with visible traversal, guidance, and verification.
 
+## Sprint 05: Visual Identity And Presentation Pass
+- Status: in progress
+- Goal: give the connected exploration slice a coherent visual direction, stronger scene mood, and cleaner player-facing presentation without changing the core loop.
+
 ## Parallel Lanes
 - Content: placeholder prefabs, ambient population, and zone dressing.
 - World: verify scene wiring and traversal flow in the editor.
@@ -397,3 +401,57 @@
   - Files: `.github/workflows/unity-validation.yml`, `docs/planning/sprint-04.md`
   - Acceptance: the repo runs at least one automated Unity-aware validation path in GitHub Actions with the environment and scope documented in the sprint plan.
   - Sprint detail: `docs/planning/sprint-04.md#eg-50-unity-validation-workflow-implementation`
+
+## Epic 17: Visual Direction
+- Status: in progress
+- Goal: make the first playable look intentional instead of scaffolded while preserving the stable traversal loop
+- Story 17.1: world palette and material cohesion
+  - Tracking ID: `EG-53`
+  - Owner: `Content`, `Game.Editor`
+  - Files: `Assets/Resources/Prefabs/Materials/*.mat`, `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
+  - Acceptance: village, forest, and mountain scenes share a deliberate material palette with clearer biome identity and fewer arbitrary placeholder colors.
+  - Sprint detail: `docs/planning/sprint-05.md#eg-53-world-palette-and-material-cohesion`
+- Story 17.2: lighting and atmosphere pass
+  - Tracking ID: `EG-54`
+  - Owner: `Content`, `Game.Editor`
+  - Files: `Assets/Scenes/Bootstrap.unity`, `Assets/Scenes/CharacterSelect.unity`, `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
+  - Acceptance: the key scenes have improved sky, camera framing, and lighting mood so the playable slice reads as one cohesive experience rather than raw editor default lighting.
+  - Sprint detail: `docs/planning/sprint-05.md#eg-54-lighting-and-atmosphere-pass`
+- Story 17.3: landmark silhouette pass
+  - Tracking ID: `EG-55`
+  - Owner: `Content`
+  - Files: `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
+  - Acceptance: major landmarks and traversal anchors have stronger silhouette contrast and spacing so they are recognizable at a distance.
+  - Sprint detail: `docs/planning/sprint-05.md#eg-55-landmark-silhouette-pass`
+
+## Epic 18: Player-Facing Presentation
+- Status: planned
+- Goal: improve the player-facing look of the selection and exploration moments without adding new systems
+- Story 18.1: character select presentation refresh
+  - Tracking ID: `EG-56`
+  - Owner: `Game.UI`, `Game.Editor`
+  - Files: `Assets/Game/UI/CharacterSelectionView.cs`, `Assets/Scenes/CharacterSelect.unity`
+  - Acceptance: character select remains minimal but looks intentionally framed, readable, and consistent with the world presentation.
+  - Sprint detail: `docs/planning/sprint-05.md#eg-56-character-select-presentation-refresh`
+- Story 18.2: interaction prompt presentation polish
+  - Tracking ID: `EG-57`
+  - Owner: `Game.UI`, `Game.Interaction`
+  - Files: `Assets/Game/UI/InteractionPromptLabel.cs`, `Assets/Scenes/WorldPersistent.unity`
+  - Acceptance: the interaction prompt remains lightweight but is more legible and visually integrated with the new scene presentation.
+  - Sprint detail: `docs/planning/sprint-05.md#eg-57-interaction-prompt-presentation-polish`
+- Story 18.3: avatar and npc placeholder cleanup
+  - Tracking ID: `EG-58`
+  - Owner: `Content`, `Game.Player`, `Game.Interaction`
+  - Files: `Assets/Resources/Prefabs/Characters/*.prefab`, `Assets/Resources/Prefabs/NPCs/*.prefab`
+  - Acceptance: placeholder characters and guide NPCs read more cleanly in silhouette, proportions, and materials without introducing final art dependencies.
+  - Sprint detail: `docs/planning/sprint-05.md#eg-58-avatar-and-npc-placeholder-cleanup`
+
+## Epic 19: Visual Verification
+- Status: planned
+- Goal: make the presentation pass reviewable and stable
+- Story 19.1: presentation review checklist
+  - Tracking ID: `EG-59`
+  - Owner: `Docs`, `Game.Editor`
+  - Files: `docs/planning/sprint-05.md`
+  - Acceptance: Sprint 05 defines a repeatable in-editor review path for checking palette, lighting, silhouettes, and UI readability across the connected exploration slice.
+  - Sprint detail: `docs/planning/sprint-05.md#eg-59-presentation-review-checklist`

@@ -37,3 +37,4 @@ Use this file for concrete content lists once a content pass is active.
 ## Status
 - baseline established in Sprint 02
 - readability and connected-exploration follow-up planned for Sprint 04
+- visual identity and presentation follow-up planned for Sprint 05
