@@ -255,3 +255,23 @@
   - `EG-58`
 - Notes:
   - this is the sync point between generator code and serialized Unity assets
+
+### EG-61 Repo Ignore And Starter Asset Cleanup
+- Story Order: `19.3`
+- Status: done
+- Owner: `Docs`, `ProjectSettings`
+- Module: `.gitignore`, `ProjectSettings`, `Assets`
+- Files: `.gitignore`, `ProjectSettings/ProjectSettings.asset`, `Assets/Scenes/SampleScene.unity`, `Assets/Readme.asset`, `Assets/TutorialInfo/*`, `Assets/Settings/SampleSceneProfile.asset`
+- Goal: remove leftover Unity template artifacts and ignore recurring editor-only scene template metadata.
+- Acceptance:
+  - `ProjectSettings/SceneTemplateSettings.json` is ignored
+  - the project template default scene points at `Bootstrap`
+  - Unity starter tutorial assets no longer remain in the tracked repo
+- Subtasks:
+  - add the ignore rule for scene template metadata
+  - repoint the template default scene away from `SampleScene`
+  - delete unused tutorial and starter sample assets
+- Dependencies:
+  - `EG-60`
+- Notes:
+  - this is repository cleanup, not gameplay scope

@@ -461,3 +461,9 @@
   - Files: `Assets/Scenes/*.unity`, `Assets/Resources/Prefabs/Characters/*.prefab`, `Assets/Resources/Prefabs/Materials/*.mat`
   - Acceptance: the generated scenes, prefabs, and materials are regenerated from the Sprint 05 scaffold changes and checked in as the reviewed visual baseline.
   - Sprint detail: `docs/planning/sprint-05.md#eg-60-sprint-05-presentation-asset-sync`
+- Story 19.3: repo ignore and starter asset cleanup
+  - Tracking ID: `EG-61`
+  - Owner: `Docs`, `ProjectSettings`
+  - Files: `.gitignore`, `ProjectSettings/ProjectSettings.asset`, `Assets/Scenes/SampleScene.unity`, `Assets/Readme.asset`, `Assets/TutorialInfo/*`, `Assets/Settings/SampleSceneProfile.asset`
+  - Acceptance: editor-local scene template noise is ignored, the default scene template points at the project bootstrap scene, and unused Unity starter assets are removed from the tracked repo.
+  - Sprint detail: `docs/planning/sprint-05.md#eg-61-repo-ignore-and-starter-asset-cleanup`
