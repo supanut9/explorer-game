@@ -25,6 +25,11 @@
 - Replace art by swapping prefabs or catalog entries, not by rewriting systems.
 - Preserve stable names for scenes, assets, and content IDs when possible.
 
+## Project Settings
+- Treat `ProjectSettings/*` changes as tracked repository configuration, not editor noise.
+- Commit project-setting diffs only when the resulting baseline is intentional and reviewable.
+- If a project setting changes implicitly, either revert it or document why the repo should keep it.
+
 ## AI Editing
 - Change the smallest module that can own the behavior.
 - Update docs in the same task when adding a new workflow or contract.

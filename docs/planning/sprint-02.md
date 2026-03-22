@@ -71,7 +71,7 @@
 
 ### EG-18 ShaderGraph Settings Baseline
 - Story Order: `10.2`
-- Status: stretch
+- Status: done
 - Owner: `ProjectSettings`
 - Module: `ProjectSettings`
 - Files: `ProjectSettings/ShaderGraphSettings.asset`
@@ -86,7 +86,8 @@
 - Dependencies:
   - `EG-16`
 - Notes:
-  - current diff adds `overrideShaderVariantLimit: 0`
+  - the repo keeps `overrideShaderVariantLimit: 0` as the current Unity-generated baseline
+  - project settings changes should be treated as intentional repository configuration, not ignored editor noise
 
 ### EG-19 Unity Validation Workflow
 - Story Order: `11.1`
