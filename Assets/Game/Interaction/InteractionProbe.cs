@@ -18,6 +18,11 @@ namespace ExplorerGame.Interaction
 
         public IInteractable CurrentTarget => currentTarget;
 
+        private void Awake()
+        {
+            promptLabel ??= FindFirstObjectByType<InteractionPromptLabel>();
+        }
+
         private void OnEnable()
         {
             runtimeInteractAction = PrepareInteractAction(interactAction);

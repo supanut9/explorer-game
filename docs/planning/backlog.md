@@ -1,7 +1,7 @@
 # Backlog
 
 ## Sprint 01: MVP Foundation
-- Status: in progress
+- Status: done
 - Goal: make the repo ready for a first playable exploration loop with clear AI ownership.
 
 ## Parallel Lanes
@@ -39,7 +39,7 @@
   - Sprint detail: `docs/planning/sprint-01.md#eg-3-catalog-validation`
 
 ## Epic 3: Player Flow
-- Status: in progress
+- Status: done
 - Goal: character select, movement, and camera
 - Story 3.1: character select flow
   - Tracking ID: `EG-4`
@@ -55,7 +55,7 @@
   - Sprint detail: `docs/planning/sprint-01.md#eg-5-movement-camera`
 
 ## Epic 4: World Flow
-- Status: in progress
+- Status: done
 - Goal: zone loading and spawn flow
 - Story 4.1: zone definitions and world catalog
   - Tracking ID: `EG-6`
@@ -71,7 +71,7 @@
   - Sprint detail: `docs/planning/sprint-01.md#eg-7-world-spawn`
 
 ## Epic 5: Light Interaction
-- Status: ready
+- Status: done
 - Goal: talk, inspect, and prompt behavior
 - Story 5.1: interaction probe and prompt UI
   - Tracking ID: `EG-8`
@@ -97,7 +97,7 @@
   - Sprint detail: `docs/planning/sprint-01.md#eg-10-editor-scaffold`
 
 ## Epic 7: Tests
-- Status: in progress
+- Status: done
 - Goal: edit mode and play mode coverage
 - Story 7.1: session and selection tests
   - Tracking ID: `EG-11`
@@ -113,7 +113,7 @@
   - Sprint detail: `docs/planning/sprint-01.md#eg-12-interaction-tests`
 
 ## Epic 8: Stretch Backlog
-- Status: ready
+- Status: done
 - Goal: track optional sprint-adjacent work that already exists in the workspace
 - Story 8.1: animal roaming placeholder behavior
   - Tracking ID: `EG-13`

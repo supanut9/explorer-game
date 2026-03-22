@@ -274,7 +274,7 @@
 
 ### EG-12 Interaction Tests
 - Story Order: `7.2`
-- Status: blocked
+- Status: done
 - Owner: `Game.Tests.PlayMode`
 - Module: `Assets/Game/Tests/PlayMode`
 - Files: `Assets/Game/Tests/PlayMode/InteractionProbeTests.cs`
@@ -290,7 +290,6 @@
   - `EG-8`
 - Notes:
   - keep the test setup minimal
-  - blocked until play mode interaction test files are added to the repo
 
 ### EG-13 Animal Roaming
 - Story Order: `8.1`
