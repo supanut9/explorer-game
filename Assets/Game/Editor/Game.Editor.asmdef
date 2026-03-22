@@ -2,6 +2,7 @@
   "name": "Game.Editor",
   "rootNamespace": "ExplorerGame",
   "references": [
+    "Game.Animals",
     "Game.Core",
     "Game.Interaction",
     "Game.Player",

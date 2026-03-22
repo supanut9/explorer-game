@@ -173,7 +173,7 @@
   - Sprint detail: `docs/planning/sprint-02.md#eg-19-unity-validation-workflow`
 
 ## Epic 12: Content Pass 1
-- Status: in progress
+- Status: done
 - Goal: populate the first playable world with placeholder-first content that matches the game spec
 - Story 12.1: placeholder character and npc prefab hookup
   - Tracking ID: `EG-20`

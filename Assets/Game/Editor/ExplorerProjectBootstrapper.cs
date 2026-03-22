@@ -1,4 +1,5 @@
 using System.IO;
+using ExplorerGame.Animals;
 using ExplorerGame.Core;
 using ExplorerGame.Interaction;
 using ExplorerGame.Player;
@@ -7,6 +8,7 @@ using ExplorerGame.World;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 namespace ExplorerGame.Editor
@@ -17,6 +19,8 @@ namespace ExplorerGame.Editor
         private const string PrefabFolder = "Assets/Resources/Prefabs";
         private const string CharacterPrefabFolder = PrefabFolder + "/Characters";
         private const string NpcPrefabFolder = PrefabFolder + "/NPCs";
+        private const string AnimalPrefabFolder = PrefabFolder + "/Animals";
+        private const string PropPrefabFolder = PrefabFolder + "/Props";
         private const string MaterialFolder = PrefabFolder + "/Materials";
 
         [MenuItem("Tools/Explorer Game/Generate Project Scaffolding")]
@@ -28,6 +32,8 @@ namespace ExplorerGame.Editor
             EnsureFolder(PrefabFolder);
             EnsureFolder(CharacterPrefabFolder);
             EnsureFolder(NpcPrefabFolder);
+            EnsureFolder(AnimalPrefabFolder);
+            EnsureFolder(PropPrefabFolder);
             EnsureFolder(MaterialFolder);
             CreateCatalogAssets();
             CreateBootstrapScene();
@@ -161,11 +167,15 @@ namespace ExplorerGame.Editor
                 if (sceneName == GameConstants.ForestZoneScene)
                 {
                     DressForestZone(root.transform);
+                    CreatePlaceholderAnimal(root.transform, new Vector3(-2.5f, 0f, 1.5f));
+                    CreatePlaceholderAnimal(root.transform, new Vector3(2.2f, 0f, -1.2f));
+                    CreateInspectable(root.transform, "ForestMarker", new Vector3(1.2f, 0f, 3f));
                 }
 
                 if (sceneName == GameConstants.MountainZoneScene)
                 {
                     DressMountainZone(root.transform);
+                    CreateInspectable(root.transform, "MountainMarker", new Vector3(-1.8f, 0f, -2.4f));
                 }
             });
         }
@@ -291,6 +301,43 @@ namespace ExplorerGame.Editor
             instance.transform.localPosition = localPosition;
         }
 
+        private static void CreatePlaceholderAnimal(Transform parent, Vector3 localPosition)
+        {
+            var animalPrefab = CreatePlaceholderAnimalPrefab();
+            if (animalPrefab == null)
+            {
+                return;
+            }
+
+            var instance = PrefabUtility.InstantiatePrefab(animalPrefab) as GameObject;
+            if (instance == null)
+            {
+                return;
+            }
+
+            instance.transform.SetParent(parent, false);
+            instance.transform.localPosition = localPosition;
+        }
+
+        private static void CreateInspectable(Transform parent, string instanceName, Vector3 localPosition)
+        {
+            var inspectablePrefab = CreateInspectablePrefab();
+            if (inspectablePrefab == null)
+            {
+                return;
+            }
+
+            var instance = PrefabUtility.InstantiatePrefab(inspectablePrefab) as GameObject;
+            if (instance == null)
+            {
+                return;
+            }
+
+            instance.name = instanceName;
+            instance.transform.SetParent(parent, false);
+            instance.transform.localPosition = localPosition;
+        }
+
         private static GameObject CreatePlaceholderNpcPrefab()
         {
             var path = $"{NpcPrefabFolder}/GuideNpc.prefab";
@@ -321,6 +368,83 @@ namespace ExplorerGame.Editor
             if (renderer != null)
             {
                 renderer.sharedMaterial = material;
+            }
+
+            var prefab = PrefabUtility.SaveAsPrefabAsset(root, path);
+            Object.DestroyImmediate(root);
+            return prefab;
+        }
+
+        private static GameObject CreatePlaceholderAnimalPrefab()
+        {
+            var path = $"{AnimalPrefabFolder}/ForestAnimal.prefab";
+            var existing = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+            if (existing != null)
+            {
+                return existing;
+            }
+
+            var root = new GameObject("ForestAnimal");
+            root.AddComponent<CapsuleCollider>();
+            var agent = root.AddComponent<NavMeshAgent>();
+            agent.speed = 1.5f;
+            agent.angularSpeed = 180f;
+            agent.acceleration = 4f;
+            agent.stoppingDistance = 0.1f;
+            root.AddComponent<AnimalRoamingAgent>();
+
+            var visual = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            visual.name = "Visual";
+            visual.transform.SetParent(root.transform, false);
+            visual.transform.localPosition = new Vector3(0f, 0.45f, 0f);
+            visual.transform.localScale = new Vector3(0.9f, 0.65f, 1.2f);
+
+            var visualCollider = visual.GetComponent<Collider>();
+            if (visualCollider != null)
+            {
+                Object.DestroyImmediate(visualCollider);
+            }
+
+            var renderer = visual.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.sharedMaterial = CreateMaterialAsset("ForestAnimal", new Color(0.62f, 0.48f, 0.34f));
+            }
+
+            var prefab = PrefabUtility.SaveAsPrefabAsset(root, path);
+            Object.DestroyImmediate(root);
+            return prefab;
+        }
+
+        private static GameObject CreateInspectablePrefab()
+        {
+            var path = $"{PropPrefabFolder}/InspectableMarker.prefab";
+            var existing = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+            if (existing != null)
+            {
+                return existing;
+            }
+
+            var root = new GameObject("InspectableMarker");
+            root.AddComponent<BoxCollider>();
+            root.AddComponent<InspectableObject>();
+
+            var visual = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            visual.name = "Visual";
+            visual.transform.SetParent(root.transform, false);
+            visual.transform.localPosition = new Vector3(0f, 0.35f, 0f);
+            visual.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+
+            var visualCollider = visual.GetComponent<Collider>();
+            if (visualCollider != null)
+            {
+                Object.DestroyImmediate(visualCollider);
+            }
+
+            var renderer = visual.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.sharedMaterial = CreateMaterialAsset("InspectableMarker", new Color(0.72f, 0.63f, 0.3f));
             }
 
             var prefab = PrefabUtility.SaveAsPrefabAsset(root, path);

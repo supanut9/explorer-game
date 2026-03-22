@@ -156,7 +156,7 @@
 
 ### EG-22 Ambient Placement Pass
 - Story Order: `12.3`
-- Status: ready
+- Status: done
 - Owner: `Content`
 - Module: `Assets/Scenes`
 - Files: `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
@@ -176,6 +176,7 @@
   - `EG-21`
 - Notes:
   - use existing placeholder systems instead of inventing new gameplay
+  - implemented through scaffold generation so village, forest, and mountain scenes start with talk, inspect, and passive-animal placeholder content
 
 ### EG-23 Scene Wiring Verification
 - Story Order: `13.1`
