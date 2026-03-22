@@ -133,7 +133,7 @@
 
 ### EG-21 Zone Dressing Pass
 - Story Order: `12.2`
-- Status: ready
+- Status: done
 - Owner: `Content`
 - Module: `Assets/Scenes`
 - Files: `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
@@ -152,6 +152,7 @@
   - `EG-6`
 - Notes:
   - focus on readability over asset detail
+  - implemented through scaffold generation so new zone scenes start with distinct placeholder dressing
 
 ### EG-22 Ambient Placement Pass
 - Story Order: `12.3`

@@ -154,7 +154,18 @@ namespace ExplorerGame.Editor
 
                 if (sceneName == GameConstants.VillageZoneScene)
                 {
+                    DressVillageZone(root.transform);
                     CreatePlaceholderNpc(root.transform, new Vector3(3f, 0f, 2f));
+                }
+
+                if (sceneName == GameConstants.ForestZoneScene)
+                {
+                    DressForestZone(root.transform);
+                }
+
+                if (sceneName == GameConstants.MountainZoneScene)
+                {
+                    DressMountainZone(root.transform);
                 }
             });
         }
@@ -233,6 +244,34 @@ namespace ExplorerGame.Editor
             cameraRig.AddComponent<ThirdPersonCameraRig>();
         }
 
+        private static void DressVillageZone(Transform parent)
+        {
+            CreateGround(parent, "VillageGround", new Vector3(0f, -0.05f, 0f), new Vector3(2.5f, 0.1f, 2.5f), new Color(0.42f, 0.64f, 0.35f));
+            CreateBlock(parent, "MainPath", new Vector3(0f, 0.02f, 0f), new Vector3(1.4f, 0.04f, 0.4f), new Color(0.58f, 0.49f, 0.38f));
+            CreateHouse(parent, "VillageHouseA", new Vector3(-4f, 0f, 2f), new Color(0.82f, 0.73f, 0.58f));
+            CreateHouse(parent, "VillageHouseB", new Vector3(4f, 0f, -1.5f), new Color(0.75f, 0.66f, 0.54f));
+            CreateBlock(parent, "VillageSign", new Vector3(1.5f, 0.8f, 1.2f), new Vector3(0.3f, 0.8f, 0.08f), new Color(0.41f, 0.28f, 0.15f));
+        }
+
+        private static void DressForestZone(Transform parent)
+        {
+            CreateGround(parent, "ForestGround", new Vector3(0f, -0.05f, 0f), new Vector3(3f, 0.1f, 3f), new Color(0.22f, 0.46f, 0.24f));
+            CreateTree(parent, "ForestTreeA", new Vector3(-4f, 0f, 3f));
+            CreateTree(parent, "ForestTreeB", new Vector3(3f, 0f, -2f));
+            CreateTree(parent, "ForestTreeC", new Vector3(5f, 0f, 4f));
+            CreateBlock(parent, "ForestRockA", new Vector3(-1.5f, 0.35f, -3f), new Vector3(0.8f, 0.7f, 0.7f), new Color(0.45f, 0.47f, 0.48f));
+            CreateBlock(parent, "ForestRockB", new Vector3(2.5f, 0.25f, 1.5f), new Vector3(0.6f, 0.5f, 0.9f), new Color(0.43f, 0.45f, 0.46f));
+        }
+
+        private static void DressMountainZone(Transform parent)
+        {
+            CreateGround(parent, "MountainGround", new Vector3(0f, -0.05f, 0f), new Vector3(3f, 0.1f, 3f), new Color(0.38f, 0.38f, 0.36f));
+            CreateBlock(parent, "CliffA", new Vector3(-4f, 1.2f, 2f), new Vector3(1.6f, 2.4f, 2f), new Color(0.47f, 0.47f, 0.46f));
+            CreateBlock(parent, "CliffB", new Vector3(3.5f, 1.6f, -1.5f), new Vector3(1.4f, 3.2f, 1.8f), new Color(0.44f, 0.44f, 0.43f));
+            CreateBlock(parent, "MountainPath", new Vector3(0f, 0.05f, 1.5f), new Vector3(0.6f, 0.08f, 2.1f), new Color(0.54f, 0.5f, 0.43f));
+            CreateBlock(parent, "LookoutStone", new Vector3(1.8f, 0.3f, -2.8f), new Vector3(0.9f, 0.6f, 0.9f), new Color(0.5f, 0.5f, 0.49f));
+        }
+
         private static void CreatePlaceholderNpc(Transform parent, Vector3 localPosition)
         {
             var npcPrefab = CreatePlaceholderNpcPrefab();
@@ -308,6 +347,53 @@ namespace ExplorerGame.Editor
 
             AssetDatabase.CreateAsset(material, path);
             return material;
+        }
+
+        private static void CreateGround(Transform parent, string name, Vector3 localPosition, Vector3 localScale, Color color)
+        {
+            CreateBlock(parent, name, localPosition, localScale, color);
+        }
+
+        private static void CreateHouse(Transform parent, string name, Vector3 localPosition, Color color)
+        {
+            var houseRoot = new GameObject(name);
+            houseRoot.transform.SetParent(parent, false);
+            houseRoot.transform.localPosition = localPosition;
+
+            CreatePrimitive(houseRoot.transform, PrimitiveType.Cube, "Body", new Vector3(0f, 0.75f, 0f), new Vector3(1.6f, 1.5f, 1.4f), color);
+            CreatePrimitive(houseRoot.transform, PrimitiveType.Cube, "Roof", new Vector3(0f, 1.55f, 0f), new Vector3(1.8f, 0.3f, 1.6f), new Color(0.45f, 0.2f, 0.16f));
+        }
+
+        private static void CreateTree(Transform parent, string name, Vector3 localPosition)
+        {
+            var treeRoot = new GameObject(name);
+            treeRoot.transform.SetParent(parent, false);
+            treeRoot.transform.localPosition = localPosition;
+
+            CreatePrimitive(treeRoot.transform, PrimitiveType.Cylinder, "Trunk", new Vector3(0f, 1f, 0f), new Vector3(0.25f, 1f, 0.25f), new Color(0.38f, 0.24f, 0.1f));
+            CreatePrimitive(treeRoot.transform, PrimitiveType.Sphere, "Canopy", new Vector3(0f, 2.3f, 0f), new Vector3(1.4f, 1.2f, 1.4f), new Color(0.21f, 0.52f, 0.24f));
+        }
+
+        private static void CreateBlock(Transform parent, string name, Vector3 localPosition, Vector3 localScale, Color color)
+        {
+            CreatePrimitive(parent, PrimitiveType.Cube, name, localPosition, localScale, color);
+        }
+
+        private static GameObject CreatePrimitive(Transform parent, PrimitiveType type, string name, Vector3 localPosition, Vector3 localScale, Color color)
+        {
+            var instance = GameObject.CreatePrimitive(type);
+            instance.name = name;
+            instance.transform.SetParent(parent, false);
+            instance.transform.localPosition = localPosition;
+            instance.transform.localScale = localScale;
+
+            var renderer = instance.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.sharedMaterial = CreateMaterialAsset(name, color);
+            }
+
+            return instance;
         }
 
         private static T LoadOrCreateAsset<T>(string path) where T : ScriptableObject
