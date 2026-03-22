@@ -325,3 +325,24 @@
   - `EG-23`
 - Notes:
   - this blocker was discovered during manual play verification after entering the world from character select
+
+### EG-29 World Camera Snap Baseline
+- Story Order: `13.7`
+- Status: in progress
+- Owner: `Game.Player`, `Game.World`
+- Module: `Assets/Game/Player`, `Assets/Game/World`
+- Files: `Assets/Game/Player/ThirdPersonCameraRig.cs`, `Assets/Game/World/WorldRuntimeController.cs`
+- Goal: make the first frame after world entry readable by snapping the follow camera to a correct third-person position around the spawned player.
+- Acceptance:
+  - assigning the spawned player as camera target immediately places the camera at a sensible follow position
+  - world entry no longer starts with the camera buried in the player or too close to nearby props
+- Subtasks:
+  - inspect the current world-entry camera framing
+  - snap the rig to its desired follow position when a target is assigned
+  - retest the first frame after character selection
+- Dependencies:
+  - `EG-5`
+  - `EG-23`
+  - `EG-28`
+- Notes:
+  - this blocker was discovered during manual play verification after world entry started working

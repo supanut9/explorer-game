@@ -233,3 +233,9 @@
   - Files: `Assets/Game/World/WorldRuntimeController.cs`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
   - Acceptance: generated zone spawn points match the placeholder scene layout and entering the world does not immediately drop the player below the playable ground.
   - Sprint detail: `docs/planning/sprint-02.md#eg-28-scaffold-spawn-safety-baseline`
+- Story 13.7: world camera snap baseline
+  - Tracking ID: `EG-29`
+  - Owner: `Game.Player`, `Game.World`
+  - Files: `Assets/Game/Player/ThirdPersonCameraRig.cs`, `Assets/Game/World/WorldRuntimeController.cs`
+  - Acceptance: when the world scene loads, the camera snaps to a readable third-person framing on the spawned player instead of starting too close or inside the character.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-29-world-camera-snap-baseline`

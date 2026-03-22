@@ -37,20 +37,12 @@ namespace ExplorerGame.Player
                 return;
             }
 
-            var lookInput = runtimeLookAction.ReadValue<Vector2>();
-            yaw += lookInput.x * lookSensitivity;
-            pitch = Mathf.Clamp(pitch - lookInput.y * lookSensitivity, minPitch, maxPitch);
-
-            var pivot = target.position + followOffset;
-            var rotation = Quaternion.Euler(pitch, yaw, 0f);
-            var desiredPosition = pivot - (rotation * Vector3.forward * distance);
-
+            var desiredPosition = UpdateDesiredPosition();
             transform.position = Vector3.SmoothDamp(
                 transform.position,
                 desiredPosition,
                 ref followVelocity,
                 followSmoothTime);
-            transform.rotation = rotation;
         }
 
         public void SetTarget(Transform nextTarget)
@@ -62,7 +54,22 @@ namespace ExplorerGame.Player
             }
 
             yaw = target.eulerAngles.y;
-            transform.rotation = Quaternion.Euler(pitch, yaw, 0f);
+            var desiredPosition = UpdateDesiredPosition();
+            followVelocity = Vector3.zero;
+            transform.position = desiredPosition;
+        }
+
+        private Vector3 UpdateDesiredPosition()
+        {
+            var lookInput = runtimeLookAction != null ? runtimeLookAction.ReadValue<Vector2>() : Vector2.zero;
+            yaw += lookInput.x * lookSensitivity;
+            pitch = Mathf.Clamp(pitch - lookInput.y * lookSensitivity, minPitch, maxPitch);
+
+            var pivot = target.position + followOffset;
+            var rotation = Quaternion.Euler(pitch, yaw, 0f);
+            var desiredPosition = pivot - (rotation * Vector3.forward * distance);
+            transform.rotation = rotation;
+            return desiredPosition;
         }
 
         private static InputAction PrepareLookAction(InputActionProperty property)
