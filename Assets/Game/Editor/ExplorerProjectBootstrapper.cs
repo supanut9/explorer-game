@@ -208,7 +208,12 @@ namespace ExplorerGame.Editor
                     DressForestZone(root.transform);
                     CreatePlaceholderAnimal(root.transform, new Vector3(-2.5f, 0f, 1.5f));
                     CreatePlaceholderAnimal(root.transform, new Vector3(2.2f, 0f, -1.2f));
-                    CreateInspectable(root.transform, "ForestMarker", new Vector3(1.2f, 0f, 3f));
+                    CreateInspectable(
+                        root.transform,
+                        "ForestMarker",
+                        new Vector3(1.2f, 0f, 3f),
+                        "Inspect forest marker",
+                        "The air is cooler here. Animal tracks cut between the trees and the trail bends back toward the village arch.");
                     CreateZonePortalAnchor(
                         root.transform,
                         "VillageReturnPortal",
@@ -221,7 +226,12 @@ namespace ExplorerGame.Editor
                 if (sceneName == GameConstants.MountainZoneScene)
                 {
                     DressMountainZone(root.transform);
-                    CreateInspectable(root.transform, "MountainMarker", new Vector3(-1.8f, 0f, -2.4f));
+                    CreateInspectable(
+                        root.transform,
+                        "MountainMarker",
+                        new Vector3(-1.8f, 0f, -2.4f),
+                        "Inspect lookout marker",
+                        "The higher path opens onto a quiet lookout. The mountain route is still rough, but the ridge is visible from here.");
                 }
             });
         }
@@ -571,7 +581,12 @@ namespace ExplorerGame.Editor
             instance.transform.localPosition = localPosition;
         }
 
-        private static void CreateInspectable(Transform parent, string instanceName, Vector3 localPosition)
+        private static void CreateInspectable(
+            Transform parent,
+            string instanceName,
+            Vector3 localPosition,
+            string promptText,
+            string descriptionText)
         {
             var inspectablePrefab = CreateInspectablePrefab();
             if (inspectablePrefab == null)
@@ -593,6 +608,12 @@ namespace ExplorerGame.Editor
             instance.name = instanceName;
             instance.transform.SetParent(parent, false);
             instance.transform.localPosition = localPosition;
+
+            var inspectable = GetOrAddComponent<InspectableObject>(instance);
+            var serializedInspectable = new SerializedObject(inspectable);
+            serializedInspectable.FindProperty("promptText").stringValue = promptText;
+            serializedInspectable.FindProperty("descriptionText").stringValue = descriptionText;
+            serializedInspectable.ApplyModifiedPropertiesWithoutUndo();
         }
 
         private static void CreateGuideSignpost(

@@ -94,7 +94,7 @@
 
 ### EG-47 Zone-Specific Interaction Copy
 - Story Order: `15.3`
-- Status: planned
+- Status: in progress
 - Owner: `Game.Interaction`, `Content`
 - Module: `Assets/Game/Interaction`, `Assets/Scenes`
 - Files: `Assets/Game/Interaction/DialogueNpc.cs`, `Assets/Game/Interaction/InspectableObject.cs`, `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
@@ -113,6 +113,7 @@
   - `EG-45`
 - Notes:
   - prefer a few good lines per zone over broad content volume
+  - current scope targets the existing village guide NPC plus the forest and mountain inspectable markers
 
 ### EG-48 Landmark And Traversal Dressing Pass
 - Story Order: `15.4`
