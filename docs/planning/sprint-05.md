@@ -51,7 +51,7 @@
 
 ### EG-53 World Palette And Material Cohesion
 - Story Order: `17.1`
-- Status: planned
+- Status: in progress
 - Owner: `Content`, `Game.Editor`
 - Module: `Assets/Resources/Prefabs/Materials`, `Assets/Scenes`
 - Files: `Assets/Resources/Prefabs/Materials/*.mat`, `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
