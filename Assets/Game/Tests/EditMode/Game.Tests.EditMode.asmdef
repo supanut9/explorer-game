@@ -1,0 +1,25 @@
+{
+  "name": "Game.Tests.EditMode",
+  "rootNamespace": "ExplorerGame.Tests",
+  "references": [
+    "Game.Core",
+    "Game.Player",
+    "Game.UI",
+    "Game.World",
+    "UnityEngine.TestRunner",
+    "UnityEditor.TestRunner"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [
+    "UNITY_INCLUDE_TESTS"
+  ],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

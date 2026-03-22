@@ -34,7 +34,7 @@
 - Story 2.2: catalog validation rules
   - Tracking ID: `EG-3`
   - Owner: `Game.Editor`
-  - Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
+  - Files: `Assets/Game/Player/CharacterCatalog.cs`, `Assets/Game/World/WorldCatalog.cs`, `Assets/Game/Tests/EditMode/CatalogValidationTests.cs`
   - Acceptance: generated catalogs validate required entries before runtime work continues.
   - Sprint detail: `docs/planning/sprint-01.md#eg-3-catalog-validation`
 

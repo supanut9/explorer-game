@@ -91,7 +91,7 @@
 - Status: done
 - Owner: `Game.Editor`
 - Module: `Assets/Game/Editor`
-- Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Game/World/WorldCatalog.cs`, `Assets/Game/Tests/EditMode/CatalogValidationTests.cs`
+- Files: `Assets/Game/Player/CharacterCatalog.cs`, `Assets/Game/World/WorldCatalog.cs`, `Assets/Game/Tests/EditMode/CatalogValidationTests.cs`
 - Goal: validate generated catalogs before runtime work continues.
 - Acceptance:
   - generated character catalog validates required entries
