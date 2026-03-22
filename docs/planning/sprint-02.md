@@ -479,3 +479,25 @@
   - `EG-34`
 - Notes:
   - this blocker was discovered when the player still drifted right after deadzone filtering, indicating a stronger fallback-input issue
+
+### EG-36 Single-Player Spawn And Probe Baseline
+- Story Order: `13.14`
+- Status: in progress
+- Owner: `Game.World`, `Game.Editor`
+- Module: `Assets/Game/World`, `Assets/Game/Editor`
+- Files: `Assets/Game/World/WorldRuntimeController.cs`, `Assets/Game/World/Game.World.asmdef`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
+- Goal: keep the first playable world flow limited to one active player while guaranteeing the spawned player can use the interaction path.
+- Acceptance:
+  - world entry leaves only one spawned player active
+  - the spawned player can interact even if older generated prefabs lacked an `InteractionProbe`
+  - the world assembly references the interaction module needed for that runtime path
+- Subtasks:
+  - remove stale duplicate players before spawning a new one
+  - ensure the spawned player has an `InteractionProbe`
+  - update generated placeholder character prefabs on scaffold rerun so the interaction probe is part of the baseline
+- Dependencies:
+  - `EG-22`
+  - `EG-30`
+  - `EG-32`
+- Notes:
+  - this blocker was discovered after play verification exposed duplicate spawned characters and missing interaction behavior

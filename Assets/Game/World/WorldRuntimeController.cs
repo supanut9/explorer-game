@@ -1,4 +1,5 @@
 using ExplorerGame.Core;
+using ExplorerGame.Interaction;
 using ExplorerGame.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -61,13 +62,14 @@ namespace ExplorerGame.World
                 return;
             }
 
-            if (spawnedPlayer != null)
-            {
-                Destroy(spawnedPlayer);
-            }
+            DestroyExistingPlayers();
 
             var spawnPosition = zone.PlayerSpawnPoint + definition.SpawnOffset + SpawnSafetyOffset;
             spawnedPlayer = Instantiate(definition.Prefab, spawnPosition, Quaternion.identity);
+            if (spawnedPlayer.GetComponent<InteractionProbe>() == null)
+            {
+                spawnedPlayer.AddComponent<InteractionProbe>();
+            }
 
             var cameraRig = FindAnyObjectByType<ThirdPersonCameraRig>();
             if (cameraRig != null)
@@ -79,6 +81,19 @@ namespace ExplorerGame.World
                     controller.SetMovementReference(cameraRig.transform);
                 }
             }
+        }
+
+        private void DestroyExistingPlayers()
+        {
+            foreach (var controller in FindObjectsByType<ThirdPersonExplorerController>(FindObjectsInactive.Exclude, FindObjectsSortMode.None))
+            {
+                if (controller != null)
+                {
+                    Destroy(controller.gameObject);
+                }
+            }
+
+            spawnedPlayer = null;
         }
 
         private async Awaitable UnloadInactiveZonesAsync(string activeZoneScene)

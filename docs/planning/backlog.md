@@ -275,3 +275,9 @@
   - Files: `Assets/Game/Player/ThirdPersonExplorerController.cs`, `Assets/Game/Player/ThirdPersonCameraRig.cs`, `Assets/Game/Interaction/InteractionProbe.cs`
   - Acceptance: the generated fallback controls are keyboard-and-mouse first and do not drift because of connected gamepads or stick noise.
   - Sprint detail: `docs/planning/sprint-02.md#eg-35-pc-first-fallback-input-baseline`
+- Story 13.14: single-player spawn and probe baseline
+  - Tracking ID: `EG-36`
+  - Owner: `Game.World`, `Game.Editor`
+  - Files: `Assets/Game/World/WorldRuntimeController.cs`, `Assets/Game/World/Game.World.asmdef`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
+  - Acceptance: world entry keeps a single player instance active, the spawned player can interact without manual prefab repair, and the world assembly graph supports that runtime path.
+  - Sprint detail: `docs/planning/sprint-02.md#eg-36-single-player-spawn-and-probe-baseline`

@@ -323,17 +323,19 @@ namespace ExplorerGame.Editor
         {
             var path = $"{CharacterPrefabFolder}/{prefabName}.prefab";
             var existing = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-            if (existing != null)
+            var root = existing != null ? PrefabUtility.LoadPrefabContents(path) : new GameObject(prefabName);
+            root.name = prefabName;
+            GetOrAddComponent<CharacterController>(root);
+            GetOrAddComponent<ThirdPersonExplorerController>(root);
+            GetOrAddComponent<InteractionProbe>(root);
+
+            var visual = root.transform.Find("Visual")?.gameObject;
+            if (visual == null)
             {
-                return existing;
+                visual = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+                visual.name = "Visual";
             }
 
-            var root = new GameObject(prefabName);
-            root.AddComponent<CharacterController>();
-            root.AddComponent<ThirdPersonExplorerController>();
-
-            var visual = GameObject.CreatePrimitive(PrimitiveType.Capsule);
-            visual.name = "Visual";
             visual.transform.SetParent(root.transform, false);
             visual.transform.localPosition = new Vector3(0f, 1f, 0f);
             visual.transform.localScale = new Vector3(1f, 2f, 1f);
@@ -345,9 +347,16 @@ namespace ExplorerGame.Editor
                 renderer.sharedMaterial = material;
             }
 
-            var prefab = PrefabUtility.SaveAsPrefabAsset(root, path);
-            Object.DestroyImmediate(root);
-            return prefab;
+            if (existing == null)
+            {
+                var prefab = PrefabUtility.SaveAsPrefabAsset(root, path);
+                Object.DestroyImmediate(root);
+                return prefab;
+            }
+
+            var updatedPrefab = PrefabUtility.SaveAsPrefabAsset(root, path);
+            PrefabUtility.UnloadPrefabContents(root);
+            return updatedPrefab;
         }
 
         private static void CreateCameraRig(Transform parent)
