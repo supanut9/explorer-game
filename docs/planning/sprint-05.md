@@ -51,7 +51,7 @@
 
 ### EG-53 World Palette And Material Cohesion
 - Story Order: `17.1`
-- Status: in progress
+- Status: done
 - Owner: `Content`, `Game.Editor`
 - Module: `Assets/Resources/Prefabs/Materials`, `Assets/Scenes`
 - Files: `Assets/Resources/Prefabs/Materials/*.mat`, `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
@@ -72,7 +72,7 @@
 
 ### EG-54 Lighting And Atmosphere Pass
 - Story Order: `17.2`
-- Status: in progress
+- Status: done
 - Owner: `Content`, `Game.Editor`
 - Module: `Assets/Scenes`
 - Files: `Assets/Scenes/Bootstrap.unity`, `Assets/Scenes/CharacterSelect.unity`, `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
@@ -93,7 +93,7 @@
 
 ### EG-55 Landmark Silhouette Pass
 - Story Order: `17.3`
-- Status: in progress
+- Status: done
 - Owner: `Content`
 - Module: `Assets/Scenes`
 - Files: `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
@@ -114,7 +114,7 @@
 
 ### EG-56 Character Select Presentation Refresh
 - Story Order: `18.1`
-- Status: in progress
+- Status: done
 - Owner: `Game.UI`, `Game.Editor`
 - Module: `Assets/Game/UI`, `Assets/Scenes`
 - Files: `Assets/Game/UI/CharacterSelectionView.cs`, `Assets/Scenes/CharacterSelect.unity`
@@ -135,7 +135,7 @@
 
 ### EG-57 Interaction Prompt Presentation Polish
 - Story Order: `18.2`
-- Status: in progress
+- Status: done
 - Owner: `Game.UI`, `Game.Interaction`
 - Module: `Assets/Game/UI`, `Assets/Scenes`
 - Files: `Assets/Game/UI/InteractionPromptLabel.cs`, `Assets/Scenes/WorldPersistent.unity`
@@ -156,7 +156,7 @@
 
 ### EG-58 Avatar And Npc Placeholder Cleanup
 - Story Order: `18.3`
-- Status: in progress
+- Status: done
 - Owner: `Content`, `Game.Player`, `Game.Interaction`
 - Module: `Assets/Resources/Prefabs/Characters`, `Assets/Resources/Prefabs/NPCs`
 - Files: `Assets/Resources/Prefabs/Characters/*.prefab`, `Assets/Resources/Prefabs/NPCs/*.prefab`
@@ -177,7 +177,7 @@
 
 ### EG-59 Presentation Review Checklist
 - Story Order: `19.1`
-- Status: in progress
+- Status: done
 - Owner: `Docs`, `Game.Editor`
 - Module: `docs/planning`
 - Files: `docs/planning/sprint-05.md`
@@ -227,3 +227,27 @@
 - Character-select framing feels deliberate enough to capture in a short clip without extra cleanup.
 - Forest and mountain landmarks feel memorable, not just functional.
 - Placeholder figures have enough personality to support one more sprint before final art replacement.
+
+### EG-60 Sprint 05 Presentation Asset Sync
+- Story Order: `19.2`
+- Status: done
+- Owner: `Content`, `Game.Editor`
+- Module: `Assets/Scenes`, `Assets/Resources/Prefabs`
+- Files: `Assets/Scenes/*.unity`, `Assets/Resources/Prefabs/Characters/*.prefab`, `Assets/Resources/Prefabs/Materials/*.mat`
+- Goal: capture the reviewed Sprint 05 scene, prefab, and material changes as the baseline presentation assets.
+- Acceptance:
+  - regenerated scene assets match the scaffold-driven palette, atmosphere, and silhouette pass
+  - character prefabs serialize the placeholder silhouette cleanup
+  - only intentional visual baseline assets are committed, with editor noise left out
+- Subtasks:
+  - regenerate scaffolding after the Sprint 05 content changes
+  - review the resulting scene, prefab, and material diff
+  - commit the visual baseline assets without editor-only noise
+- Dependencies:
+  - `EG-53`
+  - `EG-54`
+  - `EG-55`
+  - `EG-56`
+  - `EG-58`
+- Notes:
+  - this is the sync point between generator code and serialized Unity assets

@@ -403,7 +403,7 @@
   - Sprint detail: `docs/planning/sprint-04.md#eg-50-unity-validation-workflow-implementation`
 
 ## Epic 17: Visual Direction
-- Status: in progress
+- Status: done
 - Goal: make the first playable look intentional instead of scaffolded while preserving the stable traversal loop
 - Story 17.1: world palette and material cohesion
   - Tracking ID: `EG-53`
@@ -425,7 +425,7 @@
   - Sprint detail: `docs/planning/sprint-05.md#eg-55-landmark-silhouette-pass`
 
 ## Epic 18: Player-Facing Presentation
-- Status: planned
+- Status: done
 - Goal: improve the player-facing look of the selection and exploration moments without adding new systems
 - Story 18.1: character select presentation refresh
   - Tracking ID: `EG-56`
@@ -447,7 +447,7 @@
   - Sprint detail: `docs/planning/sprint-05.md#eg-58-avatar-and-npc-placeholder-cleanup`
 
 ## Epic 19: Visual Verification
-- Status: planned
+- Status: in progress
 - Goal: make the presentation pass reviewable and stable
 - Story 19.1: presentation review checklist
   - Tracking ID: `EG-59`
@@ -455,3 +455,9 @@
   - Files: `docs/planning/sprint-05.md`
   - Acceptance: Sprint 05 defines a repeatable in-editor review path for checking palette, lighting, silhouettes, and UI readability across the connected exploration slice.
   - Sprint detail: `docs/planning/sprint-05.md#eg-59-presentation-review-checklist`
+- Story 19.2: sprint 05 presentation asset sync
+  - Tracking ID: `EG-60`
+  - Owner: `Content`, `Game.Editor`
+  - Files: `Assets/Scenes/*.unity`, `Assets/Resources/Prefabs/Characters/*.prefab`, `Assets/Resources/Prefabs/Materials/*.mat`
+  - Acceptance: the generated scenes, prefabs, and materials are regenerated from the Sprint 05 scaffold changes and checked in as the reviewed visual baseline.
+  - Sprint detail: `docs/planning/sprint-05.md#eg-60-sprint-05-presentation-asset-sync`
