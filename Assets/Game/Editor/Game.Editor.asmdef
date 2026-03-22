@@ -3,6 +3,7 @@
   "rootNamespace": "ExplorerGame",
   "references": [
     "Game.Core",
+    "Game.Interaction",
     "Game.Player",
     "Game.World",
     "Game.UI"

@@ -5,7 +5,7 @@
 - Goal: make the repo ready for a first playable exploration loop with clear AI ownership.
 
 ## Sprint 02: First Playable Polish
-- Status: planned
+- Status: in progress
 - Goal: turn the Sprint 01 foundation into a more believable first playable by adding content, scene verification, and stronger validation.
 
 ## Parallel Lanes
@@ -173,7 +173,7 @@
   - Sprint detail: `docs/planning/sprint-02.md#eg-19-unity-validation-workflow`
 
 ## Epic 12: Content Pass 1
-- Status: ready
+- Status: in progress
 - Goal: populate the first playable world with placeholder-first content that matches the game spec
 - Story 12.1: placeholder character and npc prefab hookup
   - Tracking ID: `EG-20`

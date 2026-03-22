@@ -109,7 +109,7 @@
 
 ### EG-20 Placeholder Prefab Hookup
 - Story Order: `12.1`
-- Status: ready
+- Status: done
 - Owner: `Game.Player`
 - Module: `Assets/Resources/Configs`, `Assets/Scenes`
 - Files: `Assets/Resources/Configs/CharacterCatalog.asset`, `Assets/Scenes/CharacterSelect.unity`, `Assets/Scenes/WorldPersistent.unity`
@@ -128,6 +128,7 @@
   - `EG-8`
 - Notes:
   - keep placeholder-first and do not overdesign final art structure
+  - implemented through scaffold generation so new project bootstrap runs create placeholder character and NPC prefabs
 
 ### EG-21 Zone Dressing Pass
 - Story Order: `12.2`

@@ -1,5 +1,6 @@
 using System.IO;
 using ExplorerGame.Core;
+using ExplorerGame.Interaction;
 using ExplorerGame.Player;
 using ExplorerGame.UI;
 using ExplorerGame.World;
@@ -13,6 +14,10 @@ namespace ExplorerGame.Editor
     public static class ExplorerProjectBootstrapper
     {
         private const string SceneFolder = "Assets/Scenes";
+        private const string PrefabFolder = "Assets/Resources/Prefabs";
+        private const string CharacterPrefabFolder = PrefabFolder + "/Characters";
+        private const string NpcPrefabFolder = PrefabFolder + "/NPCs";
+        private const string MaterialFolder = PrefabFolder + "/Materials";
 
         [MenuItem("Tools/Explorer Game/Generate Project Scaffolding")]
         public static void GenerateProjectScaffolding()
@@ -20,6 +25,10 @@ namespace ExplorerGame.Editor
             EnsureFolder(SceneFolder);
             EnsureFolder(GameConstants.ResourcesFolder);
             EnsureFolder(GameConstants.ConfigFolder);
+            EnsureFolder(PrefabFolder);
+            EnsureFolder(CharacterPrefabFolder);
+            EnsureFolder(NpcPrefabFolder);
+            EnsureFolder(MaterialFolder);
             CreateCatalogAssets();
             CreateBootstrapScene();
             CreateCharacterSelectScene();
@@ -58,8 +67,11 @@ namespace ExplorerGame.Editor
         {
             var characterCatalog = LoadOrCreateAsset<CharacterCatalog>($"{GameConstants.ConfigFolder}/CharacterCatalog.asset");
             var worldCatalog = LoadOrCreateAsset<WorldCatalog>($"{GameConstants.ConfigFolder}/WorldCatalog.asset");
-            var maleCharacter = CreateCharacterAsset(CharacterOption.Male, "Male Explorer");
-            var femaleCharacter = CreateCharacterAsset(CharacterOption.Female, "Female Explorer");
+            var maleCharacterPrefab = CreatePlaceholderCharacterPrefab("MaleExplorer", new Color(0.27f, 0.54f, 0.88f));
+            var femaleCharacterPrefab = CreatePlaceholderCharacterPrefab("FemaleExplorer", new Color(0.88f, 0.45f, 0.31f));
+
+            var maleCharacter = CreateCharacterAsset(CharacterOption.Male, "Male Explorer", maleCharacterPrefab);
+            var femaleCharacter = CreateCharacterAsset(CharacterOption.Female, "Female Explorer", femaleCharacterPrefab);
             AddCharacterIfMissing(characterCatalog, maleCharacter);
             AddCharacterIfMissing(characterCatalog, femaleCharacter);
 
@@ -74,21 +86,21 @@ namespace ExplorerGame.Editor
             EditorUtility.SetDirty(worldCatalog);
         }
 
-        private static CharacterDefinition CreateCharacterAsset(CharacterOption option, string displayName)
+        private static CharacterDefinition CreateCharacterAsset(CharacterOption option, string displayName, GameObject prefab)
         {
             var path = $"{GameConstants.ConfigFolder}/{displayName.Replace(" ", string.Empty)}.asset";
             var existing = AssetDatabase.LoadAssetAtPath<CharacterDefinition>(path);
-            if (existing != null)
-            {
-                return existing;
-            }
-
-            var character = ScriptableObject.CreateInstance<CharacterDefinition>();
+            var character = existing != null ? existing : ScriptableObject.CreateInstance<CharacterDefinition>();
             var serializedCharacter = new SerializedObject(character);
             serializedCharacter.FindProperty("option").enumValueIndex = (int)option;
             serializedCharacter.FindProperty("displayName").stringValue = displayName;
+            serializedCharacter.FindProperty("prefab").objectReferenceValue = prefab;
             serializedCharacter.ApplyModifiedPropertiesWithoutUndo();
-            AssetDatabase.CreateAsset(character, path);
+            if (existing == null)
+            {
+                AssetDatabase.CreateAsset(character, path);
+            }
+
             return character;
         }
 
@@ -137,6 +149,12 @@ namespace ExplorerGame.Editor
                 if (sceneName == GameConstants.WorldPersistentScene)
                 {
                     root.AddComponent<WorldRuntimeController>();
+                    CreateCameraRig(root.transform);
+                }
+
+                if (sceneName == GameConstants.VillageZoneScene)
+                {
+                    CreatePlaceholderNpc(root.transform, new Vector3(3f, 0f, 2f));
                 }
             });
         }
@@ -172,6 +190,124 @@ namespace ExplorerGame.Editor
         private static EditorBuildSettingsScene BuildScene(string sceneName)
         {
             return new EditorBuildSettingsScene($"{SceneFolder}/{sceneName}.unity", true);
+        }
+
+        private static GameObject CreatePlaceholderCharacterPrefab(string prefabName, Color color)
+        {
+            var path = $"{CharacterPrefabFolder}/{prefabName}.prefab";
+            var existing = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+            if (existing != null)
+            {
+                return existing;
+            }
+
+            var root = new GameObject(prefabName);
+            root.AddComponent<CharacterController>();
+            root.AddComponent<ThirdPersonExplorerController>();
+
+            var visual = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+            visual.name = "Visual";
+            visual.transform.SetParent(root.transform, false);
+            visual.transform.localPosition = new Vector3(0f, 1f, 0f);
+            visual.transform.localScale = new Vector3(1f, 2f, 1f);
+
+            var material = CreateMaterialAsset(prefabName, color);
+            var renderer = visual.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.sharedMaterial = material;
+            }
+
+            var prefab = PrefabUtility.SaveAsPrefabAsset(root, path);
+            Object.DestroyImmediate(root);
+            return prefab;
+        }
+
+        private static void CreateCameraRig(Transform parent)
+        {
+            var cameraRig = new GameObject("ThirdPersonCameraRig");
+            cameraRig.transform.SetParent(parent, false);
+            cameraRig.transform.position = new Vector3(0f, 2.5f, -4.5f);
+            cameraRig.AddComponent<Camera>();
+            cameraRig.AddComponent<AudioListener>();
+            cameraRig.AddComponent<ThirdPersonCameraRig>();
+        }
+
+        private static void CreatePlaceholderNpc(Transform parent, Vector3 localPosition)
+        {
+            var npcPrefab = CreatePlaceholderNpcPrefab();
+            if (npcPrefab == null)
+            {
+                return;
+            }
+
+            var instance = PrefabUtility.InstantiatePrefab(npcPrefab) as GameObject;
+            if (instance == null)
+            {
+                return;
+            }
+
+            instance.name = "GuideNpc";
+            instance.transform.SetParent(parent, false);
+            instance.transform.localPosition = localPosition;
+        }
+
+        private static GameObject CreatePlaceholderNpcPrefab()
+        {
+            var path = $"{NpcPrefabFolder}/GuideNpc.prefab";
+            var existing = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+            if (existing != null)
+            {
+                return existing;
+            }
+
+            var root = new GameObject("GuideNpc");
+            root.AddComponent<CapsuleCollider>();
+            root.AddComponent<DialogueNpc>();
+
+            var visual = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+            visual.name = "Visual";
+            visual.transform.SetParent(root.transform, false);
+            visual.transform.localPosition = new Vector3(0f, 1f, 0f);
+            visual.transform.localScale = new Vector3(1f, 2f, 1f);
+
+            var visualCollider = visual.GetComponent<Collider>();
+            if (visualCollider != null)
+            {
+                Object.DestroyImmediate(visualCollider);
+            }
+
+            var material = CreateMaterialAsset("GuideNpc", new Color(0.35f, 0.75f, 0.48f));
+            var renderer = visual.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.sharedMaterial = material;
+            }
+
+            var prefab = PrefabUtility.SaveAsPrefabAsset(root, path);
+            Object.DestroyImmediate(root);
+            return prefab;
+        }
+
+        private static Material CreateMaterialAsset(string assetName, Color color)
+        {
+            var path = $"{MaterialFolder}/{assetName}.mat";
+            var existing = AssetDatabase.LoadAssetAtPath<Material>(path);
+            if (existing != null)
+            {
+                return existing;
+            }
+
+            var shader = Shader.Find("Universal Render Pipeline/Lit");
+            shader ??= Shader.Find("Standard");
+
+            var material = new Material(shader)
+            {
+                color = color
+            };
+
+            AssetDatabase.CreateAsset(material, path);
+            return material;
         }
 
         private static T LoadOrCreateAsset<T>(string path) where T : ScriptableObject
