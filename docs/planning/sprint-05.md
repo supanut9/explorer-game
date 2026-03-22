@@ -156,7 +156,7 @@
 
 ### EG-58 Avatar And Npc Placeholder Cleanup
 - Story Order: `18.3`
-- Status: planned
+- Status: in progress
 - Owner: `Content`, `Game.Player`, `Game.Interaction`
 - Module: `Assets/Resources/Prefabs/Characters`, `Assets/Resources/Prefabs/NPCs`
 - Files: `Assets/Resources/Prefabs/Characters/*.prefab`, `Assets/Resources/Prefabs/NPCs/*.prefab`

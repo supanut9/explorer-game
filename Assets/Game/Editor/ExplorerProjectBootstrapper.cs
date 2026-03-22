@@ -44,7 +44,9 @@ namespace ExplorerGame.Editor
         private static readonly Color PromptAccentColor = new Color(0.73f, 0.66f, 0.34f);
         private static readonly Color CharacterMaleColor = new Color(0.31f, 0.53f, 0.79f);
         private static readonly Color CharacterFemaleColor = new Color(0.83f, 0.43f, 0.32f);
+        private static readonly Color CharacterAccentColor = new Color(0.89f, 0.84f, 0.74f);
         private static readonly Color NpcGuideColor = new Color(0.45f, 0.66f, 0.46f);
+        private static readonly Color NpcGuideAccentColor = new Color(0.9f, 0.84f, 0.69f);
         private static readonly Color AnimalColor = new Color(0.58f, 0.45f, 0.31f);
         private static readonly Color BootstrapSkyAmbient = new Color(0.44f, 0.49f, 0.58f);
         private static readonly Color BootstrapEquatorAmbient = new Color(0.29f, 0.32f, 0.38f);
@@ -434,8 +436,8 @@ namespace ExplorerGame.Editor
             }
 
             visual.transform.SetParent(root.transform, false);
-            visual.transform.localPosition = new Vector3(0f, 1f, 0f);
-            visual.transform.localScale = new Vector3(1f, 2f, 1f);
+            visual.transform.localPosition = new Vector3(0f, 0.95f, 0f);
+            visual.transform.localScale = new Vector3(0.78f, 1.6f, 0.72f);
 
             var visualCollider = visual.GetComponent<Collider>();
             if (visualCollider != null)
@@ -449,6 +451,10 @@ namespace ExplorerGame.Editor
             {
                 renderer.sharedMaterial = material;
             }
+
+            CreatePrimitive(visual.transform, PrimitiveType.Sphere, "Head", new Vector3(0f, 0.88f, 0f), new Vector3(0.5f, 0.5f, 0.5f), CharacterAccentColor);
+            CreatePrimitive(visual.transform, PrimitiveType.Cube, "Shoulders", new Vector3(0f, 0.4f, 0f), new Vector3(0.72f, 0.18f, 0.3f), color);
+            CreatePrimitive(visual.transform, PrimitiveType.Cube, "Satchel", new Vector3(-0.3f, 0.12f, 0.16f), new Vector3(0.18f, 0.32f, 0.12f), WoodSignColor);
 
             if (existing == null)
             {
@@ -882,8 +888,8 @@ namespace ExplorerGame.Editor
             var visual = GameObject.CreatePrimitive(PrimitiveType.Capsule);
             visual.name = "Visual";
             visual.transform.SetParent(root.transform, false);
-            visual.transform.localPosition = new Vector3(0f, 1f, 0f);
-            visual.transform.localScale = new Vector3(1f, 2f, 1f);
+            visual.transform.localPosition = new Vector3(0f, 0.98f, 0f);
+            visual.transform.localScale = new Vector3(0.82f, 1.7f, 0.78f);
 
             var visualCollider = visual.GetComponent<Collider>();
             if (visualCollider != null)
@@ -897,6 +903,10 @@ namespace ExplorerGame.Editor
             {
                 renderer.sharedMaterial = material;
             }
+
+            CreatePrimitive(visual.transform, PrimitiveType.Sphere, "Head", new Vector3(0f, 0.9f, 0f), new Vector3(0.48f, 0.48f, 0.48f), NpcGuideAccentColor);
+            CreatePrimitive(visual.transform, PrimitiveType.Cube, "Arms", new Vector3(0f, 0.34f, 0f), new Vector3(0.84f, 0.16f, 0.22f), NpcGuideColor);
+            CreatePrimitive(visual.transform, PrimitiveType.Cylinder, "Staff", new Vector3(0.34f, 0.12f, 0f), new Vector3(0.08f, 0.7f, 0.08f), WoodDarkColor);
 
             var prefab = PrefabUtility.SaveAsPrefabAsset(root, path);
             Object.DestroyImmediate(root);
