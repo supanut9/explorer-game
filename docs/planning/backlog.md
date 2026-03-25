@@ -447,7 +447,7 @@
   - Sprint detail: `docs/planning/sprint-05.md#eg-58-avatar-and-npc-placeholder-cleanup`
 
 ## Epic 19: Visual Verification
-- Status: in progress
+- Status: done
 - Goal: make the presentation pass reviewable and stable
 - Story 19.1: presentation review checklist
   - Tracking ID: `EG-59`
