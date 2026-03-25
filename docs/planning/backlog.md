@@ -504,7 +504,7 @@
   - Sprint detail: `docs/planning/sprint-07.md#eg-64-connected-slice-runtime-regression-coverage`
 - Story 21.2: validation scope cleanup and ci truthfulness follow-up
   - Tracking ID: `EG-65`
-  - Status: ready
+  - Status: done
   - Owner: `Docs`, `CI`
   - Files: `.github/workflows/unity-validation.yml`, `docs/planning/sprint-07.md`
   - Acceptance: workflow and sprint docs describe the current automated coverage honestly and name any remaining manual-only smoke path explicitly.

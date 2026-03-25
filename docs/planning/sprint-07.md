@@ -67,7 +67,7 @@
 
 ### EG-65 Validation Scope Cleanup And CI Truthfulness Follow-Up
 - Story Order: `21.2`
-- Status: ready
+- Status: done
 - Owner: `Docs`, `CI`
 - Module: `.github/workflows`, `docs/planning`
 - Files: `.github/workflows/unity-validation.yml`, `docs/planning/sprint-07.md`
@@ -84,3 +84,21 @@
   - `EG-64`
 - Notes:
   - this remains stretch unless the runtime coverage work lands cleanly
+
+## Manual Smoke Path
+- Open `Bootstrap`, move through `CharacterSelect`, and enter the world.
+- Confirm one active audio listener and one spawned player are present at world startup.
+- Interact with the village guide NPC.
+- Travel village -> forest and confirm the forest inspectable still works.
+- Travel forest -> village and confirm the village guide NPC still works after the return transition.
+- Treat mountain as signposted-but-manual-only in this sprint; do not claim automated traversal coverage for that route.
+
+## Validation Scope
+- Always automated:
+  - `python3 scripts/validate_unity_project.py`
+  - `unity-project-sanity` GitHub Actions job
+- Conditionally automated when Unity license secrets are configured:
+  - `unity-editmode-tests`
+  - `unity-playmode-tests`
+- Still manual for sprint closeout:
+  - in-editor smoke pass of the supported village -> forest -> village route
