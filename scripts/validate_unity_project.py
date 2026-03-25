@@ -37,7 +37,7 @@ SCENE_TEXT_CHECKS = {
         "GuideNpc",
         "ForestTrailPortal",
         "ForestTrailSign",
-        "MountainTrailSign",
+        "MountainTrailPortal",
     ],
     "Assets/Scenes/ForestZone.unity": [
         "VillageReturnPortal",
@@ -46,6 +46,7 @@ SCENE_TEXT_CHECKS = {
     "Assets/Scenes/MountainZone.unity": [
         "MountainMarker",
         "MountainBeacon",
+        "VillageReturnPortal",
     ],
 }
 

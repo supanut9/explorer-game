@@ -38,3 +38,16 @@ Use this file for concrete content lists once a content pass is active.
 - baseline established in Sprint 02
 - readability and connected-exploration follow-up planned for Sprint 04
 - visual identity and presentation follow-up planned for Sprint 05
+
+## MountainZone Minimum Set
+- Keep `MountainGround`, `MountainPath`, and `LookoutPath` as the readable traversal line.
+- Keep `CliffA`, `CliffB`, `LookoutStone`, `MountainBeacon`, and `MountainBeaconTop` as the minimal landmark frame for the zone.
+- Keep one lightweight interaction touchpoint only: `MountainMarker` as the lookout inspectable.
+- Use simple route-framing props only where needed to clarify the return anchor or lookout edge.
+
+## MountainZone Deferred
+- Animals or any NavMesh-dependent ambient behavior
+- Cabins, houses, or settlement dressing
+- Additional mountain NPCs or extra dialogue beats
+- Extra portal routes beyond the village entry and village return anchors
+- Decorative prop sweeps or final-art polish beyond readability

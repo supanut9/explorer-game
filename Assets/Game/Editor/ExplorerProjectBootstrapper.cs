@@ -116,7 +116,7 @@ namespace ExplorerGame.Editor
             ValidateScene(GameConstants.WorldPersistentScene, typeof(WorldRuntimeController), typeof(ThirdPersonCameraRig));
             ValidateScene(GameConstants.VillageZoneScene, typeof(DialogueNpc), typeof(ZonePortal));
             ValidateScene(GameConstants.ForestZoneScene, typeof(AnimalRoamingAgent), typeof(InspectableObject), typeof(ZonePortal));
-            ValidateScene(GameConstants.MountainZoneScene, typeof(InspectableObject));
+            ValidateScene(GameConstants.MountainZoneScene, typeof(InspectableObject), typeof(ZonePortal));
             Debug.Log("Explorer Game scene validation completed successfully.");
         }
 
@@ -227,12 +227,13 @@ namespace ExplorerGame.Editor
                         new Vector3(0.6f, 0f, 4f),
                         "Read forest sign",
                         "Forest trail ahead. Pass through the green arch to continue.");
-                    CreateGuideSignpost(
+                    CreateZonePortalAnchor(
                         root.transform,
-                        "MountainTrailSign",
-                        new Vector3(2.8f, 0f, -0.2f),
-                        "Read mountain sign",
-                        "Mountain route remains closed in this slice. Start with the forest trail.");
+                        "MountainTrailPortal",
+                        new Vector3(3.2f, 0f, -2.4f),
+                        new Vector3(2f, 2.2f, 0.8f),
+                        MountainAccentColor,
+                        GameConstants.MountainZoneScene);
                     CreateZonePortalAnchor(
                         root.transform,
                         "ForestTrailPortal",
@@ -271,6 +272,13 @@ namespace ExplorerGame.Editor
                         new Vector3(-1.8f, 0f, -2.4f),
                         "Inspect lookout marker",
                         "The higher path opens onto a quiet lookout. The mountain route is still rough, but the ridge is visible from here.");
+                    CreateZonePortalAnchor(
+                        root.transform,
+                        "VillageReturnPortal",
+                        new Vector3(0f, 0f, -3.6f),
+                        new Vector3(2f, 2.2f, 0.8f),
+                        WoodSignColor,
+                        GameConstants.VillageZoneScene);
                 }
             });
         }
@@ -687,7 +695,11 @@ namespace ExplorerGame.Editor
             CreateBlock(parent, "CliffA", new Vector3(-4f, 1.2f, 2f), new Vector3(1.6f, 2.4f, 2f), StoneColor);
             CreateBlock(parent, "CliffB", new Vector3(3.5f, 1.6f, -1.5f), new Vector3(1.4f, 3.2f, 1.8f), StoneDarkColor);
             CreateBlock(parent, "MountainPath", new Vector3(0f, 0.05f, 1.8f), new Vector3(1.1f, 0.08f, 4.8f), MountainPathColor);
+            CreateBlock(parent, "MountainReturnMarker", new Vector3(0f, 0.8f, -4.2f), new Vector3(0.3f, 1.6f, 0.3f), WoodDarkColor);
+            CreateBlock(parent, "MountainReturnMarkerTop", new Vector3(0f, 1.82f, -4.2f), new Vector3(0.82f, 0.16f, 0.82f), WoodSignColor);
             CreateBlock(parent, "LookoutStone", new Vector3(1.8f, 0.3f, -2.8f), new Vector3(0.9f, 0.6f, 0.9f), StoneColor);
+            CreateBlock(parent, "LookoutCairnBase", new Vector3(-1.1f, 0.22f, -1.5f), new Vector3(0.6f, 0.45f, 0.6f), StoneDarkColor);
+            CreateBlock(parent, "LookoutCairnTop", new Vector3(-1.1f, 0.58f, -1.5f), new Vector3(0.32f, 0.26f, 0.32f), StoneColor);
             CreateBlock(parent, "MountainBeacon", new Vector3(0f, 1.35f, 3.9f), new Vector3(0.65f, 2.7f, 0.65f), MountainAccentColor);
             CreateBlock(parent, "MountainBeaconTop", new Vector3(0f, 2.95f, 3.9f), new Vector3(1.1f, 0.22f, 1.1f), WoodSignColor);
             CreateBlock(parent, "LookoutPath", new Vector3(1.2f, 0.05f, -1.4f), new Vector3(0.7f, 0.08f, 2.4f), MountainPathColor);
