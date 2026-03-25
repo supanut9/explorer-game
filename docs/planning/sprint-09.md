@@ -96,7 +96,7 @@
 
 ### EG-71 Portal And Spawn Layout Cleanup
 - Story Order: `23.3`
-- Status: in progress
+- Status: done
 - Owner: `Game.World`, `Game.Editor`
 - Module: `Assets/Game/World`, `Assets/Game/Editor`, `Assets/Game/Tests/PlayMode`
 - Files: `Assets/Game/World/ZonePortal.cs`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`, `Assets/Game/Tests/PlayMode/WorldPlayableBaselineTests.cs`

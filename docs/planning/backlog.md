@@ -562,7 +562,7 @@
   - Sprint detail: `docs/planning/sprint-09.md#eg-70-boundary-treatment-pass`
 - Story 23.3: portal and spawn layout cleanup
   - Tracking ID: `EG-71`
-  - Status: in progress
+  - Status: done
   - Owner: `Game.World`, `Game.Editor`
   - Files: `Assets/Game/World/ZonePortal.cs`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`, `Assets/Game/Tests/PlayMode/WorldPlayableBaselineTests.cs`
   - Acceptance: zone entry, return, and spawn anchors feel embedded in routes and landmarks instead of isolated portal placements while keeping the supported traversal loop stable.

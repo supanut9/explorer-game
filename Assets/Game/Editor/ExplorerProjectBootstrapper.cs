@@ -132,9 +132,9 @@ namespace ExplorerGame.Editor
             AddCharacterIfMissing(characterCatalog, maleCharacter);
             AddCharacterIfMissing(characterCatalog, femaleCharacter);
 
-            var villageZone = CreateZoneAsset("VillageZone", "Village", new Vector3(0.6f, 1.1f, -5.2f));
-            var forestZone = CreateZoneAsset("ForestZone", "Forest", new Vector3(-0.2f, 1.1f, -6.1f));
-            var mountainZone = CreateZoneAsset("MountainZone", "Mountain", new Vector3(0.2f, 1.1f, -5.4f));
+            var villageZone = CreateZoneAsset("VillageZone", "Village", new Vector3(0.6f, 1.1f, -6.2f));
+            var forestZone = CreateZoneAsset("ForestZone", "Forest", new Vector3(-0.2f, 1.1f, -7f));
+            var mountainZone = CreateZoneAsset("MountainZone", "Mountain", new Vector3(0.2f, 1.1f, -5.9f));
             AddZoneIfMissing(worldCatalog, villageZone);
             AddZoneIfMissing(worldCatalog, forestZone);
             AddZoneIfMissing(worldCatalog, mountainZone);
@@ -230,14 +230,15 @@ namespace ExplorerGame.Editor
                     CreateZonePortalAnchor(
                         root.transform,
                         "MountainTrailPortal",
-                        new Vector3(5.2f, 0f, -4.2f),
+                        new Vector3(5.8f, 0f, -4.2f),
                         new Vector3(2f, 2.2f, 0.8f),
                         MountainAccentColor,
-                        GameConstants.MountainZoneScene);
+                        GameConstants.MountainZoneScene,
+                        new Vector3(0f, 90f, 0f));
                     CreateZonePortalAnchor(
                         root.transform,
                         "ForestTrailPortal",
-                        new Vector3(0.4f, 0f, 8.2f),
+                        new Vector3(0.4f, 0f, 8.8f),
                         new Vector3(2.2f, 2.2f, 0.8f),
                         ForestPortalColor,
                         GameConstants.ForestZoneScene);
@@ -257,7 +258,7 @@ namespace ExplorerGame.Editor
                     CreateZonePortalAnchor(
                         root.transform,
                         "VillageReturnPortal",
-                        new Vector3(-0.2f, 0f, -7.2f),
+                        new Vector3(-0.2f, 0f, -8.1f),
                         new Vector3(2.2f, 2.2f, 0.8f),
                         WoodSignColor,
                         GameConstants.VillageZoneScene);
@@ -275,7 +276,7 @@ namespace ExplorerGame.Editor
                     CreateZonePortalAnchor(
                         root.transform,
                         "VillageReturnPortal",
-                        new Vector3(0.2f, 0f, -6.2f),
+                        new Vector3(0.2f, 0f, -7.1f),
                         new Vector3(2f, 2.2f, 0.8f),
                         WoodSignColor,
                         GameConstants.VillageZoneScene);
@@ -689,8 +690,13 @@ namespace ExplorerGame.Editor
             CreateBlock(parent, "VillageSign", new Vector3(1.8f, 1.05f, -0.2f), new Vector3(0.34f, 1.1f, 0.1f), WoodDarkColor);
             CreateBlock(parent, "ForestTrailMarker", new Vector3(0.4f, 0.9f, 6.9f), new Vector3(0.32f, 1.8f, 0.32f), WoodDarkColor);
             CreateBlock(parent, "ForestTrailMarkerCap", new Vector3(0.4f, 1.95f, 6.9f), new Vector3(0.9f, 0.18f, 0.9f), PromptAccentColor);
+            CreateBlock(parent, "ForestTrailGateLeft", new Vector3(-1.6f, 0.7f, 8.6f), new Vector3(1.2f, 1.4f, 1.4f), StoneColor);
+            CreateBlock(parent, "ForestTrailGateRight", new Vector3(2.2f, 0.7f, 8.6f), new Vector3(1.2f, 1.4f, 1.4f), StoneDarkColor);
             CreateBlock(parent, "MountainTrailMarker", new Vector3(4.5f, 0.9f, -4.2f), new Vector3(0.32f, 1.8f, 0.32f), WoodDarkColor);
             CreateBlock(parent, "MountainTrailMarkerCap", new Vector3(4.5f, 1.95f, -4.2f), new Vector3(0.9f, 0.18f, 0.9f), MountainAccentColor);
+            CreateBlock(parent, "MountainPassStoneA", new Vector3(5.9f, 0.65f, -2.7f), new Vector3(1.2f, 1.3f, 1.6f), StoneColor);
+            CreateBlock(parent, "MountainPassStoneB", new Vector3(5.9f, 0.8f, -5.8f), new Vector3(1.2f, 1.6f, 1.8f), StoneDarkColor);
+            CreateBlock(parent, "MountainPassBackstop", new Vector3(7.2f, 1f, -4.2f), new Vector3(1f, 2f, 3.8f), StoneDarkColor);
         }
 
         private static void DressForestZone(Transform parent)
@@ -721,6 +727,10 @@ namespace ExplorerGame.Editor
             CreateBlock(parent, "ForestNorthBermEast", new Vector3(2.8f, 0.7f, 10.1f), new Vector3(4.4f, 1.4f, 1.2f), StoneDarkColor);
             CreateBlock(parent, "ForestSouthBermWest", new Vector3(-3.6f, 0.5f, -9.1f), new Vector3(3.4f, 1f, 1.1f), StoneColor);
             CreateBlock(parent, "ForestSouthBermEast", new Vector3(3.5f, 0.5f, -9.1f), new Vector3(4.1f, 1f, 1.1f), StoneDarkColor);
+            CreateBlock(parent, "ForestReturnStoneLeft", new Vector3(-1.9f, 0.65f, -8.1f), new Vector3(1.2f, 1.3f, 1.2f), StoneColor);
+            CreateBlock(parent, "ForestReturnStoneRight", new Vector3(1.6f, 0.7f, -8.1f), new Vector3(1.3f, 1.4f, 1.2f), StoneDarkColor);
+            CreateTree(parent, "ForestReturnTreeLeft", new Vector3(-3.1f, 0f, -7.7f));
+            CreateTree(parent, "ForestReturnTreeRight", new Vector3(2.8f, 0f, -7.4f));
             CreateBlock(parent, "ForestLookoutMarker", new Vector3(0.4f, 1.45f, 7.6f), new Vector3(0.72f, 2.9f, 0.72f), PromptAccentColor);
             CreateBlock(parent, "ForestLookoutMarkerTop", new Vector3(0.4f, 3.1f, 7.6f), new Vector3(1.1f, 0.22f, 1.1f), WoodSignColor);
             CreateBlock(parent, "VillageMarker", new Vector3(-0.2f, 0.75f, -7.6f), new Vector3(0.3f, 1.5f, 0.3f), WoodDarkColor);
@@ -746,6 +756,8 @@ namespace ExplorerGame.Editor
             CreateBlock(parent, "LookoutPath", new Vector3(1.6f, 0.05f, 4.5f), new Vector3(0.9f, 0.08f, 3.4f), MountainPathColor);
             CreateBlock(parent, "MountainReturnMarker", new Vector3(0.2f, 0.8f, -6.8f), new Vector3(0.3f, 1.6f, 0.3f), WoodDarkColor);
             CreateBlock(parent, "MountainReturnMarkerTop", new Vector3(0.2f, 1.82f, -6.8f), new Vector3(0.82f, 0.16f, 0.82f), WoodSignColor);
+            CreateBlock(parent, "MountainReturnPassLeft", new Vector3(-1.5f, 0.9f, -7.1f), new Vector3(1.4f, 1.8f, 1.4f), StoneColor);
+            CreateBlock(parent, "MountainReturnPassRight", new Vector3(1.9f, 1f, -7.1f), new Vector3(1.5f, 2f, 1.5f), StoneDarkColor);
             CreateBlock(parent, "LookoutStone", new Vector3(2.3f, 0.3f, 5.9f), new Vector3(1f, 0.6f, 1f), StoneColor);
             CreateBlock(parent, "LookoutCairnBase", new Vector3(-0.8f, 0.22f, 3.8f), new Vector3(0.6f, 0.45f, 0.6f), StoneDarkColor);
             CreateBlock(parent, "LookoutCairnTop", new Vector3(-0.8f, 0.58f, 3.8f), new Vector3(0.32f, 0.26f, 0.32f), StoneColor);
@@ -883,7 +895,8 @@ namespace ExplorerGame.Editor
             Vector3 localPosition,
             Vector3 archScale,
             Color color,
-            string targetScene)
+            string targetScene,
+            Vector3? localEulerAngles = null)
         {
             var root = parent.Find(instanceName)?.gameObject;
             if (root == null)
@@ -893,7 +906,7 @@ namespace ExplorerGame.Editor
 
             root.transform.SetParent(parent, false);
             root.transform.localPosition = localPosition;
-            root.transform.localRotation = Quaternion.identity;
+            root.transform.localRotation = Quaternion.Euler(localEulerAngles ?? Vector3.zero);
 
             var portal = GetOrAddComponent<ZonePortal>(root);
             var serializedPortal = new SerializedObject(portal);
