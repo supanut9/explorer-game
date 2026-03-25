@@ -61,11 +61,7 @@ namespace ExplorerGame.Tests.PlayMode
             Assert.IsNotNull(villagePortal, "Expected a traversal portal in the village scene.");
 
             villagePortal.TravelAsync();
-            yield return WaitForFrames(10);
-
-            Assert.AreEqual(GameConstants.ForestZoneScene, GameSession.Instance.ActiveZoneScene, "Expected the active zone to switch to the forest after portal travel.");
-            Assert.IsTrue(SceneManager.GetSceneByName(GameConstants.ForestZoneScene).isLoaded, "Expected the forest scene to be loaded after traversal.");
-            Assert.IsFalse(SceneManager.GetSceneByName(GameConstants.VillageZoneScene).isLoaded, "Expected the village scene to unload after traversal.");
+            yield return WaitForZoneTransition(GameConstants.ForestZoneScene, GameConstants.VillageZoneScene);
             AssertSinglePlayerAndAudioListener("after village-to-forest traversal");
 
             var forestMarker = Object.FindAnyObjectByType<InspectableObject>();
@@ -86,17 +82,13 @@ namespace ExplorerGame.Tests.PlayMode
             Assert.IsNotNull(villagePortal, "Expected a traversal portal in the village scene.");
 
             villagePortal.TravelAsync();
-            yield return WaitForFrames(10);
+            yield return WaitForZoneTransition(GameConstants.ForestZoneScene, GameConstants.VillageZoneScene);
 
             var forestReturnPortal = FindPortalInScene(GameConstants.ForestZoneScene, GameConstants.VillageZoneScene);
             Assert.IsNotNull(forestReturnPortal, "Expected a return portal in the forest scene.");
 
             forestReturnPortal.TravelAsync();
-            yield return WaitForFrames(10);
-
-            Assert.AreEqual(GameConstants.VillageZoneScene, GameSession.Instance.ActiveZoneScene, "Expected the active zone to switch back to the village after return travel.");
-            Assert.IsTrue(SceneManager.GetSceneByName(GameConstants.VillageZoneScene).isLoaded, "Expected the village scene to be loaded after return traversal.");
-            Assert.IsFalse(SceneManager.GetSceneByName(GameConstants.ForestZoneScene).isLoaded, "Expected the forest scene to unload after return traversal.");
+            yield return WaitForZoneTransition(GameConstants.VillageZoneScene, GameConstants.ForestZoneScene);
             AssertSinglePlayerAndAudioListener("after forest-to-village return");
 
             var npc = Object.FindAnyObjectByType<DialogueNpc>();
@@ -117,11 +109,7 @@ namespace ExplorerGame.Tests.PlayMode
             Assert.IsNotNull(villagePortal, "Expected a mountain traversal portal in the village scene.");
 
             villagePortal.TravelAsync();
-            yield return WaitForFrames(10);
-
-            Assert.AreEqual(GameConstants.MountainZoneScene, GameSession.Instance.ActiveZoneScene, "Expected the active zone to switch to the mountain after portal travel.");
-            Assert.IsTrue(SceneManager.GetSceneByName(GameConstants.MountainZoneScene).isLoaded, "Expected the mountain scene to be loaded after traversal.");
-            Assert.IsFalse(SceneManager.GetSceneByName(GameConstants.VillageZoneScene).isLoaded, "Expected the village scene to unload after traversal.");
+            yield return WaitForZoneTransition(GameConstants.MountainZoneScene, GameConstants.VillageZoneScene);
             AssertSinglePlayerAndAudioListener("after village-to-mountain traversal");
 
             var mountainMarker = Object.FindAnyObjectByType<InspectableObject>();
@@ -142,17 +130,13 @@ namespace ExplorerGame.Tests.PlayMode
             Assert.IsNotNull(villagePortal, "Expected a mountain traversal portal in the village scene.");
 
             villagePortal.TravelAsync();
-            yield return WaitForFrames(10);
+            yield return WaitForZoneTransition(GameConstants.MountainZoneScene, GameConstants.VillageZoneScene);
 
             var mountainReturnPortal = FindPortalInScene(GameConstants.MountainZoneScene, GameConstants.VillageZoneScene);
             Assert.IsNotNull(mountainReturnPortal, "Expected a return portal in the mountain scene.");
 
             mountainReturnPortal.TravelAsync();
-            yield return WaitForFrames(10);
-
-            Assert.AreEqual(GameConstants.VillageZoneScene, GameSession.Instance.ActiveZoneScene, "Expected the active zone to switch back to the village after mountain return travel.");
-            Assert.IsTrue(SceneManager.GetSceneByName(GameConstants.VillageZoneScene).isLoaded, "Expected the village scene to be loaded after mountain return traversal.");
-            Assert.IsFalse(SceneManager.GetSceneByName(GameConstants.MountainZoneScene).isLoaded, "Expected the mountain scene to unload after return traversal.");
+            yield return WaitForZoneTransition(GameConstants.VillageZoneScene, GameConstants.MountainZoneScene);
             AssertSinglePlayerAndAudioListener("after mountain-to-village return");
 
             var npc = Object.FindAnyObjectByType<DialogueNpc>();
@@ -195,6 +179,31 @@ namespace ExplorerGame.Tests.PlayMode
             }
         }
 
+        private static IEnumerator WaitForZoneTransition(string expectedActiveZoneScene, string previousZoneScene)
+        {
+            yield return WaitForCondition(
+                () => GameSession.Instance != null &&
+                    GameSession.Instance.ActiveZoneScene == expectedActiveZoneScene &&
+                    SceneManager.GetSceneByName(expectedActiveZoneScene).isLoaded &&
+                    !SceneManager.GetSceneByName(previousZoneScene).isLoaded,
+                $"Expected zone transition to settle on '{expectedActiveZoneScene}'.");
+        }
+
+        private static IEnumerator WaitForCondition(System.Func<bool> condition, string failureMessage, int maxFrames = 60)
+        {
+            for (var i = 0; i < maxFrames; i++)
+            {
+                if (condition())
+                {
+                    yield break;
+                }
+
+                yield return null;
+            }
+
+            Assert.IsTrue(condition(), failureMessage);
+        }
+
         private static void AssertSinglePlayerAndAudioListener(string context)
         {
             var players = Object.FindObjectsByType<ThirdPersonExplorerController>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
@@ -222,9 +231,9 @@ namespace ExplorerGame.Tests.PlayMode
             Assert.IsNotNull(probe, "Expected the spawned player to have an interaction probe.");
 
             player.transform.position = target.transform.position + new Vector3(0.25f, 0f, 0f);
-            yield return WaitForFrames(2);
-
-            Assert.AreSame(target, probe.CurrentTarget, targetMessage);
+            yield return WaitForCondition(
+                () => probe.CurrentTarget == target,
+                targetMessage);
 
             LogAssert.Expect(LogType.Log, expectedLog);
             Assert.IsTrue(probe.TriggerCurrentTarget(), "Expected the probe to trigger the current interaction target.");

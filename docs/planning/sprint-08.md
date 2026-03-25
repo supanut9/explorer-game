@@ -89,6 +89,7 @@
 - Notes:
   - keep the forest path stable while adding mountain coverage
   - do not claim automated mountain support until the runtime route is actually enabled
+  - prefer bounded state polling for zone transitions and interaction targets instead of fixed frame-count waits
 
 ### EG-68 Mountain Placeholder Content Boundary Pass
 - Story Order: `22.3`
