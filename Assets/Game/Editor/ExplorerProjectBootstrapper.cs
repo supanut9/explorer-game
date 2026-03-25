@@ -695,7 +695,11 @@ namespace ExplorerGame.Editor
             CreateBlock(parent, "CliffA", new Vector3(-4f, 1.2f, 2f), new Vector3(1.6f, 2.4f, 2f), StoneColor);
             CreateBlock(parent, "CliffB", new Vector3(3.5f, 1.6f, -1.5f), new Vector3(1.4f, 3.2f, 1.8f), StoneDarkColor);
             CreateBlock(parent, "MountainPath", new Vector3(0f, 0.05f, 1.8f), new Vector3(1.1f, 0.08f, 4.8f), MountainPathColor);
+            CreateBlock(parent, "MountainReturnMarker", new Vector3(0f, 0.8f, -4.2f), new Vector3(0.3f, 1.6f, 0.3f), WoodDarkColor);
+            CreateBlock(parent, "MountainReturnMarkerTop", new Vector3(0f, 1.82f, -4.2f), new Vector3(0.82f, 0.16f, 0.82f), WoodSignColor);
             CreateBlock(parent, "LookoutStone", new Vector3(1.8f, 0.3f, -2.8f), new Vector3(0.9f, 0.6f, 0.9f), StoneColor);
+            CreateBlock(parent, "LookoutCairnBase", new Vector3(-1.1f, 0.22f, -1.5f), new Vector3(0.6f, 0.45f, 0.6f), StoneDarkColor);
+            CreateBlock(parent, "LookoutCairnTop", new Vector3(-1.1f, 0.58f, -1.5f), new Vector3(0.32f, 0.26f, 0.32f), StoneColor);
             CreateBlock(parent, "MountainBeacon", new Vector3(0f, 1.35f, 3.9f), new Vector3(0.65f, 2.7f, 0.65f), MountainAccentColor);
             CreateBlock(parent, "MountainBeaconTop", new Vector3(0f, 2.95f, 3.9f), new Vector3(1.1f, 0.22f, 1.1f), WoodSignColor);
             CreateBlock(parent, "LookoutPath", new Vector3(1.2f, 0.05f, -1.4f), new Vector3(0.7f, 0.08f, 2.4f), MountainPathColor);

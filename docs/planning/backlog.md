@@ -533,7 +533,7 @@
   - Sprint detail: `docs/planning/sprint-08.md#eg-67-mountain-slice-verification-coverage`
 - Story 22.3: mountain placeholder content boundary pass
   - Tracking ID: `EG-68`
-  - Status: ready
+  - Status: done
   - Owner: `Content`, `Game.Interaction`
   - Files: `Assets/Scenes/MountainZone.unity`, `docs/content-plan.md`, `docs/planning/sprint-08.md`
   - Acceptance: the mountain zone contains the minimum placeholder landmarks, inspectable or NPC touchpoint, and signposting needed to read as a real v1 destination without introducing final-art scope or extra systems.

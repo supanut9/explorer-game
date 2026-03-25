@@ -93,7 +93,7 @@
 
 ### EG-68 Mountain Placeholder Content Boundary Pass
 - Story Order: `22.3`
-- Status: ready
+- Status: done
 - Owner: `Content`, `Game.Interaction`
 - Module: `Assets/Scenes`, `docs`
 - Files: `Assets/Scenes/MountainZone.unity`, `docs/content-plan.md`, `docs/planning/sprint-08.md`
@@ -109,7 +109,7 @@
 - Dependencies:
   - `EG-66`
 - Notes:
-  - this stays stretch unless the traversal contract lands cleanly
+  - keep the mountain interaction surface to a single inspectable in this sprint
   - stay placeholder-first and avoid final-art polish
 
 ## Manual Smoke Path
