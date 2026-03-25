@@ -12,7 +12,6 @@
 ## Codex Metadata
 - Repo skills live in `.agents/skills/<skill-name>/SKILL.md` and should use YAML frontmatter with `name` and `description`.
 - Repo subagents live in `.codex/agents/*.toml` and should define `name`, `description`, and `developer_instructions`.
-- Repo command approval policy lives in `.codex/rules/*.rules`.
 - Keep `AGENTS.md` as the policy layer that tells Codex when to use the skills and subagents above.
 
 ## Common Task Patterns

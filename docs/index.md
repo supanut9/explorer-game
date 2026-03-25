@@ -35,7 +35,6 @@ Start here when contributing to this repository.
 
 ## Codex
 - [.codex/config.toml](../.codex/config.toml)
-- [.codex/rules/default.rules](../.codex/rules/default.rules)
 - [.codex/agents/content-designer.toml](../.codex/agents/content-designer.toml)
 - [.codex/agents/game-designer.toml](../.codex/agents/game-designer.toml)
 - [.codex/agents/runtime-implementer.toml](../.codex/agents/runtime-implementer.toml)

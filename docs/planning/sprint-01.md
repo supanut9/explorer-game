@@ -332,18 +332,16 @@
 - Status: done
 - Owner: `Docs`
 - Module: `AGENTS.md`, `.agents`, `.codex`
-- Files: `AGENTS.md`, `.codex/agents/*.toml`, `.agents/skills/*/SKILL.md`, `.codex/rules/*.rules`
-- Goal: keep repo-owned Codex instructions, custom subagents, task skills, and command rules versioned with the project docs.
+- Files: `AGENTS.md`, `.codex/agents/*.toml`, `.agents/skills/*/SKILL.md`
+- Goal: keep repo-owned Codex instructions, custom subagents, and task skills versioned with the project docs.
 - Acceptance:
   - the repo-owned `AGENTS.md` instructions are committed
   - custom subagent configs are committed for project reuse
   - skill definitions are committed for sprint and task workflows
-  - command rules are committed for repeatable approval behavior
 - Subtasks:
   - track repo-owned `AGENTS.md` instructions
   - track custom subagents under `.codex/agents`
   - track skill definitions under `.agents/skills`
-  - track command rules under `.codex/rules`
 - Dependencies:
   - `EG-1`
 - Notes:
