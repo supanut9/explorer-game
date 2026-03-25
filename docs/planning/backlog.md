@@ -144,8 +144,8 @@
 - Story 8.3: repo codex workflow assets
   - Tracking ID: `EG-15`
   - Owner: `Docs`
-  - Files: `.codex/instructions.md`, `.codex/agents/*.md`, `.codex/skills/*.md`
-  - Acceptance: repo-owned Codex instructions, agent roles, and task skills are tracked with the project docs.
+  - Files: `AGENTS.md`, `.codex/agents/*.toml`, `.agents/skills/*/SKILL.md`, `.codex/rules/*.rules`
+  - Acceptance: repo-owned Codex instructions, custom subagents, task skills, and command rules are tracked with the project docs.
   - Sprint detail: `docs/planning/sprint-01.md#eg-15-codex-workflow-assets`
 
 ## Epic 9: CI Foundation
@@ -473,3 +473,13 @@
   - Files: `Assets/Resources/Prefabs/Materials/*.mat`
   - Acceptance: tracked presentation materials serialize the updated Sprint 05 palette consistently, including `_Color` normalization matching the reviewed baseline.
   - Sprint detail: `docs/planning/sprint-05.md#eg-62-sprint-05-material-serialization-sync`
+
+## Epic 20: Codex Workflow Standardization
+- Status: done
+- Goal: align the repo's Codex metadata with the current platform-native skills, subagents, and command rules model
+- Story 20.1: codex-native skills, subagents, and rules migration
+  - Tracking ID: `EG-63`
+  - Owner: `Docs`
+  - Files: `AGENTS.md`, `.agents/skills/*/SKILL.md`, `.codex/agents/*.toml`, `.codex/rules/*.rules`, `docs/index.md`, `docs/ai-workflow.md`, `docs/task-skills.md`, `docs/agent-roles.md`, `docs/planning/README.md`, `docs/planning/sprint-06.md`
+  - Acceptance: repo skills live under `.agents/skills/<skill>/SKILL.md` with YAML frontmatter, repo subagents live under `.codex/agents/*.toml`, repo command rules are versioned under `.codex/rules/*.rules`, and project docs route Codex to the new structure consistently.
+  - Sprint detail: `docs/planning/sprint-06.md#eg-63-codex-native-skills-subagents-and-rules-migration`

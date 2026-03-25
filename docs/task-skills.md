@@ -1,7 +1,7 @@
 # Task Skills
 
 ## Purpose
-This file maps reusable task families to the kind of work Codex should do in this repo. Use it to pick the right workflow before editing code.
+This file maps reusable task families to the Codex skills used in this repo. The canonical skill bodies live in `.agents/skills/<skill-name>/SKILL.md`, and `AGENTS.md` routes tasks to them.
 
 ## Gameplay Skills
 - `player-controller` - avatar selection, movement, camera, and input mapping.
@@ -24,3 +24,14 @@ This file maps reusable task families to the kind of work Codex should do in thi
 - Pick the smallest skill that owns the change.
 - If a task crosses skills, choose one primary skill and document the handoff.
 - Do not use a generic skill when a more specific one exists.
+
+## Skill Locations
+- `backlog-refinement`: `.agents/skills/backlog-refinement/SKILL.md`
+- `docs-maintenance`: `.agents/skills/docs-maintenance/SKILL.md`
+- `interaction`: `.agents/skills/interaction/SKILL.md`
+- `player-controller`: `.agents/skills/player-controller/SKILL.md`
+- `sprint-planning`: `.agents/skills/sprint-planning/SKILL.md`
+- `testing`: `.agents/skills/testing/SKILL.md`
+- `ui-flow`: `.agents/skills/ui-flow/SKILL.md`
+- `unity-bootstrap`: `.agents/skills/unity-bootstrap/SKILL.md`
+- `world-zone`: `.agents/skills/world-zone/SKILL.md`

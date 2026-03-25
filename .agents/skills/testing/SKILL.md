@@ -1,15 +1,14 @@
-# testing
+---
+name: testing
+description: Use for edit mode tests, play mode tests, config validation coverage, and regression checks for changed runtime contracts. Do not use for broad feature design.
+---
 
-## Use for
-- edit mode tests
-- play mode tests
-- config validation coverage
-- regression coverage for runtime contracts
+# testing
 
 ## Read first
 - `AGENTS.md`
 - `docs/game-spec.md`
-- `docs/planning/sprint-01.md`
+- the current sprint file in `docs/planning/`, if one exists
 - the runtime files changed by the current task
 
 ## Scope

@@ -1,5 +1,34 @@
 # Repository Guidelines
 
+## Codex Workflow
+Codex reads `AGENTS.md` before doing work, so this file is the repository policy layer for AI behavior.
+
+- Read `docs/index.md` before changing code, docs, or planning files.
+- Treat `docs/game-spec.md`, `docs/repo-standards.md`, and `docs/ai-workflow.md` as the source of truth.
+- Use the matching repo skill from `.agents/skills/*/SKILL.md` before substantial work in that task family.
+- Use the smallest matching skill. If a task crosses domains, choose one primary skill and keep any handoff explicit.
+- Use repo subagents from `.codex/agents/*.toml` only for bounded delegated work. Keep one primary owner per task.
+- Follow command approval rules from `.codex/rules/default.rules` when running GitHub or git write operations.
+
+## Skill Routing
+- Planning and "what next" requests: use `sprint-planning`.
+- Backlog shaping, new `EG-*` work, or task splitting: use `backlog-refinement`.
+- Repo, workflow, or planning doc updates: use `docs-maintenance`.
+- Bootstrap, scene generation, config creation, or validation tooling: use `unity-bootstrap`.
+- Player control, camera, selection, or input work: use `player-controller`.
+- Zone, travel, scene loading, spawn, or world catalog work: use `world-zone`.
+- Interaction prompt, inspectable, or NPC placeholder work: use `interaction`.
+- Character select, HUD labels, or prompt presentation work: use `ui-flow`.
+- Edit mode or play mode coverage work: use `testing`.
+
+## Subagent Routing
+- `runtime_implementer`: gameplay code in runtime modules.
+- `editor_tooling`: editor utilities, validation, scaffold generation, and setup automation.
+- `test_writer`: edit mode and play mode tests, regression coverage, and validation checks.
+- `doc_maintainer`: repository docs, workflow notes, skills, and agent metadata.
+- `game_designer`: structural design decisions and game-spec-level tradeoffs.
+- `content_designer`: asset-level content lists, variants, and content-pass planning.
+
 ## Project Structure
 This Unity `6000.4.0f1` project uses URP. Runtime code lives in `Assets/Game`, split by feature: `Core`, `Player`, `World`, `Interaction`, `Animals`, `UI`, and `Editor`. Tests live under `Assets/Game/Tests` in `EditMode` and `PlayMode`. Scenes belong in `Assets/Scenes`, and shared config assets belong in `Assets/Resources/Configs`.
 
@@ -9,6 +38,11 @@ Use the Unity Editor for day-to-day work:
 - `Tools/Explorer Game/Validate Config Assets` checks the generated character and world catalogs.
 - `Tools/Explorer Game/Validate Generated Scenes` checks the generated bootstrap, world, and interaction scene wiring.
 - Unity Test Runner runs `EditMode` and `PlayMode` tests from `Assets/Game/Tests`.
+
+## Command Rules
+- Safe repo inspection commands such as `git status`, `git diff`, `git branch`, and `git log` are expected parts of normal work.
+- Prompt before remote or write operations such as `git push`, `git pull`, `git fetch`, `gh pr create`, or `gh pr edit`.
+- Do not use destructive cleanup commands such as `git reset --hard`, `git checkout --`, `git clean -fd`, or `rm -rf`.
 
 ## Coding Style
 Use C# with 4-space indentation and ASCII-only identifiers unless a file already uses otherwise. Keep one responsibility per `MonoBehaviour`, put shared contracts in `Game.Core`, and prefer ScriptableObject-backed configuration over hidden Inspector state. Use PascalCase for types, methods, and public members; use camelCase for private fields, with `[SerializeField]` when Inspector access is needed.

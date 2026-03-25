@@ -1,14 +1,13 @@
-# ui-flow
+---
+name: ui-flow
+description: Use for character select, HUD labels, prompt UI, and menu-to-scene flow. Do not use for large UI frameworks or unrelated runtime systems.
+---
 
-## Use for
-- character select
-- HUD labels
-- prompt UI
-- menu-to-scene flow
+# ui-flow
 
 ## Read first
 - `docs/game-spec.md`
-- `docs/planning/sprint-01.md`
+- the current sprint file in `docs/planning/`, if one exists
 - `Assets/Game/Core/GameSession.cs`
 - `Assets/Game/Core/GameConstants.cs`
 

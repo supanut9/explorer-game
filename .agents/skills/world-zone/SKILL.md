@@ -1,15 +1,14 @@
-# world-zone
+---
+name: world-zone
+description: Use for zone definitions, world catalogs, scene loading, travel between areas, and spawn flow support. Do not use for unrelated player control or content-only polish work.
+---
 
-## Use for
-- zone definitions
-- world catalogs
-- scene loading
-- travel between areas
+# world-zone
 
 ## Read first
 - `docs/game-spec.md`
 - `docs/content-plan.md`
-- `docs/planning/sprint-01.md`
+- the current sprint file in `docs/planning/`, if one exists
 - `Assets/Game/Core/GameSession.cs`
 - `Assets/Game/World/WorldCatalog.cs`
 

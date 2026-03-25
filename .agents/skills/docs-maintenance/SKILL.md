@@ -1,22 +1,22 @@
-# docs-maintenance
+---
+name: docs-maintenance
+description: Use when updating repo workflow docs, planning docs, skills, agent metadata, or any documentation that must stay aligned with the current code and process. Do not use for unrelated runtime changes.
+---
 
-## Use for
-- repo workflow docs
-- planning docs
-- agent guidance
-- updating docs when code and docs differ
+# docs-maintenance
 
 ## Read first
 - `docs/index.md`
 - `AGENTS.md`
 - `docs/repo-standards.md`
 - `docs/planning/backlog.md`
-- `docs/planning/sprint-01.md`
+- the current sprint file in `docs/planning/`, if one exists
 
 ## Scope
 - markdown docs in the repo
 - planning status and tracking ids
 - workflow and contribution guidance
+- Codex repo metadata such as skills, agents, and rules docs
 
 ## Rules
 - treat docs as the source of truth before implementation

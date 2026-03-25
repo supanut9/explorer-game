@@ -1,15 +1,14 @@
-# unity-bootstrap
+---
+name: unity-bootstrap
+description: Use for bootstrap scene setup, repeatable editor scaffolding, build settings generation, config asset creation, and validation tooling. Do not use for unrelated gameplay systems.
+---
 
-## Use for
-- bootstrap scene setup
-- build settings generation
-- repeatable editor scaffolding
-- config asset creation and validation
+# unity-bootstrap
 
 ## Read first
 - `docs/game-spec.md`
 - `docs/repo-standards.md`
-- `docs/planning/sprint-01.md`
+- the current sprint file in `docs/planning/`, if one exists
 - `Assets/Game/Core/GameConstants.cs`
 - `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`
 
