@@ -29,8 +29,12 @@
 - Goal: harden the current v1 exploration slice so the documented connected path is backed by stronger runtime verification and honest validation coverage.
 
 ## Sprint 08: Mountain Route Completion
-- Status: in progress
+- Status: done
 - Goal: complete the v1 three-zone world by opening the mountain route with stable traversal, minimal placeholder content, and honest verification coverage.
+
+## Sprint 09: World Readability And Natural Boundaries
+- Status: in progress
+- Goal: make the existing world feel larger and naturally bounded by reworking zone framing, edge treatment, and traversal anchor layout without adding new gameplay systems.
 
 ## Parallel Lanes
 - Content: placeholder prefabs, ambient population, and zone dressing.
@@ -515,7 +519,7 @@
   - Sprint detail: `docs/planning/sprint-07.md#eg-65-validation-scope-cleanup-and-ci-truthfulness-follow-up`
 
 ## Epic 22: Mountain Route Completion
-- Status: in progress
+- Status: done
 - Goal: turn the currently signposted mountain area into a supported connected exploration route without adding new gameplay systems
 - Story 22.1: mountain route traversal exposure
   - Tracking ID: `EG-66`
@@ -538,3 +542,28 @@
   - Files: `Assets/Scenes/MountainZone.unity`, `docs/content-plan.md`, `docs/planning/sprint-08.md`
   - Acceptance: the mountain zone contains the minimum placeholder landmarks, inspectable or NPC touchpoint, and signposting needed to read as a real v1 destination without introducing final-art scope or extra systems.
   - Sprint detail: `docs/planning/sprint-08.md#eg-68-mountain-placeholder-content-boundary-pass`
+
+## Epic 23: World Readability And Natural Boundaries
+- Status: in progress
+- Goal: make the current three-zone world read as larger, more natural, and less system-authored without expanding v1 gameplay scope
+- Story 23.1: world scale and framing pass
+  - Tracking ID: `EG-69`
+  - Status: done
+  - Owner: `Game.World`, `Content`
+  - Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
+  - Acceptance: each zone uses clearer route hierarchy, landmark spacing, and sightline framing so the world reads as larger without adding new traversal systems.
+  - Sprint detail: `docs/planning/sprint-09.md#eg-69-world-scale-and-framing-pass`
+- Story 23.2: boundary treatment pass
+  - Tracking ID: `EG-70`
+  - Status: done
+  - Owner: `Content`, `Game.World`
+  - Files: `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`
+  - Acceptance: playable edges are reinforced with natural blockers or terrain framing so the player no longer reads the map boundary as a falloff or invisible wall.
+  - Sprint detail: `docs/planning/sprint-09.md#eg-70-boundary-treatment-pass`
+- Story 23.3: portal and spawn layout cleanup
+  - Tracking ID: `EG-71`
+  - Status: in progress
+  - Owner: `Game.World`, `Game.Editor`
+  - Files: `Assets/Game/World/ZonePortal.cs`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/ForestZone.unity`, `Assets/Scenes/MountainZone.unity`, `Assets/Game/Tests/PlayMode/WorldPlayableBaselineTests.cs`
+  - Acceptance: zone entry, return, and spawn anchors feel embedded in routes and landmarks instead of isolated portal placements while keeping the supported traversal loop stable.
+  - Sprint detail: `docs/planning/sprint-09.md#eg-71-portal-and-spawn-layout-cleanup`
