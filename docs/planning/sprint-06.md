@@ -44,6 +44,16 @@
 - Confirm command rules match the repo's desired git and GitHub safety posture.
 - Confirm project docs point to the new Codex-native layout and no longer treat the old layout as canonical.
 
+## Outcome
+- Status: done
+- Verified in repo metadata and docs:
+  - `AGENTS.md` routes common repo task families to the current repo skills and subagents
+  - repo skills live under `.agents/skills/<skill>/SKILL.md` with YAML frontmatter
+  - repo subagents live under `.codex/agents/*.toml`
+  - repo command policy is tracked under `.codex/rules/*.rules`
+  - project docs point to the Codex-native layout consistently
+  - backlog and sprint planning now both reflect Sprint 06 as complete
+
 ## Sprint Tasks
 
 ### EG-63 Codex-Native Skills, Subagents, And Rules Migration
