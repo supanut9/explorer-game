@@ -70,7 +70,7 @@
 
 ### EG-67 Mountain Slice Verification Coverage
 - Story Order: `22.2`
-- Status: in progress
+- Status: done
 - Owner: `Game.Tests.PlayMode`, `Docs`
 - Module: `Assets/Game/Tests/PlayMode`, `docs/planning`
 - Files: `Assets/Game/Tests/PlayMode/WorldPlayableBaselineTests.cs`, `docs/planning/sprint-08.md`

@@ -526,7 +526,7 @@
   - Sprint detail: `docs/planning/sprint-08.md#eg-66-mountain-route-traversal-exposure`
 - Story 22.2: mountain slice verification coverage
   - Tracking ID: `EG-67`
-  - Status: in progress
+  - Status: done
   - Owner: `Game.Tests.PlayMode`, `Docs`
   - Files: `Assets/Game/Tests/PlayMode/WorldPlayableBaselineTests.cs`, `docs/planning/sprint-08.md`
   - Acceptance: Sprint 08 defines and, when implemented, covers a repeatable mountain verification path for village interaction, village-to-mountain traversal, mountain interaction, mountain-to-village return, and the one-player or one-listener invariants that protect the supported route.

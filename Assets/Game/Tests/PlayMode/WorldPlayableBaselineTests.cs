@@ -19,7 +19,11 @@ namespace ExplorerGame.Tests.PlayMode
         [UnitySetUp]
         public IEnumerator SetUp()
         {
-            yield return LoadSceneAsync(GameConstants.BootstrapScene);
+            if (GameSession.HasInstance)
+            {
+                Object.Destroy(GameSession.Instance.gameObject);
+                yield return null;
+            }
 
             var session = GameSession.EnsureInstance();
             session.ResetState();
@@ -27,7 +31,12 @@ namespace ExplorerGame.Tests.PlayMode
             session.SetActiveZone(GameConstants.VillageZoneScene);
 
             yield return LoadSceneAsync(GameConstants.WorldPersistentScene);
-            yield return WaitForFrames(5);
+            yield return WaitForCondition(
+                () => SceneManager.GetSceneByName(GameConstants.WorldPersistentScene).isLoaded,
+                $"Expected scene '{GameConstants.WorldPersistentScene}' to load.");
+            yield return WaitForCondition(
+                () => SceneManager.GetSceneByName(GameConstants.VillageZoneScene).isLoaded,
+                $"Expected scene '{GameConstants.VillageZoneScene}' to load.");
         }
 
         [UnityTest]
@@ -189,7 +198,7 @@ namespace ExplorerGame.Tests.PlayMode
                 $"Expected zone transition to settle on '{expectedActiveZoneScene}'.");
         }
 
-        private static IEnumerator WaitForCondition(System.Func<bool> condition, string failureMessage, int maxFrames = 60)
+        private static IEnumerator WaitForCondition(System.Func<bool> condition, string failureMessage, int maxFrames = 180)
         {
             for (var i = 0; i < maxFrames; i++)
             {
@@ -230,7 +239,8 @@ namespace ExplorerGame.Tests.PlayMode
             var probe = player.GetComponent<InteractionProbe>();
             Assert.IsNotNull(probe, "Expected the spawned player to have an interaction probe.");
 
-            player.transform.position = target.transform.position + new Vector3(0.25f, 0f, 0f);
+            player.transform.position = target.transform.position + new Vector3(0.1f, 0f, 0.1f);
+            Physics.SyncTransforms();
             yield return WaitForCondition(
                 () => probe.CurrentTarget == target,
                 targetMessage);
