@@ -230,7 +230,7 @@ namespace ExplorerGame.Editor
                     CreateZonePortalAnchor(
                         root.transform,
                         "MountainTrailPortal",
-                        new Vector3(5.8f, 0f, -4.2f),
+                        new Vector3(5.4f, 0f, -4.8f),
                         new Vector3(2f, 2.2f, 0.8f),
                         MountainAccentColor,
                         GameConstants.MountainZoneScene,
@@ -671,7 +671,7 @@ namespace ExplorerGame.Editor
             CreateBlock(parent, "NorthTrail", new Vector3(0.4f, 0.02f, 5.8f), new Vector3(2.2f, 0.04f, 6.2f), VillagePathColor);
             CreateBlock(parent, "MountainLane", new Vector3(3.8f, 0.02f, -3.4f), new Vector3(4.8f, 0.04f, 1.8f), VillagePathColor);
             CreateHouse(parent, "VillageHouseA", new Vector3(-4.8f, 0f, -1f), VillageWallColor);
-            CreateHouse(parent, "VillageHouseB", new Vector3(5.4f, 0f, -3.4f), VillageWallAltColor);
+            CreateHouse(parent, "VillageHouseB", new Vector3(5.2f, 0f, -1.3f), VillageWallAltColor);
             CreateHouse(parent, "VillageHouseC", new Vector3(-5.8f, 0f, 4.4f), VillageWallAltColor);
             CreateHouse(parent, "VillageHouseD", new Vector3(4.9f, 0f, 6.2f), VillageWallColor);
             CreateTree(parent, "VillageEdgeTreeA", new Vector3(-6.4f, 0f, 8.4f));
@@ -690,13 +690,13 @@ namespace ExplorerGame.Editor
             CreateBlock(parent, "VillageSign", new Vector3(1.8f, 1.05f, -0.2f), new Vector3(0.34f, 1.1f, 0.1f), WoodDarkColor);
             CreateBlock(parent, "ForestTrailMarker", new Vector3(0.4f, 0.9f, 6.9f), new Vector3(0.32f, 1.8f, 0.32f), WoodDarkColor);
             CreateBlock(parent, "ForestTrailMarkerCap", new Vector3(0.4f, 1.95f, 6.9f), new Vector3(0.9f, 0.18f, 0.9f), PromptAccentColor);
-            CreateBlock(parent, "ForestTrailGateLeft", new Vector3(-1.6f, 0.7f, 8.6f), new Vector3(1.2f, 1.4f, 1.4f), StoneColor);
-            CreateBlock(parent, "ForestTrailGateRight", new Vector3(2.2f, 0.7f, 8.6f), new Vector3(1.2f, 1.4f, 1.4f), StoneDarkColor);
-            CreateBlock(parent, "MountainTrailMarker", new Vector3(4.5f, 0.9f, -4.2f), new Vector3(0.32f, 1.8f, 0.32f), WoodDarkColor);
-            CreateBlock(parent, "MountainTrailMarkerCap", new Vector3(4.5f, 1.95f, -4.2f), new Vector3(0.9f, 0.18f, 0.9f), MountainAccentColor);
-            CreateBlock(parent, "MountainPassStoneA", new Vector3(5.9f, 0.65f, -2.7f), new Vector3(1.2f, 1.3f, 1.6f), StoneColor);
-            CreateBlock(parent, "MountainPassStoneB", new Vector3(5.9f, 0.8f, -5.8f), new Vector3(1.2f, 1.6f, 1.8f), StoneDarkColor);
-            CreateBlock(parent, "MountainPassBackstop", new Vector3(7.2f, 1f, -4.2f), new Vector3(1f, 2f, 3.8f), StoneDarkColor);
+            CreateBlock(parent, "ForestTrailGateLeft", new Vector3(-2.1f, 0.7f, 8.6f), new Vector3(1f, 1.4f, 1.2f), StoneColor);
+            CreateBlock(parent, "ForestTrailGateRight", new Vector3(2.8f, 0.7f, 8.6f), new Vector3(1f, 1.4f, 1.2f), StoneDarkColor);
+            CreateBlock(parent, "MountainTrailMarker", new Vector3(4.2f, 0.9f, -4.8f), new Vector3(0.32f, 1.8f, 0.32f), WoodDarkColor);
+            CreateBlock(parent, "MountainTrailMarkerCap", new Vector3(4.2f, 1.95f, -4.8f), new Vector3(0.9f, 0.18f, 0.9f), MountainAccentColor);
+            CreateBlock(parent, "MountainPassStoneA", new Vector3(5.5f, 0.65f, -3.1f), new Vector3(1f, 1.3f, 1.2f), StoneColor);
+            CreateBlock(parent, "MountainPassStoneB", new Vector3(5.5f, 0.8f, -6.4f), new Vector3(1f, 1.6f, 1.4f), StoneDarkColor);
+            CreateBlock(parent, "MountainPassBackstop", new Vector3(6.8f, 1f, -4.8f), new Vector3(1f, 2f, 3.4f), StoneDarkColor);
         }
 
         private static void DressForestZone(Transform parent)
