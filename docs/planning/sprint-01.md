@@ -331,17 +331,19 @@
 - Story Order: `8.3`
 - Status: done
 - Owner: `Docs`
-- Module: `.codex`
-- Files: `.codex/instructions.md`, `.codex/agents/*.md`, `.codex/skills/*.md`
-- Goal: keep repo-owned Codex instructions, role prompts, and task skills versioned with the project docs.
+- Module: `AGENTS.md`, `.agents`, `.codex`
+- Files: `AGENTS.md`, `.codex/agents/*.toml`, `.agents/skills/*/SKILL.md`, `.codex/rules/*.rules`
+- Goal: keep repo-owned Codex instructions, custom subagents, task skills, and command rules versioned with the project docs.
 - Acceptance:
-  - the repo-owned `.codex` instructions are committed
-  - agent role prompts are committed for project reuse
-  - skill docs are committed for sprint and task workflows
+  - the repo-owned `AGENTS.md` instructions are committed
+  - custom subagent configs are committed for project reuse
+  - skill definitions are committed for sprint and task workflows
+  - command rules are committed for repeatable approval behavior
 - Subtasks:
-  - track repo-owned `.codex` instruction files
-  - track role prompts under `.codex/agents`
-  - track skill docs under `.codex/skills`
+  - track repo-owned `AGENTS.md` instructions
+  - track custom subagents under `.codex/agents`
+  - track skill definitions under `.agents/skills`
+  - track command rules under `.codex/rules`
 - Dependencies:
   - `EG-1`
 - Notes:

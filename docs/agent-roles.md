@@ -1,7 +1,7 @@
 # Agent Roles
 
 ## Purpose
-This file defines execution roles for bounded work. Roles describe what an agent can touch, not the whole workflow.
+This file defines execution roles for bounded work. The canonical subagent configs live in `.codex/agents/*.toml`, and `AGENTS.md` describes when to use them. Roles describe what an agent can touch, not the whole workflow.
 
 ## Runtime Roles
 - `runtime-implementer` - writes gameplay code in runtime modules.
@@ -38,3 +38,11 @@ This file defines execution roles for bounded work. Roles describe what an agent
 - Assign one primary role per task.
 - Use a secondary role only when the handoff is explicit.
 - Keep file ownership narrow so tasks stay safe for parallel work.
+
+## Subagent Locations
+- `runtime_implementer`: `.codex/agents/runtime-implementer.toml`
+- `editor_tooling`: `.codex/agents/editor-tooling.toml`
+- `test_writer`: `.codex/agents/test-writer.toml`
+- `doc_maintainer`: `.codex/agents/doc-maintainer.toml`
+- `game_designer`: `.codex/agents/game-designer.toml`
+- `content_designer`: `.codex/agents/content-designer.toml`

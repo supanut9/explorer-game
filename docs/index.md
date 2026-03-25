@@ -23,16 +23,18 @@ Start here when contributing to this repository.
 - [docs/planning/sprint-03.md](planning/sprint-03.md)
 - [docs/planning/sprint-04.md](planning/sprint-04.md)
 - [docs/planning/sprint-05.md](planning/sprint-05.md)
+- [docs/planning/sprint-06.md](planning/sprint-06.md)
 
 ## Skills
 - [docs/task-skills.md](task-skills.md)
 - [docs/agent-roles.md](agent-roles.md)
-- [.codex/skills/backlog-refinement.md](../.codex/skills/backlog-refinement.md)
-- [.codex/skills/sprint-planning.md](../.codex/skills/sprint-planning.md)
-- [.codex/skills/unity-bootstrap.md](../.codex/skills/unity-bootstrap.md)
+- [.agents/skills/backlog-refinement/SKILL.md](../.agents/skills/backlog-refinement/SKILL.md)
+- [.agents/skills/sprint-planning/SKILL.md](../.agents/skills/sprint-planning/SKILL.md)
+- [.agents/skills/unity-bootstrap/SKILL.md](../.agents/skills/unity-bootstrap/SKILL.md)
 
 ## Codex
-- [.codex/instructions.md](../.codex/instructions.md)
-- [.codex/agents/content-designer.md](../.codex/agents/content-designer.md)
-- [.codex/agents/game-designer.md](../.codex/agents/game-designer.md)
-- [.codex/agents/runtime-implementer.md](../.codex/agents/runtime-implementer.md)
+- [.codex/config.toml](../.codex/config.toml)
+- [.codex/rules/default.rules](../.codex/rules/default.rules)
+- [.codex/agents/content-designer.toml](../.codex/agents/content-designer.toml)
+- [.codex/agents/game-designer.toml](../.codex/agents/game-designer.toml)
+- [.codex/agents/runtime-implementer.toml](../.codex/agents/runtime-implementer.toml)

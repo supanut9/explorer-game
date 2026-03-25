@@ -1,16 +1,15 @@
-# backlog-refinement
+---
+name: backlog-refinement
+description: Use when turning rough ideas into tracked backlog items, splitting oversized work, or adding a new EG-* item before implementation starts. Do not use for direct runtime implementation.
+---
 
-## Use for
-- turning rough ideas into tracked backlog items
-- splitting oversized tasks before implementation starts
-- defining acceptance criteria, dependencies, and ownership
-- creating a new `EG-*` item before untracked work is committed
+# backlog-refinement
 
 ## Read first
 - `docs/index.md`
 - `docs/repo-standards.md`
 - `docs/planning/backlog.md`
-- `docs/planning/sprint-01.md`
+- the current sprint file in `docs/planning/`, if one exists
 
 ## Inputs
 - a feature idea, bug, gap, or untracked file

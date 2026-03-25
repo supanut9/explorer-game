@@ -1,15 +1,14 @@
-# player-controller
+---
+name: player-controller
+description: Use for avatar selection flow, third-person movement, camera follow, and player input mapping. Do not use for world loading or unrelated UI systems.
+---
 
-## Use for
-- avatar selection flow
-- third-person movement
-- third-person camera follow
-- player input mapping
+# player-controller
 
 ## Read first
 - `docs/game-spec.md`
 - `docs/decision-rules.md`
-- `docs/planning/sprint-01.md`
+- the current sprint file in `docs/planning/`, if one exists
 - `Assets/Game/Core/GameSession.cs`
 - `Assets/Game/Core/GameConstants.cs`
 

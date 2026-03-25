@@ -1,16 +1,15 @@
-# sprint-planning
+---
+name: sprint-planning
+description: Use when building or updating a sprint plan, answering "what should we do next", choosing committed versus stretch work, or tracking sprint status. Do not use for direct feature implementation.
+---
 
-## Use for
-- building or updating a sprint plan from the backlog
-- choosing committed and stretch work
-- tracking sprint status as implementation progresses
-- deciding when a new backlog item belongs in the current sprint
+# sprint-planning
 
 ## Read first
 - `docs/index.md`
 - `docs/repo-standards.md`
 - `docs/planning/backlog.md`
-- `docs/planning/sprint-01.md`
+- the current sprint file in `docs/planning/`, if one exists
 
 ## Scope
 - sprint goal

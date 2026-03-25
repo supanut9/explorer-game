@@ -1,15 +1,14 @@
-# interaction
+---
+name: interaction
+description: Use for proximity prompts, nearest-target interaction, placeholder NPC talk behavior, and inspect interactions. Do not use for large dialogue, quest, or inventory systems.
+---
 
-## Use for
-- proximity prompts
-- nearest-target interaction
-- placeholder NPC talk behavior
-- placeholder inspect behavior
+# interaction
 
 ## Read first
 - `docs/game-spec.md`
 - `docs/content-decisions.md`
-- `docs/planning/sprint-01.md`
+- the current sprint file in `docs/planning/`, if one exists
 - `Assets/Game/UI/InteractionPromptLabel.cs`
 - `Assets/Game/Core/GameSession.cs`
 
