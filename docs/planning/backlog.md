@@ -20,6 +20,14 @@
 - Status: done
 - Goal: give the connected exploration slice a coherent visual direction, stronger scene mood, and cleaner player-facing presentation without changing the core loop.
 
+## Sprint 06: Codex Workflow Standardization
+- Status: done
+- Goal: align the repository's Codex workflow metadata with the current native skills, subagents, and command-rules model so future AI work follows the repo standard by default.
+
+## Sprint 07: MVP Slice Hardening
+- Status: in progress
+- Goal: harden the current v1 exploration slice so the documented connected path is backed by stronger runtime verification and honest validation coverage.
+
 ## Parallel Lanes
 - Content: placeholder prefabs, ambient population, and zone dressing.
 - World: verify scene wiring and traversal flow in the editor.
@@ -483,3 +491,21 @@
   - Files: `AGENTS.md`, `.agents/skills/*/SKILL.md`, `.codex/agents/*.toml`, `.codex/rules/*.rules`, `docs/index.md`, `docs/ai-workflow.md`, `docs/task-skills.md`, `docs/agent-roles.md`, `docs/planning/README.md`, `docs/planning/sprint-06.md`
   - Acceptance: repo skills live under `.agents/skills/<skill>/SKILL.md` with YAML frontmatter, repo subagents live under `.codex/agents/*.toml`, repo command rules are versioned under `.codex/rules/*.rules`, and project docs route Codex to the new structure consistently.
   - Sprint detail: `docs/planning/sprint-06.md#eg-63-codex-native-skills-subagents-and-rules-migration`
+
+## Epic 21: MVP Slice Hardening
+- Status: in progress
+- Goal: strengthen automated confidence in the current connected exploration slice without expanding v1 gameplay scope
+- Story 21.1: connected-slice runtime regression coverage
+  - Tracking ID: `EG-64`
+  - Status: done
+  - Owner: `Game.Tests.PlayMode`, `Game.Editor`
+  - Files: `Assets/Game/Tests/PlayMode/WorldPlayableBaselineTests.cs`, `scripts/validate_unity_project.py`
+  - Acceptance: PlayMode and repo validation cover startup, village interaction, village-to-forest traversal, forest interaction, forest-to-village return, post-return village interaction, and the scene markers that support the current route.
+  - Sprint detail: `docs/planning/sprint-07.md#eg-64-connected-slice-runtime-regression-coverage`
+- Story 21.2: validation scope cleanup and ci truthfulness follow-up
+  - Tracking ID: `EG-65`
+  - Status: ready
+  - Owner: `Docs`, `CI`
+  - Files: `.github/workflows/unity-validation.yml`, `docs/planning/sprint-07.md`
+  - Acceptance: workflow and sprint docs describe the current automated coverage honestly and name any remaining manual-only smoke path explicitly.
+  - Sprint detail: `docs/planning/sprint-07.md#eg-65-validation-scope-cleanup-and-ci-truthfulness-follow-up`

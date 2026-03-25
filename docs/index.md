@@ -24,6 +24,7 @@ Start here when contributing to this repository.
 - [docs/planning/sprint-04.md](planning/sprint-04.md)
 - [docs/planning/sprint-05.md](planning/sprint-05.md)
 - [docs/planning/sprint-06.md](planning/sprint-06.md)
+- [docs/planning/sprint-07.md](planning/sprint-07.md)
 
 ## Skills
 - [docs/task-skills.md](task-skills.md)

@@ -12,6 +12,9 @@ namespace ExplorerGame.Tests.PlayMode
 {
     public sealed class WorldPlayableBaselineTests
     {
+        private const string VillageNpcPrompt = "The forest trail is straight ahead. Follow the marked path past the sign and step through the green arch.";
+        private const string ForestMarkerDescription = "The air is cooler here. Animal tracks cut between the trees and the trail bends back toward the village arch.";
+
         [UnitySetUp]
         public IEnumerator SetUp()
         {
@@ -31,20 +34,7 @@ namespace ExplorerGame.Tests.PlayMode
         {
             yield return WaitForFrames(5);
 
-            var players = Object.FindObjectsByType<ThirdPersonExplorerController>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-            Assert.AreEqual(1, players.Length, "Expected exactly one spawned player in the world flow.");
-
-            var listeners = Object.FindObjectsByType<AudioListener>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-            var enabledListeners = 0;
-            foreach (var listener in listeners)
-            {
-                if (listener != null && listener.enabled && listener.gameObject.activeInHierarchy)
-                {
-                    enabledListeners++;
-                }
-            }
-
-            Assert.AreEqual(1, enabledListeners, "Expected exactly one active audio listener after world startup.");
+            AssertSinglePlayerAndAudioListener("after world startup");
         }
 
         [UnityTest]
@@ -52,34 +42,19 @@ namespace ExplorerGame.Tests.PlayMode
         {
             yield return WaitForFrames(5);
 
-            var player = Object.FindAnyObjectByType<ThirdPersonExplorerController>();
-            Assert.IsNotNull(player, "Expected a spawned player controller.");
-
-            var probe = player.GetComponent<InteractionProbe>();
-            Assert.IsNotNull(probe, "Expected the spawned player to have an interaction probe.");
-
             var npc = Object.FindAnyObjectByType<DialogueNpc>();
             Assert.IsNotNull(npc, "Expected a reachable dialogue NPC in the generated world.");
 
-            player.transform.position = npc.transform.position + new Vector3(0.25f, 0f, 0f);
-            yield return WaitForFrames(2);
-
-            Assert.AreSame(npc, probe.CurrentTarget, "Expected the nearest interaction target to resolve to the village NPC.");
-
-            LogAssert.Expect(LogType.Log, "The forest trail is straight ahead. Follow the marked path past the sign and step through the green arch.");
-            Assert.IsTrue(probe.TriggerCurrentTarget(), "Expected the probe to trigger the current NPC target.");
+            yield return ExpectReachableInteractionTarget(
+                npc,
+                VillageNpcPrompt,
+                "Expected the nearest interaction target to resolve to the village NPC.");
         }
 
         [UnityTest]
         public IEnumerator WorldTraversal_ReachesForest_AndAllowsDestinationInteraction()
         {
             yield return WaitForFrames(5);
-
-            var player = Object.FindAnyObjectByType<ThirdPersonExplorerController>();
-            Assert.IsNotNull(player, "Expected a spawned player controller before traversal.");
-
-            var probe = player.GetComponent<InteractionProbe>();
-            Assert.IsNotNull(probe, "Expected the spawned player to have an interaction probe.");
 
             var villagePortal = FindPortalInScene(GameConstants.VillageZoneScene);
             Assert.IsNotNull(villagePortal, "Expected a traversal portal in the village scene.");
@@ -90,23 +65,46 @@ namespace ExplorerGame.Tests.PlayMode
             Assert.AreEqual(GameConstants.ForestZoneScene, GameSession.Instance.ActiveZoneScene, "Expected the active zone to switch to the forest after portal travel.");
             Assert.IsTrue(SceneManager.GetSceneByName(GameConstants.ForestZoneScene).isLoaded, "Expected the forest scene to be loaded after traversal.");
             Assert.IsFalse(SceneManager.GetSceneByName(GameConstants.VillageZoneScene).isLoaded, "Expected the village scene to unload after traversal.");
-
-            player = Object.FindAnyObjectByType<ThirdPersonExplorerController>();
-            Assert.IsNotNull(player, "Expected a spawned player controller after traversal.");
-
-            probe = player.GetComponent<InteractionProbe>();
-            Assert.IsNotNull(probe, "Expected the respawned player to keep an interaction probe after traversal.");
+            AssertSinglePlayerAndAudioListener("after village-to-forest traversal");
 
             var forestMarker = Object.FindAnyObjectByType<InspectableObject>();
             Assert.IsNotNull(forestMarker, "Expected a reachable inspectable in the forest scene.");
 
-            player.transform.position = forestMarker.transform.position + new Vector3(0.25f, 0f, 0f);
-            yield return WaitForFrames(2);
+            yield return ExpectReachableInteractionTarget(
+                forestMarker,
+                ForestMarkerDescription,
+                "Expected the forest inspectable to become the active target after traversal.");
+        }
 
-            Assert.AreSame(forestMarker, probe.CurrentTarget, "Expected the forest inspectable to become the active target after traversal.");
+        [UnityTest]
+        public IEnumerator WorldTraversal_ReturnsToVillage_AndKeepsNpcInteractionStable()
+        {
+            yield return WaitForFrames(5);
 
-            LogAssert.Expect(LogType.Log, "The air is cooler here. Animal tracks cut between the trees and the trail bends back toward the village arch.");
-            Assert.IsTrue(probe.TriggerCurrentTarget(), "Expected the probe to trigger the forest inspectable target.");
+            var villagePortal = FindPortalInScene(GameConstants.VillageZoneScene);
+            Assert.IsNotNull(villagePortal, "Expected a traversal portal in the village scene.");
+
+            villagePortal.TravelAsync();
+            yield return WaitForFrames(10);
+
+            var forestReturnPortal = FindPortalInScene(GameConstants.ForestZoneScene);
+            Assert.IsNotNull(forestReturnPortal, "Expected a return portal in the forest scene.");
+
+            forestReturnPortal.TravelAsync();
+            yield return WaitForFrames(10);
+
+            Assert.AreEqual(GameConstants.VillageZoneScene, GameSession.Instance.ActiveZoneScene, "Expected the active zone to switch back to the village after return travel.");
+            Assert.IsTrue(SceneManager.GetSceneByName(GameConstants.VillageZoneScene).isLoaded, "Expected the village scene to be loaded after return traversal.");
+            Assert.IsFalse(SceneManager.GetSceneByName(GameConstants.ForestZoneScene).isLoaded, "Expected the forest scene to unload after return traversal.");
+            AssertSinglePlayerAndAudioListener("after forest-to-village return");
+
+            var npc = Object.FindAnyObjectByType<DialogueNpc>();
+            Assert.IsNotNull(npc, "Expected the village NPC to be reachable again after returning from the forest.");
+
+            yield return ExpectReachableInteractionTarget(
+                npc,
+                VillageNpcPrompt,
+                "Expected the village NPC to become the active target again after returning from the forest.");
         }
 
         [UnityTearDown]
@@ -138,6 +136,41 @@ namespace ExplorerGame.Tests.PlayMode
             {
                 yield return null;
             }
+        }
+
+        private static void AssertSinglePlayerAndAudioListener(string context)
+        {
+            var players = Object.FindObjectsByType<ThirdPersonExplorerController>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+            Assert.AreEqual(1, players.Length, $"Expected exactly one spawned player {context}.");
+
+            var listeners = Object.FindObjectsByType<AudioListener>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+            var enabledListeners = 0;
+            foreach (var listener in listeners)
+            {
+                if (listener != null && listener.enabled && listener.gameObject.activeInHierarchy)
+                {
+                    enabledListeners++;
+                }
+            }
+
+            Assert.AreEqual(1, enabledListeners, $"Expected exactly one active audio listener {context}.");
+        }
+
+        private static IEnumerator ExpectReachableInteractionTarget(Component target, string expectedLog, string targetMessage)
+        {
+            var player = Object.FindAnyObjectByType<ThirdPersonExplorerController>();
+            Assert.IsNotNull(player, "Expected a spawned player controller.");
+
+            var probe = player.GetComponent<InteractionProbe>();
+            Assert.IsNotNull(probe, "Expected the spawned player to have an interaction probe.");
+
+            player.transform.position = target.transform.position + new Vector3(0.25f, 0f, 0f);
+            yield return WaitForFrames(2);
+
+            Assert.AreSame(target, probe.CurrentTarget, targetMessage);
+
+            LogAssert.Expect(LogType.Log, expectedLog);
+            Assert.IsTrue(probe.TriggerCurrentTarget(), "Expected the probe to trigger the current interaction target.");
         }
 
         private static ZonePortal FindPortalInScene(string sceneName)

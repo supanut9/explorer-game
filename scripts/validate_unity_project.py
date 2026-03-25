@@ -37,6 +37,7 @@ SCENE_TEXT_CHECKS = {
         "GuideNpc",
         "ForestTrailPortal",
         "ForestTrailSign",
+        "MountainTrailSign",
     ],
     "Assets/Scenes/ForestZone.unity": [
         "VillageReturnPortal",
