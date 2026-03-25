@@ -8,7 +8,6 @@ Codex reads `AGENTS.md` before doing work, so this file is the repository policy
 - Use the matching repo skill from `.agents/skills/*/SKILL.md` before substantial work in that task family.
 - Use the smallest matching skill. If a task crosses domains, choose one primary skill and keep any handoff explicit.
 - Use repo subagents from `.codex/agents/*.toml` only for bounded delegated work. Keep one primary owner per task.
-- Follow command approval rules from `.codex/rules/default.rules` when running GitHub or git write operations.
 
 ## Skill Routing
 - Planning and "what next" requests: use `sprint-planning`.

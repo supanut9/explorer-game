@@ -10,6 +10,7 @@ Use this folder for live task state, not for AI instructions.
 - `sprint-04.md` - fourth sprint plan with connected exploration, signposting, and multi-zone verification work
 - `sprint-05.md` - fifth sprint plan with visual identity, scene mood, and presentation polish work
 - `sprint-06.md` - sixth sprint plan with Codex workflow standardization and repo automation guidance
+- `sprint-07.md` - seventh sprint plan with connected-slice runtime hardening and validation scope follow-up
 - `sprint-template.md` - reusable sprint planning format
 - `task-template.md` - reusable task or subtask format
 

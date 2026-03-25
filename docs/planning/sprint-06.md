@@ -41,7 +41,6 @@
 - Confirm `AGENTS.md` routes planning, runtime, docs, testing, and bootstrap tasks to the right repo skills.
 - Confirm each repo skill uses `SKILL.md` plus YAML frontmatter.
 - Confirm each repo subagent uses `.toml` metadata instead of Markdown role notes.
-- Confirm command rules match the repo's desired git and GitHub safety posture.
 - Confirm project docs point to the new Codex-native layout and no longer treat the old layout as canonical.
 
 ## Outcome
@@ -50,7 +49,6 @@
   - `AGENTS.md` routes common repo task families to the current repo skills and subagents
   - repo skills live under `.agents/skills/<skill>/SKILL.md` with YAML frontmatter
   - repo subagents live under `.codex/agents/*.toml`
-  - repo command policy is tracked under `.codex/rules/*.rules`
   - project docs point to the Codex-native layout consistently
   - backlog and sprint planning now both reflect Sprint 06 as complete
 
@@ -61,18 +59,16 @@
 - Status: done
 - Owner: `Docs`
 - Module: `AGENTS.md`, `.agents`, `.codex`, `docs`
-- Files: `AGENTS.md`, `.agents/skills/*/SKILL.md`, `.codex/agents/*.toml`, `.codex/rules/*.rules`, `docs/index.md`, `docs/ai-workflow.md`, `docs/task-skills.md`, `docs/agent-roles.md`, `docs/planning/README.md`
+- Files: `AGENTS.md`, `.agents/skills/*/SKILL.md`, `.codex/agents/*.toml`, `docs/index.md`, `docs/ai-workflow.md`, `docs/task-skills.md`, `docs/agent-roles.md`, `docs/planning/README.md`
 - Goal: move the repo from the legacy Markdown-only Codex layout to the current native skills, subagents, and command-rules model.
 - Acceptance:
   - the repo's skill definitions live under `.agents/skills/<skill>/SKILL.md` with YAML frontmatter
   - the repo's custom subagents live under `.codex/agents/*.toml`
-  - the repo's command approval policy is versioned under `.codex/rules/*.rules`
   - `AGENTS.md` routes Codex to the correct skills and subagents for common repo task families
   - project docs point to the new Codex-native structure consistently
 - Subtasks:
   - replace the legacy Markdown-only skill layout with `SKILL.md` files
   - replace Markdown agent role files with `.toml` subagent definitions
-  - add repo command rules for safe git and GitHub usage
   - update docs and planning references to the new layout
 - Dependencies:
   - `EG-15`
