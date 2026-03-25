@@ -25,8 +25,12 @@
 - Goal: align the repository's Codex workflow metadata with the current native skills, subagents, and command-rules model so future AI work follows the repo standard by default.
 
 ## Sprint 07: MVP Slice Hardening
-- Status: in progress
+- Status: done
 - Goal: harden the current v1 exploration slice so the documented connected path is backed by stronger runtime verification and honest validation coverage.
+
+## Sprint 08: Mountain Route Completion
+- Status: in progress
+- Goal: complete the v1 three-zone world by opening the mountain route with stable traversal, minimal placeholder content, and honest verification coverage.
 
 ## Parallel Lanes
 - Content: placeholder prefabs, ambient population, and zone dressing.
@@ -493,7 +497,7 @@
   - Sprint detail: `docs/planning/sprint-06.md#eg-63-codex-native-skills-subagents-and-rules-migration`
 
 ## Epic 21: MVP Slice Hardening
-- Status: in progress
+- Status: done
 - Goal: strengthen automated confidence in the current connected exploration slice without expanding v1 gameplay scope
 - Story 21.1: connected-slice runtime regression coverage
   - Tracking ID: `EG-64`
@@ -509,3 +513,28 @@
   - Files: `.github/workflows/unity-validation.yml`, `docs/planning/sprint-07.md`
   - Acceptance: workflow and sprint docs describe the current automated coverage honestly and name any remaining manual-only smoke path explicitly.
   - Sprint detail: `docs/planning/sprint-07.md#eg-65-validation-scope-cleanup-and-ci-truthfulness-follow-up`
+
+## Epic 22: Mountain Route Completion
+- Status: in progress
+- Goal: turn the currently signposted mountain area into a supported connected exploration route without adding new gameplay systems
+- Story 22.1: mountain route traversal exposure
+  - Tracking ID: `EG-66`
+  - Status: done
+  - Owner: `Game.World`, `Game.Editor`
+  - Files: `Assets/Game/World/ZonePortal.cs`, `Assets/Game/World/WorldRuntimeController.cs`, `Assets/Game/Editor/ExplorerProjectBootstrapper.cs`, `Assets/Scenes/VillageZone.unity`, `Assets/Scenes/MountainZone.unity`
+  - Acceptance: the player can intentionally travel from the village into `MountainZone` and return through stable traversal anchors without breaking the existing village-forest path.
+  - Sprint detail: `docs/planning/sprint-08.md#eg-66-mountain-route-traversal-exposure`
+- Story 22.2: mountain slice verification coverage
+  - Tracking ID: `EG-67`
+  - Status: in progress
+  - Owner: `Game.Tests.PlayMode`, `Docs`
+  - Files: `Assets/Game/Tests/PlayMode/WorldPlayableBaselineTests.cs`, `docs/planning/sprint-08.md`
+  - Acceptance: Sprint 08 defines and, when implemented, covers a repeatable mountain verification path for village interaction, village-to-mountain traversal, mountain interaction, mountain-to-village return, and the one-player or one-listener invariants that protect the supported route.
+  - Sprint detail: `docs/planning/sprint-08.md#eg-67-mountain-slice-verification-coverage`
+- Story 22.3: mountain placeholder content boundary pass
+  - Tracking ID: `EG-68`
+  - Status: ready
+  - Owner: `Content`, `Game.Interaction`
+  - Files: `Assets/Scenes/MountainZone.unity`, `docs/content-plan.md`, `docs/planning/sprint-08.md`
+  - Acceptance: the mountain zone contains the minimum placeholder landmarks, inspectable or NPC touchpoint, and signposting needed to read as a real v1 destination without introducing final-art scope or extra systems.
+  - Sprint detail: `docs/planning/sprint-08.md#eg-68-mountain-placeholder-content-boundary-pass`

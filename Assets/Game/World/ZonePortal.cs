@@ -12,6 +12,8 @@ namespace ExplorerGame.World
 
         private bool isLoading;
 
+        public string TargetZoneScene => targetZoneScene;
+
         private async void OnTriggerEnter(Collider other)
         {
             if (!requireTriggerEnter || isLoading || !other.TryGetComponent<ThirdPersonExplorerController>(out _))

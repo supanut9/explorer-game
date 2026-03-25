@@ -116,7 +116,7 @@ namespace ExplorerGame.Editor
             ValidateScene(GameConstants.WorldPersistentScene, typeof(WorldRuntimeController), typeof(ThirdPersonCameraRig));
             ValidateScene(GameConstants.VillageZoneScene, typeof(DialogueNpc), typeof(ZonePortal));
             ValidateScene(GameConstants.ForestZoneScene, typeof(AnimalRoamingAgent), typeof(InspectableObject), typeof(ZonePortal));
-            ValidateScene(GameConstants.MountainZoneScene, typeof(InspectableObject));
+            ValidateScene(GameConstants.MountainZoneScene, typeof(InspectableObject), typeof(ZonePortal));
             Debug.Log("Explorer Game scene validation completed successfully.");
         }
 
@@ -227,12 +227,13 @@ namespace ExplorerGame.Editor
                         new Vector3(0.6f, 0f, 4f),
                         "Read forest sign",
                         "Forest trail ahead. Pass through the green arch to continue.");
-                    CreateGuideSignpost(
+                    CreateZonePortalAnchor(
                         root.transform,
-                        "MountainTrailSign",
-                        new Vector3(2.8f, 0f, -0.2f),
-                        "Read mountain sign",
-                        "Mountain route remains closed in this slice. Start with the forest trail.");
+                        "MountainTrailPortal",
+                        new Vector3(3.2f, 0f, -2.4f),
+                        new Vector3(2f, 2.2f, 0.8f),
+                        MountainAccentColor,
+                        GameConstants.MountainZoneScene);
                     CreateZonePortalAnchor(
                         root.transform,
                         "ForestTrailPortal",
@@ -271,6 +272,13 @@ namespace ExplorerGame.Editor
                         new Vector3(-1.8f, 0f, -2.4f),
                         "Inspect lookout marker",
                         "The higher path opens onto a quiet lookout. The mountain route is still rough, but the ridge is visible from here.");
+                    CreateZonePortalAnchor(
+                        root.transform,
+                        "VillageReturnPortal",
+                        new Vector3(0f, 0f, -3.6f),
+                        new Vector3(2f, 2.2f, 0.8f),
+                        WoodSignColor,
+                        GameConstants.VillageZoneScene);
                 }
             });
         }

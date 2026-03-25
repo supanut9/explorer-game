@@ -14,6 +14,7 @@ namespace ExplorerGame.Tests.PlayMode
     {
         private const string VillageNpcPrompt = "The forest trail is straight ahead. Follow the marked path past the sign and step through the green arch.";
         private const string ForestMarkerDescription = "The air is cooler here. Animal tracks cut between the trees and the trail bends back toward the village arch.";
+        private const string MountainMarkerDescription = "The higher path opens onto a quiet lookout. The mountain route is still rough, but the ridge is visible from here.";
 
         [UnitySetUp]
         public IEnumerator SetUp()
@@ -56,7 +57,7 @@ namespace ExplorerGame.Tests.PlayMode
         {
             yield return WaitForFrames(5);
 
-            var villagePortal = FindPortalInScene(GameConstants.VillageZoneScene);
+            var villagePortal = FindPortalInScene(GameConstants.VillageZoneScene, GameConstants.ForestZoneScene);
             Assert.IsNotNull(villagePortal, "Expected a traversal portal in the village scene.");
 
             villagePortal.TravelAsync();
@@ -81,13 +82,13 @@ namespace ExplorerGame.Tests.PlayMode
         {
             yield return WaitForFrames(5);
 
-            var villagePortal = FindPortalInScene(GameConstants.VillageZoneScene);
+            var villagePortal = FindPortalInScene(GameConstants.VillageZoneScene, GameConstants.ForestZoneScene);
             Assert.IsNotNull(villagePortal, "Expected a traversal portal in the village scene.");
 
             villagePortal.TravelAsync();
             yield return WaitForFrames(10);
 
-            var forestReturnPortal = FindPortalInScene(GameConstants.ForestZoneScene);
+            var forestReturnPortal = FindPortalInScene(GameConstants.ForestZoneScene, GameConstants.VillageZoneScene);
             Assert.IsNotNull(forestReturnPortal, "Expected a return portal in the forest scene.");
 
             forestReturnPortal.TravelAsync();
@@ -105,6 +106,62 @@ namespace ExplorerGame.Tests.PlayMode
                 npc,
                 VillageNpcPrompt,
                 "Expected the village NPC to become the active target again after returning from the forest.");
+        }
+
+        [UnityTest]
+        public IEnumerator WorldTraversal_ReachesMountain_AndAllowsDestinationInteraction()
+        {
+            yield return WaitForFrames(5);
+
+            var villagePortal = FindPortalInScene(GameConstants.VillageZoneScene, GameConstants.MountainZoneScene);
+            Assert.IsNotNull(villagePortal, "Expected a mountain traversal portal in the village scene.");
+
+            villagePortal.TravelAsync();
+            yield return WaitForFrames(10);
+
+            Assert.AreEqual(GameConstants.MountainZoneScene, GameSession.Instance.ActiveZoneScene, "Expected the active zone to switch to the mountain after portal travel.");
+            Assert.IsTrue(SceneManager.GetSceneByName(GameConstants.MountainZoneScene).isLoaded, "Expected the mountain scene to be loaded after traversal.");
+            Assert.IsFalse(SceneManager.GetSceneByName(GameConstants.VillageZoneScene).isLoaded, "Expected the village scene to unload after traversal.");
+            AssertSinglePlayerAndAudioListener("after village-to-mountain traversal");
+
+            var mountainMarker = Object.FindAnyObjectByType<InspectableObject>();
+            Assert.IsNotNull(mountainMarker, "Expected a reachable inspectable in the mountain scene.");
+
+            yield return ExpectReachableInteractionTarget(
+                mountainMarker,
+                MountainMarkerDescription,
+                "Expected the mountain inspectable to become the active target after traversal.");
+        }
+
+        [UnityTest]
+        public IEnumerator WorldTraversal_ReturnsFromMountain_AndKeepsNpcInteractionStable()
+        {
+            yield return WaitForFrames(5);
+
+            var villagePortal = FindPortalInScene(GameConstants.VillageZoneScene, GameConstants.MountainZoneScene);
+            Assert.IsNotNull(villagePortal, "Expected a mountain traversal portal in the village scene.");
+
+            villagePortal.TravelAsync();
+            yield return WaitForFrames(10);
+
+            var mountainReturnPortal = FindPortalInScene(GameConstants.MountainZoneScene, GameConstants.VillageZoneScene);
+            Assert.IsNotNull(mountainReturnPortal, "Expected a return portal in the mountain scene.");
+
+            mountainReturnPortal.TravelAsync();
+            yield return WaitForFrames(10);
+
+            Assert.AreEqual(GameConstants.VillageZoneScene, GameSession.Instance.ActiveZoneScene, "Expected the active zone to switch back to the village after mountain return travel.");
+            Assert.IsTrue(SceneManager.GetSceneByName(GameConstants.VillageZoneScene).isLoaded, "Expected the village scene to be loaded after mountain return traversal.");
+            Assert.IsFalse(SceneManager.GetSceneByName(GameConstants.MountainZoneScene).isLoaded, "Expected the mountain scene to unload after return traversal.");
+            AssertSinglePlayerAndAudioListener("after mountain-to-village return");
+
+            var npc = Object.FindAnyObjectByType<DialogueNpc>();
+            Assert.IsNotNull(npc, "Expected the village NPC to be reachable again after returning from the mountain.");
+
+            yield return ExpectReachableInteractionTarget(
+                npc,
+                VillageNpcPrompt,
+                "Expected the village NPC to become the active target again after returning from the mountain.");
         }
 
         [UnityTearDown]
@@ -173,12 +230,14 @@ namespace ExplorerGame.Tests.PlayMode
             Assert.IsTrue(probe.TriggerCurrentTarget(), "Expected the probe to trigger the current interaction target.");
         }
 
-        private static ZonePortal FindPortalInScene(string sceneName)
+        private static ZonePortal FindPortalInScene(string sceneName, string targetZoneScene)
         {
             var portals = Object.FindObjectsByType<ZonePortal>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
             foreach (var portal in portals)
             {
-                if (portal != null && portal.gameObject.scene.name == sceneName)
+                if (portal != null &&
+                    portal.gameObject.scene.name == sceneName &&
+                    portal.TargetZoneScene == targetZoneScene)
                 {
                     return portal;
                 }
