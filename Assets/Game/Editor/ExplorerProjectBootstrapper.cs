@@ -675,9 +675,7 @@ namespace ExplorerGame.Editor
             CreateHouse(parent, "VillageHouseC", new Vector3(-5.8f, 0f, 4.4f), VillageWallAltColor);
             CreateHouse(parent, "VillageHouseD", new Vector3(4.9f, 0f, 6.2f), VillageWallColor);
             CreateTree(parent, "VillageEdgeTreeA", new Vector3(-6.4f, 0f, 8.4f));
-            CreateTree(parent, "VillageEdgeTreeB", new Vector3(6.1f, 0f, 9.2f));
             CreateTree(parent, "VillageEdgeTreeC", new Vector3(-6.8f, 0f, -6.2f));
-            CreateTree(parent, "VillageEdgeTreeD", new Vector3(6.8f, 0f, -9.2f));
             CreateBlock(parent, "VillageWestFence", new Vector3(-6.9f, 0.7f, 1.4f), new Vector3(0.3f, 1.4f, 14.8f), WoodDarkColor);
             CreateBlock(parent, "VillageNorthFenceWest", new Vector3(-3.4f, 0.7f, 10.2f), new Vector3(6.4f, 1.4f, 0.3f), WoodDarkColor);
             CreateBlock(parent, "VillageNorthFenceEast", new Vector3(4.4f, 0.7f, 10.2f), new Vector3(4.6f, 1.4f, 0.3f), WoodDarkColor);
