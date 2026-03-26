@@ -9,7 +9,9 @@ namespace ExplorerGame.World
 {
     public sealed class WorldRuntimeController : MonoBehaviour
     {
-        private static readonly Vector3 SpawnSafetyOffset = new(0f, 0.15f, 0f);
+        private static readonly Vector3 SpawnSafetyOffset = Vector3.zero;
+        private const float SpawnProbeHeight = 4f;
+        private const float SpawnProbeDistance = 10f;
 
         [SerializeField] private CharacterCatalog characterCatalog;
         [SerializeField] private WorldCatalog worldCatalog;
@@ -68,6 +70,7 @@ namespace ExplorerGame.World
 
             var spawnPosition = zone.PlayerSpawnPoint + definition.SpawnOffset + SpawnSafetyOffset;
             spawnedPlayer = Instantiate(definition.Prefab, spawnPosition, Quaternion.identity);
+            SnapSpawnedPlayerToGround(spawnedPlayer, spawnPosition);
             if (spawnedPlayer.GetComponent<InteractionProbe>() == null)
             {
                 spawnedPlayer.AddComponent<InteractionProbe>();
@@ -83,6 +86,36 @@ namespace ExplorerGame.World
                     controller.SetMovementReference(cameraRig.transform);
                 }
             }
+        }
+
+        private static void SnapSpawnedPlayerToGround(GameObject player, Vector3 fallbackPosition)
+        {
+            if (player == null)
+            {
+                return;
+            }
+
+            var controller = player.GetComponent<CharacterController>();
+            if (controller == null)
+            {
+                return;
+            }
+
+            var probeOrigin = fallbackPosition + Vector3.up * SpawnProbeHeight;
+            if (!Physics.Raycast(probeOrigin, Vector3.down, out var hit, SpawnProbeDistance, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+            {
+                return;
+            }
+
+            var wasEnabled = controller.enabled;
+            controller.enabled = false;
+
+            var snappedPosition = player.transform.position;
+            var bottomOffset = controller.center.y - (controller.height * 0.5f);
+            snappedPosition.y = hit.point.y - bottomOffset + controller.skinWidth;
+            player.transform.position = snappedPosition;
+
+            controller.enabled = wasEnabled;
         }
 
         private void DestroyExistingPlayers()

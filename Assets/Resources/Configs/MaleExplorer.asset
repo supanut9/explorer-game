@@ -15,4 +15,4 @@ MonoBehaviour:
   option: 0
   displayName: Male Explorer
   prefab: {fileID: 2435306718904219596, guid: 09d8c924e4e46472184465780e2ce60e, type: 3}
-  spawnOffset: {x: 0, y: 0, z: 0}
+  spawnOffset: {x: 0, y: -0.35, z: 0}
