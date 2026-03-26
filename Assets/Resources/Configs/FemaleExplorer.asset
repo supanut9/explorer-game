@@ -15,4 +15,4 @@ MonoBehaviour:
   option: 1
   displayName: Female Explorer
   prefab: {fileID: 2210088714962834214, guid: f9d85185344404145ac2fee7df4789d1, type: 3}
-  spawnOffset: {x: 0, y: 0, z: 0}
+  spawnOffset: {x: 0, y: -0.35, z: 0}
