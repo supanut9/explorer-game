@@ -33,7 +33,7 @@
 - Goal: complete the v1 three-zone world by opening the mountain route with stable traversal, minimal placeholder content, and honest verification coverage.
 
 ## Sprint 09: World Readability And Natural Boundaries
-- Status: in progress
+- Status: done
 - Goal: make the existing world feel larger and naturally bounded by reworking zone framing, edge treatment, and traversal anchor layout without adding new gameplay systems.
 
 ## Parallel Lanes
@@ -544,7 +544,7 @@
   - Sprint detail: `docs/planning/sprint-08.md#eg-68-mountain-placeholder-content-boundary-pass`
 
 ## Epic 23: World Readability And Natural Boundaries
-- Status: in progress
+- Status: done
 - Goal: make the current three-zone world read as larger, more natural, and less system-authored without expanding v1 gameplay scope
 - Story 23.1: world scale and framing pass
   - Tracking ID: `EG-69`
